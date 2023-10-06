@@ -1,18 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/padrao_background"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Melhor app de viagens ja feito!!!!\naaaaaaaaaaaaaaaaaaaaaa"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:textStyle="bold"
+            android:layout_marginTop="140dp"
+            android:layout_marginLeft="40dp"
+            android:textSize="42sp"
+            android:fontFamily="@font/padrao"
+            android:textColor="@color/white"
+            android:text="Crie uma\nConta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <EditText
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/icone_senha"
+                android:layout_marginTop="200dp"
+                android:hint="Nome"
+
+                android:layout_width="320dp"
+                android:layout_height="48dp"></EditText>
+    <EditText
+        android:layout_marginTop="5dp"
+        android:drawablePadding="5dp"
+        android:drawableLeft="@drawable/icone_mail"
+        android:hint="E-mail ou Usuário"
+        android:layout_width="320dp"
+        android:layout_height="48dp"></EditText>
+        <EditText
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/icone_senha"
+            android:layout_marginTop="5dp"
+            android:hint="Senha"
+            android:layout_width="320dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="30dp">
+        </EditText>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    android:background="#2B557F"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:padding="10dp"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:text="Entrar"
+                    android:textColor="@color/white"
+                    ></TextView>
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginTop="10dp" >
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ouTexto"
+                    android:background="#c0c0c0" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:textFontWeight="600"
+                    android:fontFamily="@font/padrao"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/ouTexto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="OU"
+                    android:textColor="@android:color/black" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/ouTexto"
+                    android:background="#c0c0c0" />
+            </RelativeLayout>
+            <TextView
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:text="Cadastre-se"
+                android:textColor="#868686"
+                android:background="@drawable/outline_button_preto">
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
