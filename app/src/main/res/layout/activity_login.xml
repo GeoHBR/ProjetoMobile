@@ -26,6 +26,15 @@
                 android:text="Travelau"
                 android:textColor="@color/white"
                 android:textSize="70dp"></TextView>
+            <TextView
+                android:textStyle="italic"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:fontFamily="@font/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tudo por Você"></TextView>
         </LinearLayout>
 
         <LinearLayout
