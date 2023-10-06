@@ -19,9 +19,9 @@ public class GasolinaModel {
             CREATE_TABLE = "CREATE TABLE " + TABLE_NAME
             + " ( "
             + COLUNA_ID + " integer primary key autoincrement, "
-            + COLUNA_NOME + " text not null, "
-            + COLUNA_CPF + " text not null, "
-            + COLUNA_ENDERECO + " text not null, "
+            + COLUNA_TOTALKM + " text not null, "
+            + COLUNA_MEDIAKM + " text not null, "
+            + COLUNA_CUSTO + " text not null, "
             + COLUNA_TOTAL + " real(10,2) not null"
             + "FOREIGN KET("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id), "
             + " );";
