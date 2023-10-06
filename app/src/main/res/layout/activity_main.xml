@@ -72,7 +72,7 @@
                     android:textAlignment="center"
                     android:layout_width="280dp"
                     android:layout_height="wrap_content"
-                    android:text="Cadastrar-se"
+                    android:text="Cadastre-se"
                     android:textColor="#FFFFFF"
                     android:background="@drawable/outline_button">
                 </TextView>
