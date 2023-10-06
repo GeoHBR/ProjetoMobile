@@ -26,4 +26,6 @@ public class RefeicaoModel {
 //  Variaveis dos valores da tabela
 
     private int _id;
+    private float total;
+    private int id_viagem;
 }

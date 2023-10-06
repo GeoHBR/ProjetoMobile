@@ -18,7 +18,7 @@ public class EntreterimentoModel {
             + " ( "
             + COLUNA_ID + " integer primary key autoincrement, "
             + COLUNA_NOME + " text not null, "
-            + COLUNA_PRECO + " real(10,2) not null, "
+            + COLUNA_PRECO + " numeric(10,2) not null, "
             + COLUNA_ID_VIAGEM + " integer not null, "
             + "FOREIGN KET("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id), "
             + " );";
