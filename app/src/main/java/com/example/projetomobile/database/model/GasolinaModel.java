@@ -10,6 +10,7 @@ public class GasolinaModel {
             COLUNA_TOTALKM = "total_quilometros",
             COLUNA_MEDIAKM = "media_quilometro",
             COLUNA_CUSTO = "custo_medio",
+
             COLUNA_TOTAL_VEICULO = "total_veiculo",
             COLUNA_TOTAL = "total",
             COLUNA_ID_VIAGEM = "_id_viagem";;
