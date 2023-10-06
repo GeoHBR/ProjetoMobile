@@ -20,7 +20,7 @@ public class EntreterimentoModel {
             + COLUNA_NOME + " text not null, "
             + COLUNA_PRECO + " numeric(10,2) not null, "
             + COLUNA_ID_VIAGEM + " integer not null, "
-            + "FOREIGN KET("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id)"
+            + "FOREIGN KEY("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id)"
             + " );";
 
     public static final String

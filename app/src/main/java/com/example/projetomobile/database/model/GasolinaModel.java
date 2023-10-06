@@ -23,7 +23,7 @@ public class GasolinaModel {
             + COLUNA_MEDIAKM + " numeric(10,2) not null, "
             + COLUNA_CUSTO + " numeric(10,2) not null, "
             + COLUNA_TOTAL + " numeric(10,2) not null"
-            + "FOREIGN KET("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id), "
+            + "FOREIGN KEY("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id), "
             + " );";
 
     public static final String

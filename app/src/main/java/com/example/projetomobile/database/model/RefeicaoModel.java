@@ -18,7 +18,7 @@ public class RefeicaoModel {
             + COLUNA_ID + " integer primary key autoincrement, "
             + COLUNA_CUSTO_REFEICAO + " real not null, "
             + COLUNA_QUANT_REFEICAO + " intereger not null, " +
-            "FOREIGN KET("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id) "
+            "FOREIGN KEY("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id) "
             + " );";
 
     public static final String

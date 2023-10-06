@@ -22,7 +22,7 @@ public class HospedagemModel {
             + COLUNA_NOITES + " int not null, "
             + COLUNA_QUARTOS + " int not null, "
             + COLUNA_TOTAL + " numeric(10,2) not null"
-            + "FOREIGN KET("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id), "
+            + "FOREIGN KEY("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id) "
             + " );";
 
     public static final String

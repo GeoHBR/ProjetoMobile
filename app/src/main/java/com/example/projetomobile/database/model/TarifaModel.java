@@ -18,7 +18,7 @@ public class TarifaModel {
             + COLUNA_ID + " integer primary key autoincrement, "
             + COLUNA_CUSTO_PESSOA + " real not null, "
             + COLUNA_CUSTO_ALUGUEL + " real not null,"
-            + "FOREIGN KET("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id)"
+            + "FOREIGN KEY("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id)"
             + " );";
 
     public static final String
