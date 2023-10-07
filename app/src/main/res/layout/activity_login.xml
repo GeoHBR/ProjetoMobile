@@ -28,7 +28,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
     <EditText
-
+        android:id="@+id/edit_usuario"
+        android:inputType="text"
         android:drawablePadding="5dp"
         android:drawableLeft="@drawable/icone_mail"
         android:layout_marginTop="200dp"
@@ -36,6 +37,8 @@
         android:layout_width="320dp"
         android:layout_height="48dp"></EditText>
         <EditText
+            android:id="@+id/edit_senha_login"
+            android:inputType="textPassword"
             android:drawablePadding="5dp"
             android:drawableStart="@drawable/icone_senha"
             android:layout_marginTop="5dp"
@@ -50,6 +53,7 @@
                 app:cardCornerRadius="10dp">
 
                 <TextView
+                    android:id="@+id/btn_entrar_login"
                     android:background="#2B557F"
                     android:textStyle="bold"
                     android:textAlignment="center"
@@ -96,6 +100,7 @@
                     android:background="#c0c0c0" />
             </RelativeLayout>
             <TextView
+                android:id="@+id/btn_cadastro_login"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
                 android:padding="10dp"

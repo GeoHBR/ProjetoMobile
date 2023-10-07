@@ -28,22 +28,26 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <EditText
-
+                android:id="@+id/edit_nome"
+                android:inputType="textPersonName"
                 android:drawablePadding="5dp"
-                android:drawableLeft="@drawable/icone_senha"
-                android:layout_marginTop="200dp"
+                android:drawableLeft="@drawable/baseline_person_24"
+                android:layout_marginTop="150dp"
                 android:hint="Nome"
-
                 android:layout_width="320dp"
                 android:layout_height="48dp"></EditText>
-    <EditText
-        android:layout_marginTop="5dp"
-        android:drawablePadding="5dp"
-        android:drawableLeft="@drawable/icone_mail"
-        android:hint="E-mail ou Usuário"
-        android:layout_width="320dp"
-        android:layout_height="48dp"></EditText>
         <EditText
+            android:id="@+id/edit_email"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="5dp"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/icone_mail"
+            android:hint="E-mail ou Usuário"
+            android:layout_width="320dp"
+            android:layout_height="48dp"></EditText>
+        <EditText
+            android:id="@+id/edit_senha"
+            android:inputType="textPassword"
             android:drawablePadding="5dp"
             android:drawableStart="@drawable/icone_senha"
             android:layout_marginTop="5dp"
@@ -56,17 +60,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="10dp">
-
                 <TextView
                     android:background="#2B557F"
+                    android:id="@+id/btnCadastro"
                     android:textStyle="bold"
-                    android:textAlignment="center"
                     android:padding="10dp"
+                    android:textAlignment="center"
                     android:layout_width="320dp"
                     android:layout_height="wrap_content"
-                    android:text="Entrar"
-                    android:textColor="@color/white"
-                    ></TextView>
+                    android:text="Cadastre-se"
+                    android:textColor="#FFFF">
+                </TextView>
+
             </androidx.cardview.widget.CardView>
 
             <RelativeLayout
@@ -104,16 +109,16 @@
                     android:background="#c0c0c0" />
             </RelativeLayout>
             <TextView
-                android:textStyle="bold"
                 android:layout_marginTop="10dp"
-                android:padding="10dp"
+                android:id="@+id/btnEntrar"
+                android:background="@drawable/outline_button_preto"
+                android:textStyle="bold"
                 android:textAlignment="center"
+                android:padding="10dp"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:text="Cadastre-se"
-                android:textColor="#868686"
-                android:background="@drawable/outline_button_preto">
-            </TextView>
+                android:text="Entrar"
+                android:textColor="#868686" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
