@@ -61,8 +61,8 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="10dp">
                 <TextView
-                    android:background="#2B557F"
                     android:id="@+id/btnCadastro"
+                    android:background="#2B557F"
                     android:textStyle="bold"
                     android:padding="10dp"
                     android:textAlignment="center"
