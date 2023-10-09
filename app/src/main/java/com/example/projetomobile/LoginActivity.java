@@ -12,7 +12,6 @@ import android.widget.CompoundButton;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -47,18 +46,24 @@ public class LoginActivity extends AppCompatActivity {
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(user.getText().toString().isEmpty()){
+
+                String username = user.getText().toString();
+                String password = senha.getText().toString();
+
+                if(username.isEmpty()){
                     user.setError("Campo Usuario Vazio");
                     Toast errorToast = Toast.makeText(LoginActivity.this, "Usuario Obrigatório", Toast.LENGTH_SHORT);
                     errorToast.show();
                 }
-                if(senha.getText().toString().isEmpty()){
+                if(password.isEmpty()){
                     senha.setError("Campo Senha Vazio");
                     Toast errorToast = Toast.makeText(LoginActivity.this, "Senha Obrigatória", Toast.LENGTH_SHORT);
                     errorToast.show();
                 }
+                if (username.equals("adm") && password.equals("adm")) {
+                    startActivity(new Intent(LoginActivity.this, viagensActivity.class));
             }
-        });
+
 
         cadastro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,4 +72,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+});
+}
 }
