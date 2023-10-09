@@ -2,12 +2,12 @@ package com.example.projetomobile;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
-import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.CompoundButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,13 +33,13 @@ public class LoginActivity extends AppCompatActivity {
         cadastro = findViewById(R.id.btn_cadastro_login);
         mostrarSenha = findViewById(R.id.switchMostrarSenha);
 
-        mostrarSenha.setOnClickListener(new View.OnClickListener() {
+        mostrarSenha.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                if(mostrarSenha.isChecked()){
-                    senha.setInputType(InputType.TYPE_CLASS_TEXT);
-                }else{
-                    senha.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    senha.setInputType(android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                } else {
+                    senha.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 }
             }
         });
@@ -48,10 +48,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(user.getText().toString().isEmpty()){
-                    user.setError("Campo Obrigatório Vazio");
+                    user.setError("Campo Usuario Vazio");
+                    Toast errorToast = Toast.makeText(LoginActivity.this, "Usuario Obrigatório", Toast.LENGTH_SHORT);
+                    errorToast.show();
                 }
                 if(senha.getText().toString().isEmpty()){
-                    senha.setError("Campo Obrigatório Vazio");
+                    senha.setError("Campo Senha Vazio");
+                    Toast errorToast = Toast.makeText(LoginActivity.this, "Senha Obrigatória", Toast.LENGTH_SHORT);
+                    errorToast.show();
                 }
             }
         });

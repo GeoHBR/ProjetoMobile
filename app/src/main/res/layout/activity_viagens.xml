@@ -33,10 +33,11 @@
         android:layout_width="400dp"
         android:layout_height="550dp"
         android:orientation="vertical"
-        android:background="@drawable/outline_button_branco">
+        android:background="@drawable/borda_branco_branco">
         <ListView
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="520dp"/>
     </LinearLayout>
     <ImageView
         android:layout_marginTop="-30dp"

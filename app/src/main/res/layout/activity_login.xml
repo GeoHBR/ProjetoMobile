@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
+
                 android:id="@+id/edit_senha_login"
                 android:inputType="textPassword"
                 android:drawablePadding="5dp"
