@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/padrao_background"
+    tools:context=".Gasolina">
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_margin="5dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/pessoa_perfil_padrao"/>
+        <TextView
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:text="Fulano lopes da silva"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_marginRight="4dp"
+
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40dp"
+            android:textColor="@color/gray1"
+            android:text="R$"/>
+        <TextView
+            android:layout_marginLeft="4dp"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="75dp"
+            android:textColor="@color/white"
+
+            android:text="0,00"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="470dp"
+            android:background="@drawable/borda_branco_branco"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+               android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:paddingBottom="12dp"
+                    android:textSize="27dp"
+                    android:text="Gasolina"/>
+
+                <ImageView
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/icone_carro"/>
+                <ImageView
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/seta_voltar"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="-5dp"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/icone_mala"/>
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:text="Viagem 1"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/gray"
+                />
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_margin="15dp"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:text="Total estimado de quilômetros"
+                    />
+                <EditText
+                    android:layout_marginLeft="40dp"
+                    android:hint="710"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"/>
+            </LinearLayout>
+
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:layout_width="390dp"
+                android:layout_height="2dp"
+                android:background="@color/gray"
+                />
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_margin="15dp"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:text="Média de quilometros por dia"
+                    />
+
+                <EditText
+                    android:layout_marginLeft="10dp"
+                    android:hint="11"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"/>
+
+            </LinearLayout>
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:layout_width="390dp"
+                android:layout_height="2dp"
+                android:background="@color/gray"
+                />
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_margin="15dp"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:text="Custo médio por litros"
+                    />
+
+                <EditText
+                    android:layout_marginLeft="10dp"
+                    android:hint="R$ 5,67"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"/>
+
+            </LinearLayout>
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:layout_width="390dp"
+                android:layout_height="2dp"
+                android:background="@color/gray"
+                />
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_margin="15dp"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:text="Total de veiculos"
+                    />
+
+                <EditText
+                    android:layout_marginLeft="10dp"
+                    android:hint="1"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@drawable/borda_branco_branco"
+            android:layout_marginTop="-40dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/botao_mais_padrao"/>
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="Adicionar a viagem?"/>
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/icone_ok"/>
+        </LinearLayout>
+
+
+
+
+
+        <!-- Seu conteúdo aqui -->
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>
