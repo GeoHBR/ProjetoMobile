@@ -89,7 +89,6 @@
                 />
             <LinearLayout
                 android:padding="10dp"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -99,7 +98,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icone_carro"/>
-
                 <TextView
                     android:layout_margin="5dp"
                     android:layout_width="match_parent"
@@ -109,20 +107,17 @@
                     android:text="Gasolina"/>
                 <ImageView
                     android:layout_margin="5dp"
-
                     android:layout_gravity="center"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/icone_mais"
                     />
             </LinearLayout>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/gray"
                 />
-
         </LinearLayout>
         <ImageView
             android:layout_marginTop="-40dp"
@@ -130,20 +125,6 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:src="@drawable/botao_mais_padrao"/>
-
-
-
-
-            <!-- Seu conteúdo aqui -->
-
-
-
-
-
-
-
-
-
     </LinearLayout>
 
 

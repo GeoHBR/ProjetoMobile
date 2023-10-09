@@ -10,12 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-    <ImageView
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="18dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/pessoa_perfil"/>
+        <ImageView
+            android:layout_margin="5dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/pessoa_perfil_padrao"/>
         <TextView
             android:layout_marginLeft="18dp"
             android:layout_marginTop="18dp"
@@ -39,12 +38,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
-    <Button
-        android:backgroundTint="#003366"
-        android:layout_marginTop="-20dp"
+    <ImageView
+        android:layout_marginTop="-30dp"
         android:layout_gravity="center"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:text="+"></Button>
-
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/botao_mais_padrao"/>
 </LinearLayout>
