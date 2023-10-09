@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/padrao_background"
-    tools:context=".Gasolina">
+    tools:context=".tarifa_aerea">
     <LinearLayout
         android:layout_marginTop="20dp"
         android:gravity="center_vertical"
@@ -55,18 +55,17 @@
         android:orientation="vertical"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_height="470dp"
+            android:layout_height="310dp"
             android:background="@drawable/borda_branco_branco"
             >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-               android:orientation="horizontal"
+                android:orientation="horizontal"
                 >
                 <TextView
                     android:layout_marginTop="25dp"
@@ -77,14 +76,14 @@
                     android:textStyle="bold"
                     android:paddingBottom="12dp"
                     android:textSize="27dp"
-                    android:text="Gasolina"/>
+                    android:text="Tarifa Aérea"/>
 
                 <ImageView
                     android:layout_marginTop="25dp"
                     android:layout_marginLeft="15dp"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/icone_carro"/>
+                    android:src="@drawable/nuvem"/>
                 <ImageView
                     android:layout_marginTop="25dp"
                     android:layout_marginLeft="120dp"
@@ -121,32 +120,9 @@
                 android:background="@color/gray"
                 />
 
-            <LinearLayout
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_margin="15dp"
-                    android:layout_width="170dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:text="Total estimado de quilômetros"
-                    />
-                <EditText
-                    android:layout_marginLeft="40dp"
-                    android:hint="710"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"/>
-            </LinearLayout>
 
-            <View
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:layout_width="390dp"
-                android:layout_height="2dp"
-                android:background="@color/gray"
-                />
+
+
             <LinearLayout
                 android:gravity="center"
                 android:layout_width="wrap_content"
@@ -157,40 +133,12 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
-                    android:text="Média de quilometros por dia"
+                    android:text="Custo estimado por pessoa"
                     />
 
                 <EditText
                     android:layout_marginLeft="10dp"
-                    android:hint="11"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"/>
-
-            </LinearLayout>
-            <View
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:layout_width="390dp"
-                android:layout_height="2dp"
-                android:background="@color/gray"
-                />
-
-            <LinearLayout
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_margin="15dp"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:text="Custo médio por litros"
-                    />
-
-                <EditText
-                    android:layout_marginLeft="10dp"
-                    android:hint="R$ 5,67"
+                    android:hint="R$"
                     android:layout_width="150dp"
                     android:layout_height="50dp"/>
 
@@ -212,7 +160,7 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
-                    android:text="Total de veiculos"
+                    android:text="Aluguel do veiculo"
                     />
 
                 <EditText
@@ -264,9 +212,7 @@
 
 
 
-
     </LinearLayout>
-
 
 
 

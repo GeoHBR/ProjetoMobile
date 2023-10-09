@@ -13,6 +13,18 @@
         android:theme="@style/Theme.ProjetoMobile"
         tools:targetApi="31">
         <activity
+            android:name=".Diversos"
+            android:exported="false" />
+        <activity
+            android:name=".Hospedagem"
+            android:exported="false" />
+        <activity
+            android:name=".Refeicoes"
+            android:exported="false" />
+        <activity
+            android:name=".tarifa_aerea"
+            android:exported="false" />
+        <activity
             android:name=".Gasolina"
             android:exported="false" />
         <activity
