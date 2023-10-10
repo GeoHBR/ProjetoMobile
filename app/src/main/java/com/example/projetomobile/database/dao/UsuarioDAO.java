@@ -30,7 +30,7 @@ public class UsuarioDAO extends AbstrataDAO{
         contentValues.put(UsuarioModel.COLUNA_EMAIL, model.getEmail());
         contentValues.put(UsuarioModel.COLUNA_SENHA, model.getSenha());
 
-        isInsert = db.insert(ViagemModel.TABLE_NAME, null, contentValues);
+        isInsert = db.insert(UsuarioModel.TABLE_NAME, null, contentValues);
 
         Close();
 
