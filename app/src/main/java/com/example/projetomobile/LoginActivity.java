@@ -52,13 +52,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(username.isEmpty()){
                     user.setError("Campo Usuario Vazio");
-                    Toast errorToast = Toast.makeText(LoginActivity.this, "Usuario Obrigatório", Toast.LENGTH_SHORT);
-                    errorToast.show();
                 }
                 if(password.isEmpty()){
                     senha.setError("Campo Senha Vazio");
-                    Toast errorToast = Toast.makeText(LoginActivity.this, "Senha Obrigatória", Toast.LENGTH_SHORT);
-                    errorToast.show();
                 }
                 if (username.equals("adm") && password.equals("adm")) {
                     startActivity(new Intent(LoginActivity.this, viagensActivity.class));

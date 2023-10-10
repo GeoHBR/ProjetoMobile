@@ -1,45 +1,40 @@
 package com.example.projetomobile.database.model;
 
-public class LoginModel {
-    // Nome da tabela
-    public static final String TABLE_NAME = "tb_login";
+public class UsuarioModel {
 
-//  Colunas da tabela
+    public static final String TABLE_NAME = "tb_usuario";
+
+    //  Colunas da tabela
     public static final String
-        COLUNA_ID = "_id",
-        COLUNA_NOME="nome",
-        COLUNA_EMAIL="email",
-        COLUNA_SENHA="senha";
+            COLUNA_ID = "_id",
+            COLUNA_NOME = "nome",
+            COLUNA_EMAIL = "email",
+            COLUNA_SENHA = "senha";
 
-//  SCript de criação da tabela
+    //  SCript de criação da tabela
     public static final String
             CREATE_TABLE = "CREATE TABLE " + TABLE_NAME
             + " ( "
             + COLUNA_ID + " integer primary key autoincrement, "
             + COLUNA_NOME + " text not null, "
             + COLUNA_EMAIL + " text not null, "
-            + COLUNA_SENHA + " text not null, "
+            + COLUNA_SENHA + " text not null"
             + " );";
 
     public static final String
             DROP_TABLE =  "drop table if exist " + TABLE_NAME + ";";
 
-
-//  Variaveis dos valores da tabela
-
-    private int _id;
+    private int id;
     private String nome;
     private String email;
     private String senha;
 
-
-//  Metodos get e set
-    public int get_id() {
-        return _id;
+    public int getId() {
+        return id;
     }
 
-    public void set_id(int _id) {
-        this._id = _id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -66,3 +61,4 @@ public class LoginModel {
         this.senha = senha;
     }
 }
+

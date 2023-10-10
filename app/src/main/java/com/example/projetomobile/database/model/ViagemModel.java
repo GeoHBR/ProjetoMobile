@@ -2,7 +2,7 @@ package com.example.projetomobile.database.model;
 
 public class ViagemModel {
     // Nome da tabela
-    public static final String TABLE_NAME = "";
+    public static final String TABLE_NAME = "tb_viagem";
 
     //  Colunas da tabela
     public static final String
@@ -11,7 +11,12 @@ public class ViagemModel {
             COLUNA_DATA_INICIO = "data_inicio",
             COLUNA_DATA_FIM = "data_fim",
             COLUNA_QUANT_PESSOAS = "quant_pessoas",
-            COLUNA_DESTINO = "destino";
+            COLUNA_DESTINO = "destino",
+            COLUNA_ID_USUARIO = "_id_usuario";
+
+    private static final String
+            TABELA = "tb_usuario",
+            COLUNA = "_id";
 
     //  SCript de criação da tabela
     public static final String
@@ -22,7 +27,8 @@ public class ViagemModel {
             + COLUNA_DATA_INICIO + " text not null, "
             + COLUNA_DATA_FIM + " text not null, "
             + COLUNA_QUANT_PESSOAS + " integer not null, "
-            + COLUNA_DESTINO + " text not null "
+            + COLUNA_DESTINO + " text not null, "
+            + "FOREIGN KEY("+COLUNA_ID_USUARIO+") REFERENCES "+TABELA+"("+COLUNA+")"
             + " );";
 
     public static final String

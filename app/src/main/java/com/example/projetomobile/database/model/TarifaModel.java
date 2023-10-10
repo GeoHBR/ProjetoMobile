@@ -2,7 +2,7 @@ package com.example.projetomobile.database.model;
 
 public class TarifaModel {
     // Nome da tabela
-    public static final String TABLE_NAME = "";
+    public static final String TABLE_NAME = "tb_tarifa";
 
     //  Colunas da tabela
     public static final String
