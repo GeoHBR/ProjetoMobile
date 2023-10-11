@@ -44,15 +44,13 @@ public class UsuarioDAO extends AbstrataDAO{
         Cursor c = db.rawQuery("SELECT * FROM "+UsuarioModel.TABLE_NAME+" WHERE email = '"+email+"'"
                 + " AND senha ='"+senha+"'", null);
 
-        if(c != null){
-            if(c.getCount() > 0){
-                c.moveToFirst();
+        if(c.getCount() > 0){
+            c.moveToFirst();
 
-                user.setId(c.getInt(0));
-                user.setNome(c.getString(1));
-                user.setEmail(c.getString(2));
-                user.setSenha(c.getString(3));
-            }
+            user.setId(c.getInt(0));
+            user.setNome(c.getString(1));
+            user.setEmail(c.getString(2));
+            user.setSenha(c.getString(3));
         }
 
         Close();

@@ -56,6 +56,7 @@ public class ViagemModel {
     private String nome;
     private int quantPessoas;
     private String destino;
+    private int _idUsuario;
     private int _idGasolina;
     private int _idHospedagem;
     private int _idTarifa;
@@ -148,5 +149,13 @@ public class ViagemModel {
 
     public void set_idEntretenimento(int _idEntretenimento) {
         this._idEntretenimento = _idEntretenimento;
+    }
+
+    public int get_idUsuario() {
+        return _idUsuario;
+    }
+
+    public void set_idUsuario(int _idUsuario) {
+        this._idUsuario = _idUsuario;
     }
 }

@@ -33,6 +33,7 @@ public class HospedagemModel {
     private float custoMedio;
     private int totalNoites;
     private int totalQuartos;
+    private float total;
 
 //
     public int get_id() {
@@ -67,4 +68,11 @@ public class HospedagemModel {
         this.totalQuartos = totalQuartos;
     }
 
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.projetomobile;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -21,6 +22,7 @@ public class viagensActivity extends AppCompatActivity {
     private Viagem_Adapter adapter;
     private ListView listaViagens;
     private TextView userNome;
+    private ImageButton btnAdd;
 
     private ArrayList<Viagem_Modelo> arl;
 
@@ -34,5 +36,14 @@ public class viagensActivity extends AppCompatActivity {
         userNome = findViewById(R.id.nomeUser);
 
         userNome.setText(i.getStringExtra("nome"));
+
+        btnAdd = findViewById(R.id.btn_add);
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(viagensActivity.this, AdicionarViagem.class));
+            }
+        });
     }
 }
