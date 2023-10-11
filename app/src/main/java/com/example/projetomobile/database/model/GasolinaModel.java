@@ -11,20 +11,19 @@ public class GasolinaModel {
             COLUNA_MEDIAKM = "media_quilometro",
             COLUNA_CUSTO = "custo_medio",
             COLUNA_TOTAL_VEICULO = "total_veiculo",
-            COLUNA_TOTAL = "total",
-            COLUNA_ID_VIAGEM = "_id_viagem";
+            COLUNA_TOTAL = "total";
 
     //  SCript de criação da tabela
     public static final String
             CREATE_TABLE = "CREATE TABLE " + TABLE_NAME
-            + " ( "
+            + "("
             + COLUNA_ID + " integer primary key autoincrement, "
             + COLUNA_TOTALKM + " numeric(10,2) not null, "
             + COLUNA_MEDIAKM + " numeric(10,2) not null, "
             + COLUNA_CUSTO + " numeric(10,2) not null, "
-            + COLUNA_TOTAL + " numeric(10,2) not null"
-            + "FOREIGN KEY("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id), "
-            + " );";
+            + COLUNA_TOTAL + " numeric(10,2) not null, "
+            + COLUNA_TOTAL_VEICULO + " int not null"
+            + ");";
 
     public static final String
             DROP_TABLE =  "drop table if exist " + TABLE_NAME + ";";
@@ -37,9 +36,17 @@ public class GasolinaModel {
     private float medialKM;
     private int totalVeiculo;
     private float total;
-    private int id_viagem;
+    private float custoMedio;
 
-//
+    public float getCustoMedio() {
+        return custoMedio;
+    }
+
+    public void setCustoMedio(float custoMedio) {
+        this.custoMedio = custoMedio;
+    }
+
+    //
     public int get_id() {
         return _id;
     }
@@ -80,11 +87,5 @@ public class GasolinaModel {
         this.total = total;
     }
 
-    public int getId_viagem() {
-        return id_viagem;
-    }
 
-    public void setId_viagem(int id_viagem) {
-        this.id_viagem = id_viagem;
-    }
 }

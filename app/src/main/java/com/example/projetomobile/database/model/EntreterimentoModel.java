@@ -8,8 +8,7 @@ public class EntreterimentoModel {
     public static final String
             COLUNA_ID = "_id",
             COLUNA_NOME = "nome",
-            COLUNA_PRECO = "preco",
-            COLUNA_ID_VIAGEM = "_id_viagem";
+            COLUNA_PRECO = "preco";
 
 
     //  SCript de criação da tabela
@@ -18,9 +17,7 @@ public class EntreterimentoModel {
             + " ( "
             + COLUNA_ID + " integer primary key autoincrement, "
             + COLUNA_NOME + " text not null, "
-            + COLUNA_PRECO + " numeric(10,2) not null, "
-            + COLUNA_ID_VIAGEM + " integer not null, "
-            + "FOREIGN KEY("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id)"
+            + COLUNA_PRECO + " numeric(10,2) not null "
             + " );";
 
     public static final String
@@ -32,7 +29,6 @@ public class EntreterimentoModel {
     private int _id;
     private int nome;
     private float preco;
-    private int id_viagem;
 
 
 
@@ -61,11 +57,5 @@ public class EntreterimentoModel {
         this.preco = preco;
     }
 
-    public int getId_viagem() {
-        return id_viagem;
-    }
 
-    public void setId_viagem(int id_viagem) {
-        this.id_viagem = id_viagem;
-    }
 }

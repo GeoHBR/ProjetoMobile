@@ -8,8 +8,7 @@ public class TarifaModel {
     public static final String
             COLUNA_ID = "_id",
             COLUNA_CUSTO_PESSOA = "custo_pessoa",
-            COLUNA_CUSTO_ALUGUEL = "custo_aluguel",
-            COLUNA_ID_VIAGEM = "_id_viagem";
+            COLUNA_CUSTO_ALUGUEL = "custo_aluguel";
 
     //  SCript de criação da tabela
     public static final String
@@ -17,9 +16,7 @@ public class TarifaModel {
             + " ( "
             + COLUNA_ID + " integer primary key autoincrement, "
             + COLUNA_CUSTO_PESSOA + " real not null, "
-            + COLUNA_CUSTO_ALUGUEL + " real not null,"
-            + "FOREIGN KEY("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id)"
-            + " );";
+            + COLUNA_CUSTO_ALUGUEL + " real not null);";
 
     public static final String
             DROP_TABLE =  "drop table if exist " + TABLE_NAME + ";";
@@ -30,7 +27,6 @@ public class TarifaModel {
     private int _id;
     private float custoPessoa;
     private float custoAluguel;
-    private int id_viagem;
 
     public int get_id() {
         return _id;
@@ -56,11 +52,4 @@ public class TarifaModel {
         this.custoAluguel = custoAluguel;
     }
 
-    public int getId_viagem() {
-        return id_viagem;
-    }
-
-    public void setId_viagem(int id_viagem) {
-        this.id_viagem = id_viagem;
-    }
 }

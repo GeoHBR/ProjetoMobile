@@ -10,7 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.projetomobile.database.dao.GasolinaDAO;
 import com.example.projetomobile.database.dao.UsuarioDAO;
+import com.example.projetomobile.database.model.GasolinaModel;
 import com.example.projetomobile.database.model.UsuarioModel;
 
 public class CadastroActivity extends AppCompatActivity {
@@ -46,6 +48,7 @@ public class CadastroActivity extends AppCompatActivity {
                 }else if(senha.isEmpty()){
                     edit_senha.setError("Campo Vazio");
                 }else{
+
                     UsuarioDAO dao = new UsuarioDAO(CadastroActivity.this);
                     UsuarioModel model = new UsuarioModel();
 
@@ -54,6 +57,7 @@ public class CadastroActivity extends AppCompatActivity {
                     model.setSenha(senha);
 
                     long insert = dao.Insert(model);
+
                 }
             }
         });

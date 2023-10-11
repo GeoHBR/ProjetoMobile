@@ -8,8 +8,7 @@ public class RefeicaoModel {
     public static final String
             COLUNA_ID = "_id",
             COLUNA_CUSTO_REFEICAO = "custo_refeicao",
-            COLUNA_QUANT_REFEICAO = "quant_refeicao",
-            COLUNA_ID_VIAGEM = "_id_viagem";
+            COLUNA_QUANT_REFEICAO = "quant_refeicao";
 
     //  SCript de criação da tabela
     public static final String
@@ -17,8 +16,7 @@ public class RefeicaoModel {
             + " ( "
             + COLUNA_ID + " integer primary key autoincrement, "
             + COLUNA_CUSTO_REFEICAO + " real not null, "
-            + COLUNA_QUANT_REFEICAO + " intereger not null, " +
-            "FOREIGN KEY("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id) "
+            + COLUNA_QUANT_REFEICAO + " intereger not null "
             + " );";
 
     public static final String
@@ -30,7 +28,6 @@ public class RefeicaoModel {
     private int _id;
     private float custoRefeicao;
     private int quantRefeicao;
-    private int id_viagem;
 
     public int get_id() {
         return _id;
@@ -56,11 +53,4 @@ public class RefeicaoModel {
         this.quantRefeicao = quantRefeicao;
     }
 
-    public int getId_viagem() {
-        return id_viagem;
-    }
-
-    public void setId_viagem(int id_viagem) {
-        this.id_viagem = id_viagem;
-    }
 }

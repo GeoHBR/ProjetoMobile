@@ -10,8 +10,7 @@ public class HospedagemModel {
             COLUNA_MEDIO = "custo_medio",
             COLUNA_NOITES = "total_noites",
             COLUNA_QUARTOS = "total_quartos",
-            COLUNA_TOTAL = "total",
-            COLUNA_ID_VIAGEM = "_id_viagem";
+            COLUNA_TOTAL = "total";
 
     //  SCript de criação da tabela
     public static final String
@@ -22,7 +21,6 @@ public class HospedagemModel {
             + COLUNA_NOITES + " int not null, "
             + COLUNA_QUARTOS + " int not null, "
             + COLUNA_TOTAL + " numeric(10,2) not null"
-            + "FOREIGN KEY("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id) "
             + " );";
 
     public static final String
@@ -35,7 +33,6 @@ public class HospedagemModel {
     private float custoMedio;
     private int totalNoites;
     private int totalQuartos;
-    private int id_viagem;
 
 //
     public int get_id() {
@@ -70,11 +67,4 @@ public class HospedagemModel {
         this.totalQuartos = totalQuartos;
     }
 
-    public int getId_viagem() {
-        return id_viagem;
-    }
-
-    public void setId_viagem(int id_viagem) {
-        this.id_viagem = id_viagem;
-    }
 }
