@@ -56,7 +56,18 @@ public class CadastroActivity extends AppCompatActivity {
                     model.setEmail(email);
                     model.setSenha(senha);
 
-                    long insert = dao.Insert(model);
+                    long id = dao.Insert(model);
+
+                    if(id > 0){
+                        Intent activity = new Intent(CadastroActivity.this, viagensActivity.class);
+
+                        activity.putExtra("id", id);
+                        activity.putExtra("nome", nome);
+
+                        startActivity(activity);
+                    }else{
+                        edit_email.setError("Email ja cadastrado");
+                    }
 
                 }
             }

@@ -25,6 +25,7 @@ public class DBOpenHalper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(UsuarioModel.CREATE_TABLE);
         sqLiteDatabase.execSQL(GasolinaModel.CREATE_TABLE);
+        sqLiteDatabase.execSQL(TarifaModel.CREATE_TABLE);
         sqLiteDatabase.execSQL(EntreterimentoModel.CREATE_TABLE);
         sqLiteDatabase.execSQL(HospedagemModel.CREATE_TABLE);
         sqLiteDatabase.execSQL(RefeicaoModel.CREATE_TABLE);

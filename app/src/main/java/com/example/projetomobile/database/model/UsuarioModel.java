@@ -17,7 +17,7 @@ public class UsuarioModel {
             + " ( "
             + COLUNA_ID + " integer primary key autoincrement, "
             + COLUNA_NOME + " text not null, "
-            + COLUNA_EMAIL + " text not null, "
+            + COLUNA_EMAIL + " text not null UNIQUE, "
             + COLUNA_SENHA + " text not null"
             + " );";
 

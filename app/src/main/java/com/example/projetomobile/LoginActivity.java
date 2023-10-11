@@ -12,6 +12,9 @@ import android.widget.CompoundButton;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.projetomobile.database.dao.UsuarioDAO;
+import com.example.projetomobile.database.model.UsuarioModel;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -52,12 +55,25 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(username.isEmpty()){
                     user.setError("Campo Usuario Vazio");
-                }
-                if(password.isEmpty()){
+                }else if(password.isEmpty()){
                     senha.setError("Campo Senha Vazio");
-                }
-                if (username.equals("adm") && password.equals("adm")) {
-                    startActivity(new Intent(LoginActivity.this, viagensActivity.class));
+                }else{
+
+                    UsuarioDAO dao = new UsuarioDAO(LoginActivity.this);
+                    UsuarioModel userB;
+
+                    userB = dao.SelectLogin(username, password);
+
+                    if(userB.getId() == 0){
+                        user.setError("Campo Usuario ou Senha Incorreto");
+                    }else{
+                        Intent activity = new Intent(LoginActivity.this, viagensActivity.class);
+
+                        activity.putExtra("id", userB.getId());
+                        activity.putExtra("nome", userB.getNome());
+
+                        startActivity(activity);
+                    }
             }
 
 
