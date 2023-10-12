@@ -17,6 +17,9 @@ public class UsuarioDAO extends AbstrataDAO{
         db_helper = new DBOpenHalper(context);
     }
 
+    public void mostra (){
+        Open();
+    }
     public long Insert(UsuarioModel model){
         long isInsert = 0;
 
