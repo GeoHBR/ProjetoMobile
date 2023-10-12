@@ -22,9 +22,6 @@ public class AdicionarViagem extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_viagem);
 
-        UsuarioDAO dao = new UsuarioDAO(AdicionarViagem.this);
-        dao.mostra();
-
         dateEditText = findViewById(R.id.dateEditText);
         dateEditText2 = findViewById(R.id.dateEditText2);
 
