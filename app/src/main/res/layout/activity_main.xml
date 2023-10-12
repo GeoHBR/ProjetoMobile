@@ -8,8 +8,13 @@
     android:background="@drawable/inicial_background"
     android:gravity="center">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:orientation="vertical">
+
         <LinearLayout
-            android:layout_marginTop="250dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -75,5 +80,6 @@
                 android:textStyle="bold"
                 tools:ignore="TextContrastCheck"></TextView>
         </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
