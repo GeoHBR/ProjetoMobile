@@ -11,4 +11,25 @@
     <string name="login_failed">"Login failed"</string>
     <string name="nome_do_individuo">Nome do Individuo</string>
     <string name="adicionar">adicionar</string>
+    <string name="lista_de_viagens">Lista de Viagens</string>
+    <string name="fotousuario">FotoUsuario</string>
+    <string name="NomeApp">Travelau</string>
+    <string name="Slogan">Tudo por Você</string>
+    <string name="cadastre_se">Cadastre-se</string>
+    <string name="entrar">Entrar</string>
+    <string name="botao_adicionar">Botão Adicionar</string>
+    <string name="criciuma_sc">Criciuma-SC</string>
+    <string name="destino">Destino:</string>
+    <string name="preencha_os_campos_e_adicione_as_despesas">Preencha os campos e adicione as despesas</string>
+    <string name="dd_mm_aaaa">DD/MM/AAAA</string>
+    <string name="data_do_fim">Data do fim:</string>
+    <string name="data_de_in_cio">Data de início:</string>
+    <string name="gasolina">Gasolina</string>
+    <string name="tarifa_a_rea">Tarifa Aérea</string>
+    <string name="quantidade_de_nviajantes">Quantidade de \nviajantes:</string>
+    <string name="refei_es">Refeições</string>
+    <string name="hospedagem">Hospedagem</string>
+    <string name="entreterimento_diversos">Entreterimento/Diversos</string>
+    <string name="adicionar_viagem">Adicionar viagem</string>
+    <string name="dinheiro">Dinheiro</string>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -8,12 +9,14 @@
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
         <ImageView
             android:layout_marginStart="15dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/pessoa_perfil_padrao" />
+            android:src="@drawable/pessoa_perfil_padrao"
+            android:contentDescription="@string/fotousuario" />
         <TextView
             android:id="@+id/nomeUser"
             android:layout_marginStart="10dp"
@@ -34,11 +37,25 @@
         android:layout_height="550dp"
         android:orientation="vertical"
         android:background="@drawable/borda_branco_branco">
+        <TextView
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="20dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/padrao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lista_de_viagens"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/gray"
+            />
         <ListView
             android:id="@+id/lista_viagens"
-            android:layout_marginTop="25dp"
             android:layout_width="match_parent"
-            android:layout_height="510dp"/>
+            android:layout_height="490dp"/>
     </LinearLayout>
 
     <ImageButton

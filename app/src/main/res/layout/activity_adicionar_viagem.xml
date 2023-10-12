@@ -18,14 +18,16 @@
             android:layout_margin="5dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/pessoa_perfil_padrao"/>
+            android:src="@drawable/pessoa_perfil_padrao"
+            android:contentDescription="@string/fotousuario" />
         <TextView
+            android:id="@+id/nomeUser"
             android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textSize="20dp"
-            android:text="Fulano lopes da silva"/>
+            android:textSize="20sp"
+            android:text="@string/nome_do_individuo"/>
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
@@ -37,7 +39,7 @@
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_height="540dp"
+            android:layout_height="560dp"
             android:background="@drawable/borda_branco_branco">
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -49,22 +51,23 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="22dp"
-                    android:text="Adicionar viagem"/>
+                    android:textSize="22sp"
+                    android:text="@string/adicionar_viagem"/>
                 <ImageView
                     android:layout_gravity="center"
-                    android:layout_marginLeft="-20dp"
+                    android:layout_marginStart="-20dp"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/icone_dinheiro"/>
+                    android:src="@drawable/icone_dinheiro"
+                    android:contentDescription="@string/dinheiro" />
             </LinearLayout>
             <TextView
                 android:layout_marginTop="-20dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginBottom="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Preencha os campos e adicione as despesas"/>
+                android:text="@string/preencha_os_campos_e_adicione_as_despesas"/>
 
             <View
                 android:layout_width="match_parent"
@@ -79,21 +82,23 @@
 
                 <TextView
                     android:gravity="center_vertical"
-
+                    android:fontFamily="@font/padrao"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Destino:"
-                    android:textSize="20dp" />
+                    android:text="@string/destino"
+                    android:textSize="20sp" />
                 <EditText
-
-                    android:layout_marginLeft="190dp"
+                    android:hint="@string/criciuma_sc"
+                    android:inputType="text"
+                    android:layout_marginStart="190dp"
                     android:layout_gravity="center"
                     android:layout_width="220dp"
-                    android:layout_height="40dp"/>
+                    android:layout_height="40dp"
+                    android:autofillHints="" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -103,6 +108,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:fontFamily="@font/padrao"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -110,15 +116,17 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Data de início:"
-                    android:textSize="20dp" />
+                    android:text="@string/data_de_in_cio"
+                    android:textSize="20sp" />
                 <EditText
-
+                    android:id="@+id/dateEditText"
+                    android:hint="@string/dd_mm_aaaa"
                     android:inputType="date"
-                    android:layout_marginLeft="190dp"
+                    android:layout_marginStart="190dp"
                     android:layout_gravity="center"
                     android:layout_width="220dp"
-                    android:layout_height="40dp"/>
+                    android:layout_height="40dp"
+                    android:autofillHints="Data" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -128,6 +136,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:fontFamily="@font/padrao"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -135,13 +144,17 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Data do fim:"
-                    android:textSize="20dp" />
+                    android:text="@string/data_do_fim"
+                    android:textSize="20sp" />
                 <EditText
-                    android:layout_marginLeft="190dp"
+                    android:id="@+id/dateEditText2"
+                    android:hint="@string/dd_mm_aaaa"
+                    android:inputType="date"
+                    android:layout_marginStart="190dp"
                     android:layout_gravity="center"
                     android:layout_width="220dp"
-                    android:layout_height="40dp"/>
+                    android:layout_height="40dp"
+                    android:autofillHints="Data" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -151,20 +164,23 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:fontFamily="@font/padrao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Quantidade de \nviajantes:"
-                    android:textSize="20dp" />
+                    android:text="@string/quantidade_de_nviajantes"
+                    android:textSize="20sp" />
 
                 <EditText
+                    android:inputType="number"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="190dp"
+                    android:layout_marginStart="190dp"
                     android:layout_width="220dp"
-                    android:layout_height="40dp"/>
+                    android:layout_height="40dp"
+                    android:autofillHints="" />
             </RelativeLayout>
             <View
                 android:layout_width="match_parent"
@@ -183,38 +199,39 @@
                     android:orientation="horizontal">
                     <TextView
                         android:drawablePadding="10dp"
-                        android:layout_marginRight="90dp"
-                        android:drawableEnd="@drawable/icone_add_coisas"
+                        android:layout_marginEnd="90dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="22dp"
-                        android:text="Gasolina"/>
+                        android:textSize="22sp"
+                        android:text="@string/gasolina"
+                        app:drawableEndCompat="@drawable/icone_add_coisas" />
                     <TextView
-                        android:drawableEnd="@drawable/icone_add_coisas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="22dp"
-                        android:text="Tarifa Aérea"/>
+                        android:textSize="22sp"
+                        android:text="@string/tarifa_a_rea"
+                        app:drawableEndCompat="@drawable/icone_add_coisas" />
                 </LinearLayout>
                 <LinearLayout
+                    android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:layout_marginRight="77dp"
-                        android:drawableEnd="@drawable/icone_add_coisas"
+                        android:layout_marginEnd="77dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="22dp"
-                        android:text="Refeições"/>
+                        android:textSize="22sp"
+                        android:text="@string/refei_es"
+                        app:drawableEndCompat="@drawable/icone_add_coisas" />
                     <TextView
-                        android:drawableEnd="@drawable/icone_add_coisas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="22dp"
-                        android:text="Hospedagem"/>
+                        android:textSize="22sp"
+                        android:text="@string/hospedagem"
+                        app:drawableEndCompat="@drawable/icone_add_coisas" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_gravity="center"
@@ -223,11 +240,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:drawableEnd="@drawable/icone_add_coisas"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="22dp"
-                        android:text="Entreterimento/Diversos"/>
+                        android:textSize="22sp"
+                        android:text="@string/entreterimento_diversos"
+                        app:drawableEndCompat="@drawable/icone_add_coisas" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -239,7 +256,8 @@
             android:layout_gravity="center"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/botao_mais_padrao"/>
+            android:src="@drawable/botao_mais_padrao"
+            android:contentDescription="@string/botao_adicionar" />
     </LinearLayout>
 
 
