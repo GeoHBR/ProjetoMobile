@@ -19,6 +19,10 @@ public class MainActivity extends AppCompatActivity {
 
         btnEntrar = findViewById(R.id.btnLogin);
 
+
+
+
+
         btnCadastro = findViewById(R.id.btnCadastro);
 
         btnEntrar.setOnClickListener(new View.OnClickListener() {
