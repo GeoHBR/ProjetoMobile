@@ -10,6 +10,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     TextView btnEntrar;
+
+
     TextView btnCadastro;
 
     @Override
