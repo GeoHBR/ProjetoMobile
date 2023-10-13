@@ -209,7 +209,7 @@
                         android:text="@string/gasolina"
                         app:drawableEndCompat="@drawable/icone_add_coisas" />
                     <TextView
-                        android:id="@+id/btnTarifa"
+                        android:id="@+id/tbnTarifa"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="22sp"
