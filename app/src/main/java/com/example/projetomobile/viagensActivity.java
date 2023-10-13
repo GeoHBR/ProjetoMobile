@@ -3,7 +3,9 @@ package com.example.projetomobile;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -21,19 +23,24 @@ public class viagensActivity extends AppCompatActivity {
     private ListView listaViagens;
     private TextView userNome;
     private ImageButton btnAdd;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viagens);
 
-        Intent i = getIntent();
+        preferences = PreferenceManager.getDefaultSharedPreferences(viagensActivity.this);
+        SharedPreferences.Editor edit = preferences.edit();
+
+        if(preferences.contains("KEY_ID_GASOLINA")){
+            edit.remove("KEY_ID_GASOLINA").apply();
+        }
 
         userNome = findViewById(R.id.nomeUser);
-
-        userNome.setText(i.getStringExtra("nome"));
-
         btnAdd = findViewById(R.id.btn_add);
+
+        userNome.setText(preferences.getString("KEY_NOME", null));
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override

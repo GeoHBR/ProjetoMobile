@@ -1,7 +1,9 @@
 package com.example.projetomobile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -23,11 +25,14 @@ public class LoginActivity extends AppCompatActivity {
     private TextView entrar;
     private TextView cadastro;
     private Switch mostrarSenha;
-
+    SharedPreferences preferences;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+        SharedPreferences.Editor edit = preferences.edit();
 
         user = findViewById(R.id.edit_usuario);
         senha = findViewById(R.id.edit_senha_login);
@@ -67,12 +72,10 @@ public class LoginActivity extends AppCompatActivity {
                     if(userB.getId() == 0){
                         user.setError("Campo Usuario ou Senha Incorreto");
                     }else{
-                        Intent activity = new Intent(LoginActivity.this, viagensActivity.class);
-
-                        activity.putExtra("id", userB.getId());
-                        activity.putExtra("nome", userB.getNome());
-
-                        startActivity(activity);
+                        edit.putInt("KEY_ID", userB.getId());
+                        edit.putString("KEY_NOME", userB.getNome());
+                        edit.apply();
+                        startActivity(new Intent(LoginActivity.this, viagensActivity.class));
                     }
             }
 
