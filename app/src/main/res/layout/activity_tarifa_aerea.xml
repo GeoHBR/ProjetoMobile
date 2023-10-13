@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/padrao_background"
-    tools:context=".tarifa_aerea">
+    tools:context=".TarifaAreaActivity">
     <LinearLayout
         android:layout_marginTop="20dp"
         android:gravity="center_vertical"
@@ -20,6 +20,7 @@
             android:layout_height="50dp"
             android:src="@drawable/pessoa_perfil_padrao"/>
         <TextView
+            android:id="@+id/usuarioTarifa"
             android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,6 +43,7 @@
             android:textColor="@color/gray1"
             android:text="R$"/>
         <TextView
+            android:id="@+id/totalTarifa"
             android:layout_marginLeft="4dp"
             android:gravity="center"
             android:layout_width="wrap_content"
@@ -87,6 +89,7 @@
                     android:layout_height="40dp"
                     android:src="@drawable/nuvem"/>
                 <ImageView
+                    android:id="@+id/voltarTarifa"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginLeft="120dp"
@@ -141,6 +144,7 @@
                     />
 
                 <EditText
+                    android:id="@+id/custoPessoaTarifa"
                     android:layout_marginLeft="10dp"
                     android:hint="R$"
                     android:layout_width="150dp"
@@ -168,6 +172,7 @@
                     />
 
                 <EditText
+                    android:id="@+id/aluguelTarifa"
                     android:layout_marginLeft="10dp"
                     android:hint="1"
                     android:layout_width="150dp"
@@ -185,6 +190,7 @@
             android:layout_width="270dp"
             android:layout_height="wrap_content">
             <ImageView
+                android:id="@+id/cancelarTarifa"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@drawable/icone_x"/>
@@ -198,6 +204,7 @@
                 android:layout_height="wrap_content"
                 android:text="Adicionar a viagem?"/>
             <ImageView
+                android:id="@+id/salvarTarifa"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@drawable/icone_ok"/>

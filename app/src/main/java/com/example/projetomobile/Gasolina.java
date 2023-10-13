@@ -105,9 +105,9 @@ public class Gasolina extends AppCompatActivity {
                     if(gasolina > 0){
                         GasolinaModel model = new GasolinaModel();
 
-                        model.setTotalKM(Integer.parseInt(totalKM.getText().toString()));
-                        model.setMedialKM(Integer.parseInt(mediaKMLitro.getText().toString()));
-                        model.setCustoMedio(Integer.parseInt(precoGasolina.getText().toString()));
+                        model.setTotalKM(Float.parseFloat(totalKM.getText().toString()));
+                        model.setMedialKM(Float.parseFloat(mediaKMLitro.getText().toString()));
+                        model.setCustoMedio(Float.parseFloat(precoGasolina.getText().toString()));
                         model.setTotalVeiculo(Integer.parseInt(quantVeiculos.getText().toString()));
                         model.setTotal(precoTotal);
 
@@ -116,9 +116,9 @@ public class Gasolina extends AppCompatActivity {
                     }else{
                         GasolinaModel model = new GasolinaModel();
 
-                        model.setTotalKM(Integer.parseInt(totalKM.getText().toString()));
-                        model.setMedialKM(Integer.parseInt(mediaKMLitro.getText().toString()));
-                        model.setCustoMedio(Integer.parseInt(precoGasolina.getText().toString()));
+                        model.setTotalKM(Float.parseFloat(totalKM.getText().toString()));
+                        model.setMedialKM(Float.parseFloat(mediaKMLitro.getText().toString()));
+                        model.setCustoMedio(Float.parseFloat(precoGasolina.getText().toString()));
                         model.setTotalVeiculo(Integer.parseInt(quantVeiculos.getText().toString()));
                         model.setTotal(precoTotal);
 
@@ -132,12 +132,18 @@ public class Gasolina extends AppCompatActivity {
         });
     }
     private void calcularTotal(){
-        int totalKm = Integer.parseInt(totalKM.getText().toString());
-        float media = Integer.parseInt(mediaKMLitro.getText().toString());
-        float gasolina = Integer.parseInt(precoGasolina.getText().toString());
-        int totalVeiculos = Integer.parseInt(quantVeiculos.getText().toString());
-        precoTotal = ((totalKm/media)*gasolina)/totalVeiculos;
+        if(totalKM.getText().toString().isEmpty() ){
+        } else if (mediaKMLitro.getText().toString().isEmpty()) {
+        }else if (precoGasolina.getText().toString().isEmpty()) {
+        }else if (quantVeiculos.getText().toString().isEmpty()) {
+        }else {
+            float totalKm = Float.parseFloat(totalKM.getText().toString());
+            float media = Float.parseFloat(mediaKMLitro.getText().toString());
+            float gasolina = Float.parseFloat(precoGasolina.getText().toString());
+            int totalVeiculos = Integer.parseInt(quantVeiculos.getText().toString());
+            precoTotal = ((totalKm / media) * gasolina) / totalVeiculos;
 
-        custoTotal.setText(Float.toString(precoTotal));
+            custoTotal.setText(Float.toString(precoTotal));
+        }
     }
 }

@@ -26,7 +26,7 @@
             android:name=".Refeicoes"
             android:exported="false" />
         <activity
-            android:name=".tarifa_aerea"
+            android:name=".TarifaAreaActivity"
             android:exported="false" />
         <activity
             android:name=".Gasolina"

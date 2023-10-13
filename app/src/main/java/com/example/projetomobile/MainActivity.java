@@ -10,8 +10,6 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     TextView btnEntrar;
-
-
     TextView btnCadastro;
 
     @Override
@@ -20,29 +18,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnEntrar = findViewById(R.id.btnLogin);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         btnCadastro = findViewById(R.id.btnCadastro);
-
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
-
         btnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
