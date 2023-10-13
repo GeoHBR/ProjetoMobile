@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class viagensActivity extends AppCompatActivity {
 
     private ImageButton btnAdicionar;
+    private ImageButton btnLogout;
     private Viagem_Adapter adapter;
     private ListView listaViagens;
     private TextView userNome;
@@ -39,6 +40,7 @@ public class viagensActivity extends AppCompatActivity {
 
         userNome = findViewById(R.id.nomeUser);
         btnAdd = findViewById(R.id.btn_add);
+        btnLogout = findViewById(R.id.btn_logout);
 
         userNome.setText(preferences.getString("KEY_NOME", null));
 
@@ -46,6 +48,24 @@ public class viagensActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(viagensActivity.this, AdicionarViagem.class));
+            }
+        });
+
+//      Função Logout
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                ButtonsSalve.showAlertDialog(viagensActivity.this, "Logout", "Deseja sair de sua conta?", new ButtonsSalve.OnDismissListener() {
+                    @Override
+                    public void onDismiss(boolean validacao) {
+                        if (validacao) {
+                            edit.putString("KEY_LOGIN_AUTOMATICO", "false");
+                            edit.apply();
+                            startActivity(new Intent(viagensActivity.this, MainActivity.class));
+                        }
+                    }
+                });
             }
         });
     }

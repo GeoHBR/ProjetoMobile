@@ -51,10 +51,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        cadastro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, CadastroActivity.class));
+            }
+        });
+
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String username = user.getText().toString();
                 String password = senha.getText().toString();
 
@@ -73,20 +79,26 @@ public class LoginActivity extends AppCompatActivity {
                         user.setError("Campo Usuario ou Senha Incorreto");
                     }else{
                         edit.putInt("KEY_ID", userB.getId());
-                        edit.putString("KEY_NOME", userB.getNome());
-                        edit.apply();
-                        startActivity(new Intent(LoginActivity.this, viagensActivity.class));
+                        edit.putString("KEY_NOME",userB.getNome());
+
+
+                        ButtonsSalve.showAlertDialog(LoginActivity.this, "Deseja salvar a senha?", null, new ButtonsSalve.OnDismissListener() {
+                            @Override
+                            public void onDismiss(boolean validacao) {
+                                if (validacao) {
+                                    edit.putString("KEY_LOGIN_AUTOMATICO", "true");
+                                } else {
+                                    edit.putString("KEY_LOGIN_AUTOMATICO", "false");
+                                }
+                                edit.apply();
+                                startActivity(new Intent(LoginActivity.this, viagensActivity.class));
+                            }
+                        });
+
+
                     }
-            }
-
-
-        cadastro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, CadastroActivity.class));
+                }
             }
         });
     }
-});
-}
 }

@@ -29,6 +29,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </TextView>
+
+        <ImageButton
+            android:id="@+id/btn_logout"
+            android:background="@android:color/transparent"
+            android:layout_marginStart="135dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/icone_logout"
+            android:contentDescription="@string/fotousuario" />
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="60dp"

@@ -45,5 +45,6 @@ dependencies {
     /*Correção erro "Fix Duplicate class" que estava dando para mim ao rodar o app
     não sei se isso pode acabar estragando pra alguem*/
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+    implementation ("com.google.android.material:material:1.1.0")
 
 }
