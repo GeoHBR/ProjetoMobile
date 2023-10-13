@@ -90,6 +90,24 @@ public class AdicionarViagem extends AppCompatActivity {
                 startActivity(new Intent(AdicionarViagem.this, Gasolina.class));
             }
         });
+        hospedagem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdicionarViagem.this, Hospedagem.class));
+            }
+        });
+        tarifaAerea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdicionarViagem.this, TarifaAreaActivity.class));
+            }
+        });
+        refeicao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdicionarViagem.this, Refeicoes.class));
+            }
+        });
     }
     private void formatInput(Editable s) {
         String input = s.toString();
