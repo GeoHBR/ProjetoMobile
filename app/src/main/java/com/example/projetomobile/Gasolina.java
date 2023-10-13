@@ -60,6 +60,7 @@ public class Gasolina extends AppCompatActivity {
             precoGasolina.setText(Float.toString(aux.getCustoMedio()));
             quantVeiculos.setText(String.valueOf(aux.getTotalVeiculo()));
             custoTotal.setText(Float.toString(aux.getTotal()));
+
         }
 
         user.setText(preferences.getString("KEY_NOME", null));
