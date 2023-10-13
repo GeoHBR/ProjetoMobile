@@ -23,6 +23,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
+
+
+
+
+
+
+
         btnCadastro = findViewById(R.id.btnCadastro);
 
         btnEntrar.setOnClickListener(new View.OnClickListener() {
