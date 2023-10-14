@@ -177,7 +177,8 @@
 
                 <EditText
                     android:id="@+id/quantViajantes"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
+                    android:maxLength="2"
                     android:layout_gravity="center"
                     android:layout_marginStart="190dp"
                     android:layout_width="220dp"
