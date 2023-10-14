@@ -102,19 +102,38 @@ public class AdicionarViagem extends AppCompatActivity {
         hospedagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdicionarViagem.this, Hospedagem.class));
+                    startActivity(new Intent(AdicionarViagem.this, Hospedagem.class));
             }
         });
         tarifaAerea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdicionarViagem.this, TarifaAreaActivity.class));
+                if(quantViajantes.getText().toString().isEmpty()) {
+                    quantViajantes.setError("Preencha este campo primeiro");
+                }else{
+                    Intent intent = new Intent(AdicionarViagem.this, TarifaAreaActivity.class);
+                    intent.putExtra("QUANT_VIAJANTES", Integer.parseInt(quantViajantes.getText().toString()));
+
+                    startActivity(intent);
+                }
             }
         });
         refeicao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdicionarViagem.this, Refeicoes.class));
+                if(quantViajantes.getText().toString().isEmpty()) {
+                    quantViajantes.setError("Preencha este campo primeiro");
+                }else if(dateEditText.getText().toString().isEmpty()){
+                    dateEditText.setError("Preencha este campo primeiro");
+                }else if(dateEditText2.getText().toString().isEmpty()){
+                    dateEditText2.setError("Preencha este campo primeiro");
+                }else{
+                    int duracao = 0 ;
+                    Intent intent = new Intent(AdicionarViagem.this, TarifaAreaActivity.class);
+                    intent.putExtra("QUANT_VIAJANTES", Integer.parseInt(quantViajantes.getText().toString()));
+                    intent.putExtra("DURACAO", duracao);
+                    startActivity(intent);
+                }
             }
         });
 

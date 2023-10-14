@@ -7,7 +7,6 @@ public class ViagemModel {
     //  Colunas da tabela
     public static final String
             COLUNA_ID = "_id",
-            COLUNA_NOME = "nome",
             COLUNA_DATA_INICIO = "data_inicio",
             COLUNA_DATA_FIM = "data_fim",
             COLUNA_QUANT_PESSOAS = "quant_pessoas",
@@ -25,7 +24,6 @@ public class ViagemModel {
             CREATE_TABLE = "CREATE TABLE " + TABLE_NAME
             + " ( "
             + COLUNA_ID + " integer primary key autoincrement, "
-            + COLUNA_NOME + " text not null, "
             + COLUNA_DATA_INICIO + " text not null, "
             + COLUNA_DATA_FIM + " text not null, "
             + COLUNA_QUANT_PESSOAS + " integer not null, "
@@ -53,7 +51,6 @@ public class ViagemModel {
     private int _id;
     private String dataInicio;
     private String dataFim;
-    private String nome;
     private int quantPessoas;
     private String destino;
     private int _idUsuario;
@@ -85,14 +82,6 @@ public class ViagemModel {
 
     public void setDataFim(String dataFim) {
         this.dataFim = dataFim;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public int getQuantPessoas() {

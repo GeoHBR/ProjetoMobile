@@ -85,8 +85,8 @@ public class Hospedagem extends AppCompatActivity {
                     quantQuarto.setError("Campo Obrigatorio");
                 }else{
                     calcularTotal();
+                    HospedagemModel model = new HospedagemModel();
                     if(hospedagem > 0){
-                        HospedagemModel model = new HospedagemModel();
 
                         model.setCustoMedio(Float.parseFloat(custoNoite.getText().toString()));
                         model.setTotalQuartos(Integer.parseInt(quantQuarto.getText().toString()));
@@ -95,7 +95,6 @@ public class Hospedagem extends AppCompatActivity {
 
                         dao.Update(hospedagem, model);
                     }else{
-                        HospedagemModel model = new HospedagemModel();
 
                         model.setCustoMedio(Float.parseFloat(custoNoite.getText().toString()));
                         model.setTotalQuartos(Integer.parseInt(quantQuarto.getText().toString()));

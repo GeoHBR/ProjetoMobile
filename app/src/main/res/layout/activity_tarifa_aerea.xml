@@ -147,6 +147,7 @@
                     android:id="@+id/custoPessoaTarifa"
                     android:layout_marginLeft="10dp"
                     android:hint="R$"
+                    android:inputType="numberDecimal"
                     android:layout_width="150dp"
                     android:layout_height="50dp"/>
 
@@ -175,6 +176,7 @@
                     android:id="@+id/aluguelTarifa"
                     android:layout_marginLeft="10dp"
                     android:hint="1"
+                    android:inputType="numberDecimal"
                     android:layout_width="150dp"
                     android:layout_height="50dp"/>
 

@@ -8,7 +8,8 @@ public class TarifaModel {
     public static final String
             COLUNA_ID = "_id",
             COLUNA_CUSTO_PESSOA = "custo_pessoa",
-            COLUNA_CUSTO_ALUGUEL = "custo_aluguel";
+            COLUNA_CUSTO_ALUGUEL = "custo_aluguel",
+            COLUNA_TOTAL = "total";
 
     //  SCript de criação da tabela
     public static final String
@@ -16,7 +17,8 @@ public class TarifaModel {
             + " ( "
             + COLUNA_ID + " integer primary key autoincrement, "
             + COLUNA_CUSTO_PESSOA + " real not null, "
-            + COLUNA_CUSTO_ALUGUEL + " real not null);";
+            + COLUNA_CUSTO_ALUGUEL + " real not null, "
+            + COLUNA_TOTAL + " real not null);";
 
     public static final String
             DROP_TABLE =  "drop table if exist " + TABLE_NAME + ";";
@@ -27,6 +29,7 @@ public class TarifaModel {
     private int _id;
     private float custoPessoa;
     private float custoAluguel;
+    private float total;
 
     public int get_id() {
         return _id;
@@ -52,4 +55,11 @@ public class TarifaModel {
         this.custoAluguel = custoAluguel;
     }
 
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
 }

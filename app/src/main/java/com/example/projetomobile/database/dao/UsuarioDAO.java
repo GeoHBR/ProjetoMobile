@@ -17,8 +17,8 @@ public class UsuarioDAO extends AbstrataDAO{
         db_helper = new DBOpenHalper(context);
     }
 
-    public long Insert(UsuarioModel model){
-        long isInsert = 0;
+    public int Insert(UsuarioModel model){
+        int id = 0;
 
         Open();
 
@@ -28,11 +28,12 @@ public class UsuarioDAO extends AbstrataDAO{
         contentValues.put(UsuarioModel.COLUNA_EMAIL, model.getEmail());
         contentValues.put(UsuarioModel.COLUNA_SENHA, model.getSenha());
 
-        isInsert = db.insert(UsuarioModel.TABLE_NAME, null, contentValues);
+        long isInsert = db.insert(UsuarioModel.TABLE_NAME, null, contentValues);
+        id = (int) isInsert;
 
         Close();
 
-        return isInsert;
+        return id;
     }
 
     public UsuarioModel SelectLogin(String email, String senha){
