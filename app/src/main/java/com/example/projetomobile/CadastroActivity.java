@@ -1,7 +1,9 @@
 package com.example.projetomobile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -23,10 +25,15 @@ public class CadastroActivity extends AppCompatActivity {
     private TextView btnEntrar;
     private TextView btnCadastro;
 
+    SharedPreferences preferences;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(CadastroActivity.this);
+        SharedPreferences.Editor edit = preferences.edit();
 
         edit_nome = findViewById(R.id.edit_nome);
         edit_email = findViewById(R.id.edit_email);
@@ -56,13 +63,13 @@ public class CadastroActivity extends AppCompatActivity {
                     model.setEmail(email);
                     model.setSenha(senha);
 
-                    long id = dao.Insert(model);
-
+                    int id = dao.Insert(model);
                     if(id > 0){
                         Intent activity = new Intent(CadastroActivity.this, viagensActivity.class);
 
-                        activity.putExtra("id", id);
-                        activity.putExtra("nome", nome);
+                        edit.putInt("KEY_ID", id);
+                        edit.putString("KEY_NOME", edit_nome.getText().toString());
+                        edit.apply();
 
                         startActivity(activity);
                     }else{

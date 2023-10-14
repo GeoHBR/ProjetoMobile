@@ -8,7 +8,8 @@ public class RefeicaoModel {
     public static final String
             COLUNA_ID = "_id",
             COLUNA_CUSTO_REFEICAO = "custo_refeicao",
-            COLUNA_QUANT_REFEICAO = "quant_refeicao";
+            COLUNA_QUANT_REFEICAO = "quant_refeicao",
+            COLUNA_TOTAL = "total";
 
     //  SCript de criação da tabela
     public static final String
@@ -16,7 +17,8 @@ public class RefeicaoModel {
             + " ( "
             + COLUNA_ID + " integer primary key autoincrement, "
             + COLUNA_CUSTO_REFEICAO + " real not null, "
-            + COLUNA_QUANT_REFEICAO + " intereger not null "
+            + COLUNA_QUANT_REFEICAO + " intereger not null, "
+            + COLUNA_TOTAL + " real not null"
             + " );";
 
     public static final String
@@ -28,6 +30,7 @@ public class RefeicaoModel {
     private int _id;
     private float custoRefeicao;
     private int quantRefeicao;
+    private float total;
 
     public int get_id() {
         return _id;
@@ -53,4 +56,11 @@ public class RefeicaoModel {
         this.quantRefeicao = quantRefeicao;
     }
 
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
 }

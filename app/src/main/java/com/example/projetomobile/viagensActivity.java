@@ -37,6 +37,13 @@ public class viagensActivity extends AppCompatActivity {
         if(preferences.contains("KEY_ID_GASOLINA")){
             edit.remove("KEY_ID_GASOLINA").apply();
         }
+        if(preferences.contains("KEY_ID_HOSPEDAGEM")){
+            edit.remove("KEY_ID_HOSPEDAGEM").apply();
+        }
+        if(preferences.contains("KEY_ID_TARIFA")){
+            edit.remove("KEY_ID_TARIFA").apply();
+        }
+
 
         userNome = findViewById(R.id.nomeUser);
         btnAdd = findViewById(R.id.btn_add);

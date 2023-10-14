@@ -24,7 +24,6 @@ public class ViagemDAO extends AbstrataDAO{
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(ViagemModel.COLUNA_NOME, viagemModel.getNome());
         contentValues.put(ViagemModel.COLUNA_DATA_FIM, viagemModel.getDataFim());
         contentValues.put(ViagemModel.COLUNA_DATA_INICIO, viagemModel.getDataInicio());
         contentValues.put(ViagemModel.COLUNA_DESTINO, viagemModel.getDestino());
@@ -56,17 +55,16 @@ public class ViagemDAO extends AbstrataDAO{
                 ViagemModel viagem = new ViagemModel();
 
                 viagem.set_id(c.getInt(0));
-                viagem.setNome(c.getString(1));
-                viagem.setDataInicio(c.getString(2));
-                viagem.setDataFim(c.getString(3));
-                viagem.setQuantPessoas(c.getInt(4));
-                viagem.setDestino(c.getString(5));
-                viagem.set_idUsuario(c.getInt(6));
-                viagem.set_idEntretenimento(c.getInt(7));
-                viagem.set_idTarifa(c.getInt(8));
-                viagem.set_idGasolina(c.getInt(9));
+                viagem.setDataInicio(c.getString(1));
+                viagem.setDataFim(c.getString(2));
+                viagem.setQuantPessoas(c.getInt(3));
+                viagem.setDestino(c.getString(4));
+                viagem.set_idUsuario(c.getInt(5));
+                viagem.set_idEntretenimento(c.getInt(6));
+                viagem.set_idTarifa(c.getInt(7));
+                viagem.set_idGasolina(c.getInt(8));
+                viagem.set_idRefeicao(c.getInt(9));
                 viagem.set_idRefeicao(c.getInt(10));
-                viagem.set_idRefeicao(c.getInt(11));
 
                 viagens.add(viagem);
 

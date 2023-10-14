@@ -17,7 +17,7 @@ import com.example.projetomobile.database.model.GasolinaModel;
 
 public class Gasolina extends AppCompatActivity {
 
-    private TextView user;
+    private TextView usuario;
     private TextView custoTotal;
     private EditText totalKM;
     private EditText mediaKMLitro;
@@ -37,7 +37,7 @@ public class Gasolina extends AppCompatActivity {
         preferences = PreferenceManager.getDefaultSharedPreferences(Gasolina.this);
         SharedPreferences.Editor edit = preferences.edit();
 
-        user = findViewById(R.id.usuarioGasolina);
+        usuario = findViewById(R.id.usuarioGasolina);
         custoTotal = findViewById(R.id.txtCustoTotalGasolina);
         totalKM = findViewById(R.id.totalKMGasolina);
         mediaKMLitro = findViewById(R.id.mediaKMGasolina);
@@ -63,7 +63,7 @@ public class Gasolina extends AppCompatActivity {
 
         }
 
-        user.setText(preferences.getString("KEY_NOME", null));
+        usuario.setText(preferences.getString("KEY_NOME", null));
         voltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
