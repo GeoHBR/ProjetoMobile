@@ -138,7 +138,7 @@
                     />
                 <EditText
                     android:id="@+id/totalKMGasolina"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:layout_marginLeft="40dp"
                     android:hint="710"
                     android:layout_width="150dp"
@@ -167,7 +167,7 @@
 
                 <EditText
                     android:id="@+id/mediaKMGasolina"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:layout_marginLeft="10dp"
                     android:hint="11"
                     android:layout_width="150dp"
@@ -197,7 +197,7 @@
 
                 <EditText
                     android:id="@+id/custoGasolina"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:layout_marginLeft="10dp"
                     android:hint="R$ 5,67"
                     android:layout_width="150dp"

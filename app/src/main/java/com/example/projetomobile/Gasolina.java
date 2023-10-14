@@ -58,7 +58,7 @@ public class Gasolina extends AppCompatActivity {
             totalKM.setText(Float.toString(aux.getTotalKM()));
             mediaKMLitro.setText(Float.toString(aux.getMedialKM()));
             precoGasolina.setText(Float.toString(aux.getCustoMedio()));
-            quantVeiculos.setText(String.valueOf(aux.getTotalVeiculo()));
+            quantVeiculos.setText(Integer.toString(aux.getTotalVeiculo()));
             custoTotal.setText(Float.toString(aux.getTotal()));
 
         }
@@ -102,6 +102,9 @@ public class Gasolina extends AppCompatActivity {
                 }else if (quantVeiculos.getText().toString().isEmpty()) {
                     quantVeiculos.setError("Campo Obrigatorio");
                 }else{
+
+                    calcularTotal();
+
                     if(gasolina > 0){
                         GasolinaModel model = new GasolinaModel();
 
