@@ -19,12 +19,9 @@ public class Viagem_Adapter extends BaseAdapter {
     private Activity activity;
 
 
-    public Viagem_Adapter(final Activity activity){
-        this.activity = activity;
-    }
-
-    public void setlistaViagens(final ArrayList<Viagem_Modelo>viagens){
+    public Viagem_Adapter(final ArrayList<Viagem_Modelo>viagens, final Activity activity){
         listaViagens = viagens;
+        this.activity = activity;
     }
 
     @Override
@@ -39,7 +36,7 @@ public class Viagem_Adapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return listaViagens.get(i).getId();
     }
 
     @Override
@@ -59,18 +56,6 @@ public class Viagem_Adapter extends BaseAdapter {
 
         TextView data2 = view.findViewById(R.id.text_data2);
         data2.setText(viagem.getData2());
-
-        Button btnDetalhes = view.findViewById((R.id.btn_add));
-        btnDetalhes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(
-                        activity, "Clicou no produto"+listaViagens.get(i).getNomeViagem(), Toast.LENGTH_LONG
-                ).show();
-
-
-            }
-        });
 
         return view;
     }

@@ -5,6 +5,7 @@ public class Viagem_Modelo {
     String nomeViagem;
     String data1;
     String data2;
+    int id;
 
 
     public String getNomeViagem() {
@@ -31,4 +32,11 @@ public class Viagem_Modelo {
         this.data2 = data2;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

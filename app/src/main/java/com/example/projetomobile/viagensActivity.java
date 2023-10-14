@@ -6,13 +6,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.projetomobile.adapter.Viagem_Modelo;
 import com.example.projetomobile.adapter.Viagem_Adapter;
+import com.example.projetomobile.database.dao.ViagemDAO;
+import com.example.projetomobile.database.model.ViagemModel;
 
 import java.util.ArrayList;
 
@@ -43,7 +48,30 @@ public class viagensActivity extends AppCompatActivity {
         if(preferences.contains("KEY_ID_TARIFA")){
             edit.remove("KEY_ID_TARIFA").apply();
         }
+        if(preferences.contains("KEY_ID_REFEICAO")){
+            edit.remove("KEY_ID_REFEICAO").apply();
+        }
 
+        listaViagens = findViewById(R.id.lista_viagens);
+
+        ViagemDAO dao = new ViagemDAO(viagensActivity.this);
+        ArrayList<ViagemModel> viagens = dao.Select(preferences.getInt("KEY_ID", 0));
+        ArrayList<Viagem_Modelo> viagemModel = new ArrayList<>();
+
+        for(int i = 0; i<viagens.size(); i++){
+            Viagem_Modelo viagem = new Viagem_Modelo();
+            ViagemModel viagemC = viagens.get(i);
+            viagem.setId(viagemC.get_id());
+
+            viagem.setNomeViagem(viagemC.getDestino());
+            viagem.setData1(viagemC.getDataInicio());
+            viagem.setData2(viagemC.getDataFim());
+
+            viagemModel.add(viagem);
+        }
+
+        Viagem_Adapter adapter = new Viagem_Adapter(viagemModel, this);
+        listaViagens.setAdapter(adapter);
 
         userNome = findViewById(R.id.nomeUser);
         btnAdd = findViewById(R.id.btn_add);
@@ -67,9 +95,8 @@ public class viagensActivity extends AppCompatActivity {
                     @Override
                     public void onDismiss(boolean validacao) {
                         if (validacao) {
-                            edit.putString("KEY_LOGIN_AUTOMATICO", "false");
-                            edit.apply();
-                            startActivity(new Intent(viagensActivity.this, MainActivity.class));
+                            edit.putString("KEY_LOGIN_AUTOMATICO", "false").apply();
+                            finish();
                         }
                     }
                 });

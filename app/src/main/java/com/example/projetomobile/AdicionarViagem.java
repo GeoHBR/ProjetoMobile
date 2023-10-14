@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.projetomobile.database.dao.UsuarioDAO;
+import com.example.projetomobile.database.dao.ViagemDAO;
+import com.example.projetomobile.database.model.ViagemModel;
 
 import android.preference.PreferenceManager;
 import android.text.Editable;
@@ -123,15 +125,14 @@ public class AdicionarViagem extends AppCompatActivity {
             public void onClick(View view) {
                 if(quantViajantes.getText().toString().isEmpty()) {
                     quantViajantes.setError("Preencha este campo primeiro");
-                }else if(dateEditText.getText().toString().isEmpty()){
-                    dateEditText.setError("Preencha este campo primeiro");
-                }else if(dateEditText2.getText().toString().isEmpty()){
-                    dateEditText2.setError("Preencha este campo primeiro");
+                }else if(dateInicio.getText().toString().isEmpty()){
+                    dateInicio.setError("Preencha este campo primeiro");
+                }else if(dateFim.getText().toString().isEmpty()){
+                    dateFim.setError("Preencha este campo primeiro");
                 }else{
-                    int duracao = 0 ;
-                    Intent intent = new Intent(AdicionarViagem.this, TarifaAreaActivity.class);
+                    Intent intent = new Intent(AdicionarViagem.this, Refeicoes.class);
                     intent.putExtra("QUANT_VIAJANTES", Integer.parseInt(quantViajantes.getText().toString()));
-                    intent.putExtra("DURACAO", duracao);
+                    intent.putExtra("DURACAO", diferencaData());
                     startActivity(intent);
                 }
             }
@@ -140,7 +141,43 @@ public class AdicionarViagem extends AppCompatActivity {
         criar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edit.putInt("KEY_DIAS", diferencaData());
+                if(destino.getText().toString().isEmpty()){
+                    destino.setError("Campo Obrigatorio");
+                }else if(dateInicio.getText().toString().isEmpty()){
+                    dateInicio.setError("Campo Obrigatorio");
+                }else if(dateFim.getText().toString().isEmpty()){
+                    dateFim.setError("Campo Obrigatorio");
+                }else if(quantViajantes.getText().toString().isEmpty()) {
+                    quantViajantes.setError("Campo Obrigatorio");
+                }else{
+
+                    ViagemDAO dao = new ViagemDAO(AdicionarViagem.this);
+                    ViagemModel model = new ViagemModel();
+
+                    model.setDestino(destino.getText().toString());
+                    model.setDataInicio(dateInicio.getText().toString());
+                    model.setDataFim(dateFim.getText().toString());
+                    model.set_idUsuario(preferences.getInt("KEY_ID", 0));
+                    model.setQuantPessoas(Integer.parseInt(quantViajantes.getText().toString()));
+                    if(preferences.contains("KEY_ID_GASOLINA")){
+                        model.set_idGasolina(preferences.getInt("KEY_ID_GASOLINA", 0));
+                        edit.remove("KEY_ID_GASOLINA").apply();
+                    }
+                    if(preferences.contains("KEY_ID_HOSPEDAGEM")){
+                        model.set_idHospedagem(preferences.getInt("KEY_ID_HOSPEDAGEM", 0));
+                        edit.remove("KEY_ID_HOSPEDAGEM").apply();
+                    }
+                    if(preferences.contains("KEY_ID_TARIFA")){
+                        model.set_idTarifa(preferences.getInt("KEY_ID_TARIFA", 0));
+                        edit.remove("KEY_ID_TARIFA").apply();
+                    }
+                    if(preferences.contains("KEY_ID_REFEICAO")){
+                        model.set_idRefeicao(preferences.getInt("KEY_ID_REFEICAO", 0));
+                        edit.remove("KEY_ID_REFEICAO").apply();
+                    }
+                    dao.Insert(model);
+                    finish();
+                }
             }
         });
     }
