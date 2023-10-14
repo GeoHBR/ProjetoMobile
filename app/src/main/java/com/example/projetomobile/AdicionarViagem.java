@@ -119,9 +119,10 @@ public class AdicionarViagem extends AppCompatActivity {
                 }else if(dateEditText2.getText().toString().isEmpty()){
                     dateEditText2.setError("Preencha este campo primeiro");
                 }else{
+                    int duracao;
                     Intent intent = new Intent(AdicionarViagem.this, TarifaAreaActivity.class);
                     intent.putExtra("QUANT_VIAJANTES", Integer.parseInt(quantViajantes.getText().toString()));
-
+                    intent.putExtra("DURACAO", duracao);
                     startActivity(intent);
                 }
             }
