@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
 
-        if(preferences.getString("KEY_LOGIN_AUTOMATICO", null).equals("true")) {
+        if(preferences.getString("KEY_LOGIN_AUTOMATICO", "").equals("true")) {
             startActivity(new Intent(MainActivity.this, viagensActivity.class));
         }
 
