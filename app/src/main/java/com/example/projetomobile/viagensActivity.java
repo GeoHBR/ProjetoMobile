@@ -56,22 +56,25 @@ public class viagensActivity extends AppCompatActivity {
 
         ViagemDAO dao = new ViagemDAO(viagensActivity.this);
         ArrayList<ViagemModel> viagens = dao.Select(preferences.getInt("KEY_ID", 0));
-        ArrayList<Viagem_Modelo> viagemModel = new ArrayList<>();
+        if(viagens.size() > 0){
+            ArrayList<Viagem_Modelo> viagemModel = new ArrayList<>();
 
-        for(int i = 0; i<viagens.size(); i++){
-            Viagem_Modelo viagem = new Viagem_Modelo();
-            ViagemModel viagemC = viagens.get(i);
-            viagem.setId(viagemC.get_id());
+            for(int i = 0; i<viagens.size(); i++){
+                Viagem_Modelo viagem = new Viagem_Modelo();
+                ViagemModel viagemC = viagens.get(i);
+                viagem.setId(viagemC.get_id());
 
-            viagem.setNomeViagem(viagemC.getDestino());
-            viagem.setData1(viagemC.getDataInicio());
-            viagem.setData2(viagemC.getDataFim());
+                viagem.setNomeViagem(viagemC.getDestino());
+                viagem.setData1(viagemC.getDataInicio());
+                viagem.setData2(viagemC.getDataFim());
 
-            viagemModel.add(viagem);
+                viagemModel.add(viagem);
+            }
+
+            Viagem_Adapter adapter = new Viagem_Adapter(viagemModel, this);
+            listaViagens.setAdapter(adapter);
         }
 
-        Viagem_Adapter adapter = new Viagem_Adapter(viagemModel, this);
-        listaViagens.setAdapter(adapter);
 
         userNome = findViewById(R.id.nomeUser);
         btnAdd = findViewById(R.id.btn_add);
