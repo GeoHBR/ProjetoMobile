@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Nome do usuário"
+            android:text="@string/nome_do_individuo"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </LinearLayout>
@@ -86,11 +86,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:text="Viagem 1"
                     android:textColor="@color/black"
-                    android:textSize="27dp"
+                    android:textSize="27sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -137,7 +137,7 @@
 
                 <EditText
                     android:id="@+id/qtdViajantesRelatorio"
-                    android:layout_width="150dp"
+                    android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:hint="2"
                     android:inputType="numberDecimal" />
@@ -166,7 +166,7 @@
 
                 <EditText
                     android:id="@+id/duracaoViagemRelatorio"
-                    android:layout_width="150dp"
+                    android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:hint="15 dias"
                     android:inputType="numberDecimal" />
@@ -196,7 +196,7 @@
 
                 <EditText
                     android:id="@+id/custoTotalRelatorio"
-                    android:layout_width="150dp"
+                    android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:hint="R$ 1000,00"
                     android:inputType="numberDecimal" />
@@ -227,7 +227,7 @@
 
                 <EditText
                     android:id="@+id/custoViajanteRelatorio"
-                    android:layout_width="150dp"
+                    android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:hint="R$ 500,00"
                     android:inputType="number" />
