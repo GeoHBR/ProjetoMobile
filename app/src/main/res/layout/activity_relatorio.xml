@@ -44,7 +44,7 @@
             android:gravity="center"
             android:text="R$"
             android:textColor="@color/gray1"
-            android:textSize="40dp" />
+            android:textSize="40sp" />
 
         <TextView
             android:id="@+id/txtCustoTotalRelatorio"
@@ -140,7 +140,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:hint="2"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:backgroundTint="@color/gray"/>
             </LinearLayout>
 
             <View
@@ -169,7 +170,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:hint="15 dias"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:backgroundTint="@color/gray"/>
 
             </LinearLayout>
 
@@ -199,7 +201,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:hint="R$ 1000,00"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:backgroundTint="@color/gray"/>
 
             </LinearLayout>
 
@@ -230,7 +233,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:hint="R$ 500,00"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:backgroundTint="@color/gray"/>
             </LinearLayout>
         </LinearLayout>
 

@@ -101,10 +101,10 @@
                     android:id="@+id/destino"
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
-                    android:layout_gravity=""
                     android:autofillHints=""
                     android:hint="@string/criciuma_sc"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:backgroundTint="@color/gray"/>
             </LinearLayout>
 
             <LinearLayout
@@ -128,7 +128,8 @@
                     android:layout_height="50dp"
                     android:autofillHints="Data"
                     android:hint="@string/dd_mm_aaaa"
-                    android:inputType="date" />
+                    android:inputType="date"
+                    android:backgroundTint="@color/gray"/>
             </LinearLayout>
 
             <LinearLayout
@@ -152,7 +153,8 @@
                     android:layout_height="50dp"
                     android:autofillHints="Data"
                     android:hint="@string/dd_mm_aaaa"
-                    android:inputType="date" />
+                    android:inputType="date"
+                    android:backgroundTint="@color/gray"/>
             </LinearLayout>
 
             <LinearLayout
@@ -177,7 +179,8 @@
                     android:layout_height="50dp"
                     android:autofillHints=""
                     android:inputType="numberDecimal"
-                    android:maxLength="2" />
+                    android:maxLength="2"
+                    android:backgroundTint="@color/gray"/>
             </LinearLayout>
 
             <View
@@ -289,8 +292,8 @@
 
             <ImageView
                 android:id="@+id/btnCancelarViagem"
-                android:layout_width="63dp"
-                android:layout_height="63dp"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
                 android:src="@drawable/icone_x" />
 
             <TextView
@@ -306,8 +309,8 @@
 
             <ImageView
                 android:id="@+id/btnSalvarViagem"
-                android:layout_width="63dp"
-                android:layout_height="63dp"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
                 android:src="@drawable/icone_ok" />
         </LinearLayout>
     </LinearLayout>
