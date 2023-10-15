@@ -99,7 +99,6 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_gravity="bottom"
-
                     android:layout_marginStart="10dp"
                     android:src="@drawable/talheres" />
 
@@ -108,7 +107,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="35dp"
                     android:src="@drawable/seta_voltar"
-                    android:layout_gravity="bottom"/>
+                    android:layout_gravity="bottom" />
             </LinearLayout>
 
             <LinearLayout
@@ -131,7 +130,6 @@
                     android:layout_marginStart="5dp"
                     android:text="Viagem 1"
                     android:textSize="17sp" />
-
 
             </LinearLayout>
 
