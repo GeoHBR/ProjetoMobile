@@ -9,12 +9,12 @@
     tools:context=".TarifaAreaActivity">
 
     <LinearLayout
-        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp" >
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="50dp"
@@ -23,14 +23,13 @@
 
         <TextView
             android:id="@+id/usuarioTarifa"
-            android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:fontFamily="@font/padrao"
-            android:textSize="20sp"
             android:text="@string/nome_do_individuo"
             android:textColor="@color/gray1"
-/>
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -165,7 +164,6 @@
             </LinearLayout>
 
             <View
-                android:layout_marginTop="10dp"
                 android:layout_gravity="center"
                 android:layout_width="390dp"
                 android:layout_height="2dp"
@@ -220,7 +218,7 @@
                 android:textSize="17sp"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Adicionar a viagem?"
+                android:text="Adicionar à viagem?"
                 android:textStyle="bold" />
 
             <ImageView
