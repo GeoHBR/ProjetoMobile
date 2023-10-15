@@ -26,9 +26,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:fontFamily="@font/padrao"
             android:text="@string/nome_do_individuo"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textColor="@color/gray1"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout

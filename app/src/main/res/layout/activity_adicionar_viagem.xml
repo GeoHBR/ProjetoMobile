@@ -28,8 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="@string/nome_do_individuo"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textColor="@color/gray1"
+            android:textSize="20sp"
+            android:fontFamily="@font/padrao"/>
     </LinearLayout>
 
     <LinearLayout
@@ -180,7 +181,8 @@
                     android:autofillHints=""
                     android:inputType="numberDecimal"
                     android:maxLength="2"
-                    android:backgroundTint="@color/gray"/>
+                    android:backgroundTint="@color/gray"
+                    android:hint="2"/>
             </LinearLayout>
 
             <View

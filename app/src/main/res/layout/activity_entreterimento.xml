@@ -27,8 +27,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="@string/nome_do_individuo"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textColor="@color/gray1"
+            android:textSize="20dp"
+            android:fontFamily="@font/padrao"/>
     </LinearLayout>
 
     <LinearLayout
@@ -88,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    android:text="Entreterimento/Diversos"
+                    android:text="Entretenimento/Diversos"
                     android:textColor="@color/black"
                     android:textSize="27sp"
                     android:textStyle="bold" />

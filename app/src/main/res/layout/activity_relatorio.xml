@@ -27,8 +27,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="@string/nome_do_individuo"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textColor="@color/gray1"
+            android:textSize="20sp"
+            android:fontFamily="@font/padrao"/>
     </LinearLayout>
 
     <LinearLayout
@@ -63,7 +64,8 @@
         android:gravity="center_horizontal"
         android:text="Custo total da viagem"
         android:textColor="@color/gray1"
-        android:textSize="19sp" />
+        android:textSize="19sp"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -238,20 +240,27 @@
             </LinearLayout>
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/voltarRelatorio"
-            android:layout_width="63dp"
-            android:layout_height="63dp"
+        <RelativeLayout
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:background="@drawable/circulo_shape_branco"
             android:layout_gravity="center"
-            android:layout_marginTop="-32dp"
-            android:src="@drawable/circulo_shape" />
+            android:layout_marginTop="-37dp"
+            android:gravity="center">
 
-        <ImageView
-            android:layout_width="46.48dp"
-            android:layout_height="46.48dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="-1dp"
-            android:layout_marginTop="-54dp"
-            android:src="@drawable/seta_voltar_branca" />
+            <ImageView
+                android:id="@+id/voltarRelatorio"
+                android:layout_width="62dp"
+                android:layout_height="62dp"
+                android:src="@drawable/circulo_shape" />
+
+            <ImageView
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:layout_margin="9.5dp"
+                android:src="@drawable/icone_voltar_svg" />
+
+        </RelativeLayout>
+
     </LinearLayout>
 </LinearLayout>
