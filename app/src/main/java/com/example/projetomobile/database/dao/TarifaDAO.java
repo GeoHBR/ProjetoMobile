@@ -5,7 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.example.projetomobile.database.DBOpenHalper;
+import com.example.projetomobile.database.model.GasolinaModel;
 import com.example.projetomobile.database.model.TarifaModel;
+import com.example.projetomobile.database.model.ViagemModel;
 
 public class TarifaDAO extends AbstrataDAO{
 
@@ -48,6 +50,20 @@ public class TarifaDAO extends AbstrataDAO{
         Close();
 
         return tarifa;
+    }
+    public float SelectTotal(int id){
+        float total = 0;
+
+        Open();
+        Cursor c = db.rawQuery("SELECT total FROM "+ TarifaModel.TABLE_NAME+" WHERE "+TarifaModel.COLUNA_ID+" = "
+                + "(SELECT "+ ViagemModel.COLUNA_ID_TARIFA+" FROM "+ViagemModel.TABLE_NAME+" WHERE "
+                + ViagemModel.COLUNA_ID+" = "+id+")" ,null);
+        if(c.getCount() > 0){
+            c.moveToFirst();
+
+            total = c.getFloat(0);
+        }
+        return total;
     }
 
 

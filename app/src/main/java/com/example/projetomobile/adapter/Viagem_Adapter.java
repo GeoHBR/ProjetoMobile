@@ -1,15 +1,17 @@
 package com.example.projetomobile.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.example.projetomobile.R;
+import com.example.projetomobile.Relatorio;
+import com.example.projetomobile.viagensActivity;
 
 import java.util.ArrayList;
 
@@ -56,6 +58,16 @@ public class Viagem_Adapter extends BaseAdapter {
 
         TextView data2 = view.findViewById(R.id.text_data2);
         data2.setText(viagem.getData2());
+
+        ImageButton btnRelatorio = view.findViewById(R.id.btnRelatorio);
+        btnRelatorio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, Relatorio.class);
+                intent.putExtra("ID", viagem.getId());
+                activity.startActivity(intent);
+            }
+        });
 
         return view;
     }

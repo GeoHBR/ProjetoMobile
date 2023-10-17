@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.projetomobile.database.model.EntreterimentoModel;
+import com.example.projetomobile.database.model.EntretenimentoModel;
 import com.example.projetomobile.database.model.GasolinaModel;
 import com.example.projetomobile.database.model.HospedagemModel;
 import com.example.projetomobile.database.model.RefeicaoModel;
@@ -16,7 +16,6 @@ public class DBOpenHalper extends SQLiteOpenHelper {
     private static final String DATABASE_NOME="viagem.db";
     private static final int DATABASE_VERSION = 1;
 
-
     public DBOpenHalper(Context context) {
         super(context, DATABASE_NOME, null, DATABASE_VERSION);
     }
@@ -26,7 +25,7 @@ public class DBOpenHalper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(UsuarioModel.CREATE_TABLE);
         sqLiteDatabase.execSQL(GasolinaModel.CREATE_TABLE);
         sqLiteDatabase.execSQL(TarifaModel.CREATE_TABLE);
-        sqLiteDatabase.execSQL(EntreterimentoModel.CREATE_TABLE);
+        sqLiteDatabase.execSQL(EntretenimentoModel.CREATE_TABLE);
         sqLiteDatabase.execSQL(HospedagemModel.CREATE_TABLE);
         sqLiteDatabase.execSQL(RefeicaoModel.CREATE_TABLE);
         sqLiteDatabase.execSQL(ViagemModel.CREATE_TABLE);

@@ -15,8 +15,7 @@ public class ViagemModel {
             COLUNA_ID_GASOLINA = "_id_gasolina",
             COLUNA_ID_TARIFA = "_id_tarifa",
             COLUNA_ID_REFEICAO = "_id_refeicao",
-            COLUNA_ID_HOSPEDAGEM = "_id_hospedagem",
-            COLUNA_ID_ENTRETENIMENTO = "_id_entretenimento";
+            COLUNA_ID_HOSPEDAGEM = "_id_hospedagem";
 
 
     //  SCript de criação da tabela
@@ -29,7 +28,6 @@ public class ViagemModel {
             + COLUNA_QUANT_PESSOAS + " integer not null, "
             + COLUNA_DESTINO + " text not null, "
             + COLUNA_ID_USUARIO + " int, "
-            + COLUNA_ID_ENTRETENIMENTO + " int, "
             + COLUNA_ID_TARIFA + " int, "
             + COLUNA_ID_GASOLINA + " int, "
             + COLUNA_ID_REFEICAO + " int, "
@@ -38,8 +36,7 @@ public class ViagemModel {
             + "FOREIGN KEY("+COLUNA_ID_GASOLINA+") REFERENCES tb_gasolina(_id), "
             + "FOREIGN KEY("+COLUNA_ID_HOSPEDAGEM+") REFERENCES tb_hospedagem(_id), "
             + "FOREIGN KEY("+COLUNA_ID_REFEICAO+") REFERENCES tb_refeicao(_id), "
-            + "FOREIGN KEY("+COLUNA_ID_TARIFA+") REFERENCES tb_tarifa(_id), "
-            + "FOREIGN KEY("+COLUNA_ID_ENTRETENIMENTO+") REFERENCES tb_entreterimento(_id)"
+            + "FOREIGN KEY("+COLUNA_ID_TARIFA+") REFERENCES tb_tarifa(_id) "
             + ");";
 
     public static final String
@@ -58,7 +55,6 @@ public class ViagemModel {
     private int _idHospedagem;
     private int _idTarifa;
     private int _idRefeicao;
-    private int _idEntretenimento;
 
     public int get_id() {
         return _id;
@@ -130,14 +126,6 @@ public class ViagemModel {
 
     public void set_idRefeicao(int _idRefeicao) {
         this._idRefeicao = _idRefeicao;
-    }
-
-    public int get_idEntretenimento() {
-        return _idEntretenimento;
-    }
-
-    public void set_idEntretenimento(int _idEntretenimento) {
-        this._idEntretenimento = _idEntretenimento;
     }
 
     public int get_idUsuario() {

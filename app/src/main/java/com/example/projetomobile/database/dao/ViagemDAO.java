@@ -41,7 +41,7 @@ public class ViagemDAO extends AbstrataDAO{
         return isInsert;
     }
 
-    public ArrayList<ViagemModel> Select(int id){
+    public ArrayList<ViagemModel> SelectAll(int id){
 
         ArrayList<ViagemModel> viagens = new ArrayList<>();
 
@@ -60,11 +60,10 @@ public class ViagemDAO extends AbstrataDAO{
                 viagem.setQuantPessoas(c.getInt(3));
                 viagem.setDestino(c.getString(4));
                 viagem.set_idUsuario(c.getInt(5));
-                viagem.set_idEntretenimento(c.getInt(6));
-                viagem.set_idTarifa(c.getInt(7));
-                viagem.set_idGasolina(c.getInt(8));
+                viagem.set_idTarifa(c.getInt(6));
+                viagem.set_idGasolina(c.getInt(7));
+                viagem.set_idRefeicao(c.getInt(8));
                 viagem.set_idRefeicao(c.getInt(9));
-                viagem.set_idRefeicao(c.getInt(10));
 
                 viagens.add(viagem);
 
@@ -74,6 +73,35 @@ public class ViagemDAO extends AbstrataDAO{
         Close();
 
         return viagens;
+    }
+
+    public ViagemModel SelectViagem(int id){
+
+        ViagemModel viagem = new ViagemModel();
+
+        Open();
+
+        Cursor c = db.rawQuery("SELECT * FROM "+ ViagemModel.TABLE_NAME+" WHERE " +ViagemModel.COLUNA_ID+" = "+id, null);
+
+        if(c.getCount() > 0){
+            c.moveToFirst();
+
+            viagem.set_id(c.getInt(0));
+            viagem.setDataInicio(c.getString(1));
+            viagem.setDataFim(c.getString(2));
+            viagem.setQuantPessoas(c.getInt(3));
+            viagem.setDestino(c.getString(4));
+            viagem.set_idUsuario(c.getInt(5));
+            viagem.set_idTarifa(c.getInt(6));
+            viagem.set_idGasolina(c.getInt(7));
+            viagem.set_idRefeicao(c.getInt(8));
+            viagem.set_idRefeicao(c.getInt(9));
+
+        }
+
+        Close();
+
+        return viagem;
     }
 
     public boolean Delete(int id){

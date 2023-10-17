@@ -7,6 +7,7 @@ import android.database.Cursor;
 import com.example.projetomobile.database.DBOpenHalper;
 import com.example.projetomobile.database.model.GasolinaModel;
 import com.example.projetomobile.database.model.RefeicaoModel;
+import com.example.projetomobile.database.model.ViagemModel;
 
 public class RefeicaoDAO extends AbstrataDAO{
 
@@ -51,6 +52,21 @@ public class RefeicaoDAO extends AbstrataDAO{
         Close();
 
         return refeicao;
+    }
+
+    public float SelectTotal(int id){
+        float total = 0;
+
+        Open();
+        Cursor c = db.rawQuery("SELECT total FROM "+RefeicaoModel.TABLE_NAME+" WHERE "+RefeicaoModel.COLUNA_ID+" = "
+                + "(SELECT "+ ViagemModel.COLUNA_ID_REFEICAO+" FROM "+ViagemModel.TABLE_NAME+" WHERE "
+                + ViagemModel.COLUNA_ID+" = "+id+")" ,null);
+        if(c.getCount() > 0){
+            c.moveToFirst();
+
+            total = c.getFloat(0);
+        }
+        return total;
     }
 
     public void Delete(int id){

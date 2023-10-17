@@ -55,7 +55,7 @@ public class viagensActivity extends AppCompatActivity {
         listaViagens = findViewById(R.id.lista_viagens);
 
         ViagemDAO dao = new ViagemDAO(viagensActivity.this);
-        ArrayList<ViagemModel> viagens = dao.Select(preferences.getInt("KEY_ID", 0));
+        ArrayList<ViagemModel> viagens = dao.SelectAll(preferences.getInt("KEY_ID", 0));
         if(viagens.size() > 0){
             ArrayList<Viagem_Modelo> viagemModel = new ArrayList<>();
 

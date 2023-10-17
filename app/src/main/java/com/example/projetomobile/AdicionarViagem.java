@@ -104,7 +104,7 @@ public class AdicionarViagem extends AppCompatActivity {
         hospedagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    startActivity(new Intent(AdicionarViagem.this, Hospedagem.class));
+                startActivity(new Intent(AdicionarViagem.this, Hospedagem.class));
             }
         });
         tarifaAerea.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +135,13 @@ public class AdicionarViagem extends AppCompatActivity {
                     intent.putExtra("DURACAO", diferencaData());
                     startActivity(intent);
                 }
+            }
+        });
+
+        entretenimento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdicionarViagem.this, Entreterimento.class));
             }
         });
 
@@ -185,7 +192,7 @@ public class AdicionarViagem extends AppCompatActivity {
     public int diferencaData() {
         int dataInicio = conrveteData(dateInicio.getText().toString());
         int dataFim = conrveteData(dateFim.getText().toString());
-        return dataFim -dataInicio;
+        return dataFim - dataInicio;
     }
 
     public int conrveteData(String data) {
