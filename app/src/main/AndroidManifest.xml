@@ -17,7 +17,7 @@
         android:theme="@style/Theme.ProjetoMobile"
         tools:targetApi="31">
         <activity
-            android:name=".Entreterimento"
+            android:name=".Entretenimento"
             android:exported="false" />
         <activity
             android:name=".Hospedagem"

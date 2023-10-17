@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.example.projetomobile.database.dao.UsuarioDAO;
 import com.example.projetomobile.database.dao.ViagemDAO;
 import com.example.projetomobile.database.model.ViagemModel;
 
@@ -21,7 +20,6 @@ import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.YearMonth;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -141,7 +139,7 @@ public class AdicionarViagem extends AppCompatActivity {
         entretenimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdicionarViagem.this, Entreterimento.class));
+                startActivity(new Intent(AdicionarViagem.this, Entretenimento.class));
             }
         });
 

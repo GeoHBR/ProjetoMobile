@@ -41,8 +41,7 @@ public class EntretenimentoDAO extends AbstrataDAO{
         Open();
 
         Cursor c = db.rawQuery("SELECT * FROM "+ EntretenimentoModel.TABLE_NAME+" WHERE "
-                + EntretenimentoModel.COLUNA_ID_VIAGEM + " = (SELECT * FROM "+ViagemModel.TABLE_NAME + " WHERE "
-                + ViagemModel.COLUNA_ID + " = "+id+")", null);
+                + EntretenimentoModel.COLUNA_ID_VIAGEM + " = "+id, null);
 
         if(c.getCount() > 0){
             c.moveToFirst();
