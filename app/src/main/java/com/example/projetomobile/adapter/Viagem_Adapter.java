@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.projetomobile.R;
 import com.example.projetomobile.Relatorio;
+import com.example.projetomobile.database.dao.ViagemDAO;
 import com.example.projetomobile.viagensActivity;
 
 import java.util.ArrayList;
@@ -59,6 +60,9 @@ public class Viagem_Adapter extends BaseAdapter {
         TextView data2 = view.findViewById(R.id.text_data2);
         data2.setText(viagem.getData2());
 
+        TextView total = view.findViewById(R.id.totalLista);
+        total.setText("R$ "+String.valueOf(viagem.getTotal()));
+
         ImageButton btnRelatorio = view.findViewById(R.id.btnRelatorio);
         btnRelatorio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +73,14 @@ public class Viagem_Adapter extends BaseAdapter {
             }
         });
 
+        ImageButton remover = view.findViewById(R.id.remover_viagem);
+        remover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViagemDAO dao = new ViagemDAO(activity);
+                dao.Delete(viagem.getId());
+            }
+        });
         return view;
     }
 }

@@ -30,10 +30,10 @@ public class Relatorio extends AppCompatActivity {
     private TextView usuario;
     private TextView destino;
     private TextView custoTotal;
-    private EditText qtdViajantes;
-    private EditText duracaoViajem;
-    private EditText custoTotal2;
-    private EditText custoViajante;
+    private TextView qtdViajantes;
+    private TextView duracaoViajem;
+    private TextView custoTotal2;
+    private TextView custoViajante;
     private ImageView voltar;
     private int idViagem;
     SharedPreferences preferences;
@@ -66,7 +66,7 @@ public class Relatorio extends AppCompatActivity {
 
         destino.setText(viagem.getDestino());
         qtdViajantes.setText(String.valueOf(viagem.getQuantPessoas()));
-        duracaoViajem.setText(String.valueOf(diferencaData(viagem.getDataInicio(), viagem.getDataFim())));
+        duracaoViajem.setText(String.valueOf(diferencaData(viagem.getDataInicio(), viagem.getDataFim()))+" dias");
         custoTotal2.setText(String.valueOf(totalV));
         custoTotal.setText(String.valueOf(totalV));
         custoViajante.setText(String.valueOf(totalV/viagem.getQuantPessoas()));

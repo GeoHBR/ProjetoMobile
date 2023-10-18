@@ -5,6 +5,7 @@ public class Viagem_Modelo {
     String nomeViagem;
     String data1;
     String data2;
+    float total;
     int id;
 
 
@@ -38,5 +39,13 @@ public class Viagem_Modelo {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
     }
 }

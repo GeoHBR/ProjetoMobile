@@ -16,6 +16,10 @@ import android.widget.TextView;
 
 import com.example.projetomobile.adapter.Viagem_Modelo;
 import com.example.projetomobile.adapter.Viagem_Adapter;
+import com.example.projetomobile.database.dao.GasolinaDAO;
+import com.example.projetomobile.database.dao.HospedagemDAO;
+import com.example.projetomobile.database.dao.RefeicaoDAO;
+import com.example.projetomobile.database.dao.TarifaDAO;
 import com.example.projetomobile.database.dao.ViagemDAO;
 import com.example.projetomobile.database.model.ViagemModel;
 
@@ -23,13 +27,12 @@ import java.util.ArrayList;
 
 public class viagensActivity extends AppCompatActivity {
 
-    private ImageButton btnAdicionar;
     private ImageButton btnLogout;
-    private Viagem_Adapter adapter;
     private ListView listaViagens;
     private TextView userNome;
     private ImageButton btnAdd;
     SharedPreferences preferences;
+    private SharedPreferences.Editor edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +40,9 @@ public class viagensActivity extends AppCompatActivity {
         setContentView(R.layout.activity_viagens);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(viagensActivity.this);
-        SharedPreferences.Editor edit = preferences.edit();
+        edit = preferences.edit();
 
-        if(preferences.contains("KEY_ID_GASOLINA")){
-            edit.remove("KEY_ID_GASOLINA").apply();
-        }
-        if(preferences.contains("KEY_ID_HOSPEDAGEM")){
-            edit.remove("KEY_ID_HOSPEDAGEM").apply();
-        }
-        if(preferences.contains("KEY_ID_TARIFA")){
-            edit.remove("KEY_ID_TARIFA").apply();
-        }
-        if(preferences.contains("KEY_ID_REFEICAO")){
-            edit.remove("KEY_ID_REFEICAO").apply();
-        }
+        removerPreferences();
 
         listaViagens = findViewById(R.id.lista_viagens);
 
@@ -62,11 +54,12 @@ public class viagensActivity extends AppCompatActivity {
             for(int i = 0; i<viagens.size(); i++){
                 Viagem_Modelo viagem = new Viagem_Modelo();
                 ViagemModel viagemC = viagens.get(i);
-                viagem.setId(viagemC.get_id());
 
+                viagem.setId(viagemC.get_id());
                 viagem.setNomeViagem(viagemC.getDestino());
                 viagem.setData1(viagemC.getDataInicio());
                 viagem.setData2(viagemC.getDataFim());
+                viagem.setTotal(calcularTotal(viagemC.get_id()));
 
                 viagemModel.add(viagem);
             }
@@ -105,5 +98,51 @@ public class viagensActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        ViagemDAO dao = new ViagemDAO(viagensActivity.this);
+        ArrayList<ViagemModel> viagens = dao.SelectAll(preferences.getInt("KEY_ID", 0));
+        if(viagens.size() > 0){
+            ArrayList<Viagem_Modelo> viagemModel = new ArrayList<>();
+
+            for(int i = 0; i<viagens.size(); i++){
+                Viagem_Modelo viagem = new Viagem_Modelo();
+                ViagemModel viagemC = viagens.get(i);
+                viagem.setId(viagemC.get_id());
+
+                viagem.setNomeViagem(viagemC.getDestino());
+                viagem.setData1(viagemC.getDataInicio());
+                viagem.setData2(viagemC.getDataFim());
+
+                viagemModel.add(viagem);
+            }
+
+            Viagem_Adapter adapter = new Viagem_Adapter(viagemModel, this);
+            listaViagens.setAdapter(adapter);
+        }
+        super.onResume();
+    }
+
+    private void removerPreferences(){
+        edit.remove("KEY_ID_GASOLINA").apply();
+        edit.remove("KEY_ID_HOSPEDAGEM").apply();
+        edit.remove("KEY_ID_TARIFA").apply();
+        edit.remove("KEY_ID_REFEICAO").apply();
+    }
+
+    private float calcularTotal(int idViagem){
+        GasolinaDAO daoG = new GasolinaDAO(this);
+        HospedagemDAO daoH = new HospedagemDAO(this);
+        RefeicaoDAO daoR = new RefeicaoDAO(this);
+        TarifaDAO daoT = new TarifaDAO(this);
+
+        float totalG = daoG.SelectTotal(idViagem);
+        float totalH = daoH.SelectTotal(idViagem);
+        float totalR = daoR.SelectTotal(idViagem);
+        float totalT = daoT.SelectTotal(idViagem);
+
+        return totalG + totalH + totalR + totalT;
     }
 }

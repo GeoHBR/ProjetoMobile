@@ -104,8 +104,7 @@ public class ViagemDAO extends AbstrataDAO{
         return viagem;
     }
 
-    public boolean Delete(int id){
-        boolean delete = false;
+    public void Delete(int id){
 
         Open();
 
@@ -113,10 +112,5 @@ public class ViagemDAO extends AbstrataDAO{
 
         Close();
 
-        if(d == 1){
-            delete = true;
-        }
-
-        return delete;
     }
 }

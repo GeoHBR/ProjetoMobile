@@ -6,7 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.example.projetomobile.database.dao.GasolinaDAO;
+import com.example.projetomobile.database.dao.HospedagemDAO;
+import com.example.projetomobile.database.dao.RefeicaoDAO;
+import com.example.projetomobile.database.dao.TarifaDAO;
 import com.example.projetomobile.database.dao.ViagemDAO;
+import com.example.projetomobile.database.model.TarifaModel;
 import com.example.projetomobile.database.model.ViagemModel;
 
 import android.preference.PreferenceManager;
@@ -36,8 +41,9 @@ public class AdicionarViagem extends AppCompatActivity {
     private TextView entretenimento;
     private ImageView criar;
     private TextView userNome;
-    private ImageButton btnAddViagem;
+    private ImageView cancelar;
     SharedPreferences preferences;
+    private SharedPreferences.Editor edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +51,7 @@ public class AdicionarViagem extends AppCompatActivity {
         setContentView(R.layout.activity_adicionar_viagem);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(AdicionarViagem.this);
-        SharedPreferences.Editor edit = preferences.edit();
+        edit = preferences.edit();
 
         userNome = findViewById(R.id.nomeUser);
         destino = findViewById(R.id.destino);
@@ -58,6 +64,7 @@ public class AdicionarViagem extends AppCompatActivity {
         hospedagem = findViewById(R.id.btnHospedagem);
         entretenimento = findViewById(R.id.btnEntretenimento);
         criar = findViewById(R.id.btnSalvarViagem);
+        cancelar = findViewById(R.id.btnCancelarViagem);
 
         userNome.setText(preferences.getString("KEY_NOME", null));
 
@@ -164,27 +171,49 @@ public class AdicionarViagem extends AppCompatActivity {
                     model.setDataFim(dateFim.getText().toString());
                     model.set_idUsuario(preferences.getInt("KEY_ID", 0));
                     model.setQuantPessoas(Integer.parseInt(quantViajantes.getText().toString()));
-                    if(preferences.contains("KEY_ID_GASOLINA")){
-                        model.set_idGasolina(preferences.getInt("KEY_ID_GASOLINA", 0));
-                        edit.remove("KEY_ID_GASOLINA").apply();
-                    }
-                    if(preferences.contains("KEY_ID_HOSPEDAGEM")){
-                        model.set_idHospedagem(preferences.getInt("KEY_ID_HOSPEDAGEM", 0));
-                        edit.remove("KEY_ID_HOSPEDAGEM").apply();
-                    }
-                    if(preferences.contains("KEY_ID_TARIFA")){
-                        model.set_idTarifa(preferences.getInt("KEY_ID_TARIFA", 0));
-                        edit.remove("KEY_ID_TARIFA").apply();
-                    }
-                    if(preferences.contains("KEY_ID_REFEICAO")){
-                        model.set_idRefeicao(preferences.getInt("KEY_ID_REFEICAO", 0));
-                        edit.remove("KEY_ID_REFEICAO").apply();
-                    }
+                    model.set_idGasolina(preferences.getInt("KEY_ID_GASOLINA", 0));
+                    model.set_idHospedagem(preferences.getInt("KEY_ID_HOSPEDAGEM", 0));
+                    model.set_idTarifa(preferences.getInt("KEY_ID_TARIFA", 0));
+                    model.set_idRefeicao(preferences.getInt("KEY_ID_REFEICAO", 0));
+
+                    removerPreferences();
+
                     dao.Insert(model);
                     finish();
                 }
             }
         });
+
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(preferences.getInt("KEY_ID_GASOLINA", 0) > 0){
+                    GasolinaDAO dao = new GasolinaDAO(AdicionarViagem.this);
+                    dao.Delete(preferences.getInt("KEY_ID_GASOLINA", 0));
+                }
+                if(preferences.getInt("KEY_ID_HOSPEDAGEM", 0) > 0){
+                    HospedagemDAO dao = new HospedagemDAO(AdicionarViagem.this);
+                    dao.Delete(preferences.getInt("KEY_ID_HOSPEDAGEM", 0));
+                }
+                if(preferences.getInt("KEY_ID_TARIFA", 0) > 0){
+                    TarifaDAO dao = new TarifaDAO(AdicionarViagem.this);
+                    dao.Delete(preferences.getInt("KEY_ID_TARIFA", 0));
+                }
+                if(preferences.getInt("KEY_ID_REFEICAO", 0) > 0){
+                    RefeicaoDAO dao = new RefeicaoDAO(AdicionarViagem.this);
+                    dao.Delete(preferences.getInt("KEY_ID_REFEICAO", 0));
+                }
+                removerPreferences();
+                finish();
+            }
+        });
+    }
+
+    private void removerPreferences(){
+        edit.remove("KEY_ID_GASOLINA").apply();
+        edit.remove("KEY_ID_HOSPEDAGEM").apply();
+        edit.remove("KEY_ID_TARIFA").apply();
+        edit.remove("KEY_ID_REFEICAO").apply();
     }
 
     public int diferencaData() {
