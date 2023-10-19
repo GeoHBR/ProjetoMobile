@@ -18,8 +18,8 @@ public class ViagemDAO extends AbstrataDAO{
         db_helper = new DBOpenHalper(context);
     }
 
-    public long Insert(ViagemModel viagemModel){
-        long isInsert = 0;
+    public int Insert(ViagemModel viagemModel){
+        int id = 0;
 
         Open();
 
@@ -35,11 +35,12 @@ public class ViagemDAO extends AbstrataDAO{
         contentValues.put(ViagemModel.COLUNA_ID_REFEICAO, viagemModel.get_idRefeicao());
         contentValues.put(ViagemModel.COLUNA_ID_TARIFA, viagemModel.get_idTarifa());
 
-        isInsert = db.insert(ViagemModel.TABLE_NAME, null, contentValues);
+        long isInsert = db.insert(ViagemModel.TABLE_NAME, null, contentValues);
+        id = (int) isInsert;
 
         Close();
 
-        return isInsert;
+        return id;
     }
 
     public void Update(ViagemModel viagemModel) {
