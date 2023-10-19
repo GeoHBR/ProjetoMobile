@@ -74,7 +74,10 @@ public class Relatorio extends AppCompatActivity {
         voltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(Relatorio.this, AdicionarViagem.class);
+                intent.putExtra("ID_VIAGEM", idViagem);
+                startActivity(intent);
+//                finish();
             }
         });
 
