@@ -80,7 +80,6 @@ public class Relatorio extends AppCompatActivity {
 //                finish();
             }
         });
-
     }
 
     private int diferencaData(String inicio, String fim) {
