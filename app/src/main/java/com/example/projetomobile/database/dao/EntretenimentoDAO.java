@@ -63,29 +63,32 @@ public class EntretenimentoDAO extends AbstrataDAO{
         return entreterimentos;
     }
 
+    public float SelectTotal(int id){
+        float total = 0;
+        Open();
+
+        Cursor c = db.rawQuery("SELECT "+EntretenimentoModel.COLUNA_PRECO+" FROM "+ EntretenimentoModel.TABLE_NAME+" WHERE "
+                + EntretenimentoModel.COLUNA_ID_VIAGEM + " = "+id, null);
+
+        if(c.getCount() > 0){
+            c.moveToFirst();
+            do{
+
+                total = total + c.getFloat(0);
+
+            }while(c.moveToNext());
+        }
+
+        Close();
+        return total;
+    }
+
     public void Delete(int id){
         Open();
 
-        db.delete(EntretenimentoModel.TABLE_NAME, EntretenimentoModel.COLUNA_ID + " = "+id, null);
+        db.delete(EntretenimentoModel.TABLE_NAME, EntretenimentoModel.COLUNA_ID_VIAGEM + " = "+id, null);
 
         Close();
     }
 
-    public void Update(int id, EntretenimentoModel model){
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(EntretenimentoModel.COLUNA_NOME, model.getNome());
-        contentValues.put(EntretenimentoModel.COLUNA_PRECO, model.getPreco());
-        contentValues.put(EntretenimentoModel.COLUNA_ID_VIAGEM, model.getIdViagem());
-
-        Open();
-
-        db.update(
-                EntretenimentoModel.TABLE_NAME,
-                contentValues,
-                EntretenimentoModel.COLUNA_ID +" = ?",
-                new String[]{String.valueOf(id)});
-
-        Close();
-    }
 }

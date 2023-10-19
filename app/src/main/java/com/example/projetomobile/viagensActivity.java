@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.projetomobile.adapter.Viagem_Modelo;
 import com.example.projetomobile.adapter.Viagem_Adapter;
+import com.example.projetomobile.database.dao.EntretenimentoDAO;
 import com.example.projetomobile.database.dao.GasolinaDAO;
 import com.example.projetomobile.database.dao.HospedagemDAO;
 import com.example.projetomobile.database.dao.RefeicaoDAO;
@@ -137,12 +138,14 @@ public class viagensActivity extends AppCompatActivity {
         HospedagemDAO daoH = new HospedagemDAO(this);
         RefeicaoDAO daoR = new RefeicaoDAO(this);
         TarifaDAO daoT = new TarifaDAO(this);
+        EntretenimentoDAO daoE = new EntretenimentoDAO(this);
 
         float totalG = daoG.SelectTotal(idViagem);
         float totalH = daoH.SelectTotal(idViagem);
         float totalR = daoR.SelectTotal(idViagem);
         float totalT = daoT.SelectTotal(idViagem);
+        float totalE = daoE.SelectTotal(idViagem);
 
-        return totalG + totalH + totalR + totalT;
+        return totalG + totalH + totalR + totalT + totalE;
     }
 }

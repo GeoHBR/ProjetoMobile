@@ -42,7 +42,6 @@ public class ViagemModel {
     public static final String
             DROP_TABLE =  "drop table if exist " + TABLE_NAME + ";";
 
-
 //  Variaveis dos valores da tabela
 
     private int _id;

@@ -104,7 +104,32 @@ public class ViagemDAO extends AbstrataDAO{
         return viagem;
     }
 
-    public void Delete(int id){
+    public int SelectTotal(int id){
+        int total = 0;
+        Open();
+
+        Cursor c = db.rawQuery("SELECT _id FROM "+ViagemModel.TABLE_NAME + " WHERE "
+                + ViagemModel.COLUNA_ID_USUARIO+" = "+id, null);
+
+        if(c.getCount() > 0){
+            total = c.getCount();
+        }
+
+        Close();
+
+        return total;
+    }
+
+
+    public ArrayList<Integer> Delete(int id){
+        ViagemModel model = SelectViagem(id);
+
+        ArrayList<Integer> ids = new ArrayList<>();
+
+        ids.add(model.get_idGasolina());
+        ids.add(model.get_idHospedagem());
+        ids.add(model.get_idRefeicao());
+        ids.add(model.get_idTarifa());
 
         Open();
 
@@ -112,5 +137,6 @@ public class ViagemDAO extends AbstrataDAO{
 
         Close();
 
+        return  ids;
     }
 }

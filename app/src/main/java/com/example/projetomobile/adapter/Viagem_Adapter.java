@@ -9,8 +9,15 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 
+import com.example.projetomobile.AdicionarViagem;
+import com.example.projetomobile.Gasolina;
 import com.example.projetomobile.R;
 import com.example.projetomobile.Relatorio;
+import com.example.projetomobile.database.dao.EntretenimentoDAO;
+import com.example.projetomobile.database.dao.GasolinaDAO;
+import com.example.projetomobile.database.dao.HospedagemDAO;
+import com.example.projetomobile.database.dao.RefeicaoDAO;
+import com.example.projetomobile.database.dao.TarifaDAO;
 import com.example.projetomobile.database.dao.ViagemDAO;
 import com.example.projetomobile.viagensActivity;
 
@@ -69,6 +76,7 @@ public class Viagem_Adapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(activity, Relatorio.class);
                 intent.putExtra("ID", viagem.getId());
+                intent.putExtra("TOTAL", viagem.getTotal());
                 activity.startActivity(intent);
             }
         });
@@ -77,8 +85,23 @@ public class Viagem_Adapter extends BaseAdapter {
         remover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 ViagemDAO dao = new ViagemDAO(activity);
-                dao.Delete(viagem.getId());
+                ArrayList<Integer> ids = dao.Delete(viagem.getId());
+                GasolinaDAO daoG = new GasolinaDAO(activity);
+                daoG.Delete(ids.get(0));
+                HospedagemDAO daoH = new HospedagemDAO(activity);
+                daoH.Delete(ids.get(1));
+                RefeicaoDAO daoR = new RefeicaoDAO(activity);
+                daoR.Delete(ids.get(2));
+                TarifaDAO daoT = new TarifaDAO(activity);
+                daoT.Delete(ids.get(3));
+                EntretenimentoDAO daoE = new EntretenimentoDAO(activity);
+                daoE.Delete(viagem.getId());
+
+                listaViagens.remove(i);
+
+                notifyDataSetChanged();
             }
         });
         return view;

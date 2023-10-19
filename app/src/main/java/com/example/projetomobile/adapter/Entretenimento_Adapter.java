@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.projetomobile.R;
 
@@ -41,10 +42,20 @@ public class Entretenimento_Adapter extends BaseAdapter {
             view = activity.getLayoutInflater().inflate(R.layout.modelo_lista_entretenimento, viewGroup, false);
         }
 
+        Entretenimento_Modelo entretenimento = listaEntretenimento.get(i);
+
+        TextView nome = view.findViewById(R.id.nome_entreterimentoLista);
+        TextView preço = view.findViewById(R.id.custo_entreterimentoLista);
         ImageButton remover = view.findViewById(R.id.remover_entreterimento);
+
+        nome.setText(entretenimento.getNome());
+        preço.setText(String.valueOf(entretenimento.getPreço()));
+
         remover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                listaEntretenimento.remove(i);
+                notifyDataSetChanged();
             }
         });
 

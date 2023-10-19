@@ -62,7 +62,7 @@ public class Relatorio extends AppCompatActivity {
         ViagemDAO daoV = new ViagemDAO(this);
         ViagemModel viagem = daoV.SelectViagem(idViagem);
 
-        float totalV = calcularTotal();
+        float totalV = intent.getFloatExtra("TOTAL", 0);
 
         destino.setText(viagem.getDestino());
         qtdViajantes.setText(String.valueOf(viagem.getQuantPessoas()));
@@ -78,20 +78,6 @@ public class Relatorio extends AppCompatActivity {
             }
         });
 
-    }
-
-    private float calcularTotal(){
-        GasolinaDAO daoG = new GasolinaDAO(this);
-        HospedagemDAO daoH = new HospedagemDAO(this);
-        RefeicaoDAO daoR = new RefeicaoDAO(this);
-        TarifaDAO daoT = new TarifaDAO(this);
-
-        float totalG = daoG.SelectTotal(idViagem);
-        float totalH = daoH.SelectTotal(idViagem);
-        float totalR = daoR.SelectTotal(idViagem);
-        float totalT = daoT.SelectTotal(idViagem);
-
-        return totalG + totalH + totalR + totalT;
     }
 
     private int diferencaData(String inicio, String fim) {

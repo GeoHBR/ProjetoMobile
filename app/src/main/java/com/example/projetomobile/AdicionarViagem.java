@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.example.projetomobile.database.dao.EntretenimentoDAO;
 import com.example.projetomobile.database.dao.GasolinaDAO;
 import com.example.projetomobile.database.dao.HospedagemDAO;
 import com.example.projetomobile.database.dao.RefeicaoDAO;
@@ -44,6 +45,7 @@ public class AdicionarViagem extends AppCompatActivity {
     private ImageView cancelar;
     SharedPreferences preferences;
     private SharedPreferences.Editor edit;
+    private ViagemDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,7 +165,7 @@ public class AdicionarViagem extends AppCompatActivity {
                     quantViajantes.setError("Campo Obrigatorio");
                 }else{
 
-                    ViagemDAO dao = new ViagemDAO(AdicionarViagem.this);
+                    dao = new ViagemDAO(AdicionarViagem.this);
                     ViagemModel model = new ViagemModel();
 
                     model.setDestino(destino.getText().toString());
@@ -203,6 +205,10 @@ public class AdicionarViagem extends AppCompatActivity {
                     RefeicaoDAO dao = new RefeicaoDAO(AdicionarViagem.this);
                     dao.Delete(preferences.getInt("KEY_ID_REFEICAO", 0));
                 }
+                EntretenimentoDAO daoE = new EntretenimentoDAO(AdicionarViagem.this);
+                dao = new ViagemDAO(AdicionarViagem.this);
+                daoE.Delete(dao.SelectTotal(preferences.getInt("KEY_ID", 0)) + 1);
+
                 removerPreferences();
                 finish();
             }
