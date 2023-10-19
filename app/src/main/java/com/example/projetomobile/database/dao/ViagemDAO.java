@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.graphics.Path;
 
 import com.example.projetomobile.database.DBOpenHalper;
+import com.example.projetomobile.database.model.TarifaModel;
 import com.example.projetomobile.database.model.UsuarioModel;
 import com.example.projetomobile.database.model.ViagemModel;
 
@@ -39,6 +40,30 @@ public class ViagemDAO extends AbstrataDAO{
         Close();
 
         return isInsert;
+    }
+
+    public void Update(ViagemModel viagemModel) {
+        Open();
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(ViagemModel.COLUNA_DATA_FIM, viagemModel.getDataFim());
+        contentValues.put(ViagemModel.COLUNA_DATA_INICIO, viagemModel.getDataInicio());
+        contentValues.put(ViagemModel.COLUNA_DESTINO, viagemModel.getDestino());
+        contentValues.put(ViagemModel.COLUNA_QUANT_PESSOAS, viagemModel.getQuantPessoas());
+        contentValues.put(ViagemModel.COLUNA_ID_USUARIO, viagemModel.get_idUsuario());
+        contentValues.put(ViagemModel.COLUNA_ID_GASOLINA, viagemModel.get_idGasolina());
+        contentValues.put(ViagemModel.COLUNA_ID_HOSPEDAGEM, viagemModel.get_idHospedagem());
+        contentValues.put(ViagemModel.COLUNA_ID_REFEICAO, viagemModel.get_idRefeicao());
+        contentValues.put(ViagemModel.COLUNA_ID_TARIFA, viagemModel.get_idTarifa());
+
+        db.update(
+                TarifaModel.TABLE_NAME,
+                contentValues,
+                TarifaModel.COLUNA_ID +" = ?",
+                new String[]{String.valueOf(viagemModel.get_id())});
+
+        Close();
     }
 
     public ArrayList<ViagemModel> SelectAll(int id){
