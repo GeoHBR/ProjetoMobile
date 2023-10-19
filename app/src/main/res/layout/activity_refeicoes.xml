@@ -101,13 +101,6 @@
                     android:layout_gravity="bottom"
                     android:layout_marginStart="10dp"
                     android:src="@drawable/talheres" />
-
-                <ImageView
-                    android:id="@+id/voltarRefeicao"
-                    android:layout_width="fill_parent"
-                    android:layout_height="35dp"
-                    android:src="@drawable/seta_voltar"
-                    android:layout_gravity="bottom" />
             </LinearLayout>
 
             <LinearLayout

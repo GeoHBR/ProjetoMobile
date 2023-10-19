@@ -24,7 +24,6 @@ public class Refeicoes extends AppCompatActivity {
     private EditText custoRefeicao;
     private EditText quantRefeicao;
     private ImageView cancelar;
-    private ImageView voltar;
     private ImageView salvar;
     SharedPreferences preferences;
     private float precoTotal;
@@ -43,7 +42,6 @@ public class Refeicoes extends AppCompatActivity {
         custoTotal = findViewById(R.id.totalRefeicao);
         quantRefeicao = findViewById(R.id.quantRefeicao);
         custoRefeicao = findViewById(R.id.custoRefeicao);
-        voltar = findViewById(R.id.voltarRefeicao);
         cancelar = findViewById(R.id.cancelarRefeicao);
         salvar = findViewById(R.id.salvarRefeicao);
 
@@ -60,12 +58,7 @@ public class Refeicoes extends AppCompatActivity {
         }
 
         usuario.setText(preferences.getString("KEY_NOME", null));
-        voltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

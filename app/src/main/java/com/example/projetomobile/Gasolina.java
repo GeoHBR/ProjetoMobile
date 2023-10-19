@@ -23,7 +23,6 @@ public class Gasolina extends AppCompatActivity {
     private EditText mediaKMLitro;
     private EditText precoGasolina;
     private EditText quantVeiculos;
-    private ImageView voltar;
     private ImageView cancelar;
     private ImageView salvar;
     SharedPreferences preferences;
@@ -43,7 +42,6 @@ public class Gasolina extends AppCompatActivity {
         mediaKMLitro = findViewById(R.id.mediaKMGasolina);
         precoGasolina = findViewById(R.id.custoGasolina);
         quantVeiculos = findViewById(R.id.totalVeiculoGasolina);
-        voltar = findViewById(R.id.voltarGasolina);
         cancelar = findViewById(R.id.cancelarGasolina);
         salvar = findViewById(R.id.addGasolina);
 
@@ -64,12 +62,7 @@ public class Gasolina extends AppCompatActivity {
         }
 
         usuario.setText(preferences.getString("KEY_NOME", null));
-        voltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

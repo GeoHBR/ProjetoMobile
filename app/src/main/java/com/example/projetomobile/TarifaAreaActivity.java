@@ -22,7 +22,6 @@ public class TarifaAreaActivity extends AppCompatActivity {
     private TextView custoTotal;
     private EditText custoPessoa;
     private EditText alugelVeiculo;
-    private ImageView voltar;
     private ImageView cancelar;
     private ImageView salvar;
     SharedPreferences preferences;
@@ -42,7 +41,6 @@ public class TarifaAreaActivity extends AppCompatActivity {
         custoTotal = findViewById(R.id.totalTarifa);
         custoPessoa = findViewById(R.id.custoPessoaTarifa);
         alugelVeiculo = findViewById(R.id.aluguelTarifa);
-        voltar = findViewById(R.id.voltarTarifa);
         cancelar = findViewById(R.id.cancelarTarifa);
         salvar = findViewById(R.id.salvarTarifa);
 
@@ -60,12 +58,7 @@ public class TarifaAreaActivity extends AppCompatActivity {
         }
 
         usuario.setText(preferences.getString("KEY_NOME", null));
-        voltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
