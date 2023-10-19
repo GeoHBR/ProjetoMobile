@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_nome_viagem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/padrao"
+            android:text="Viagem 1"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/totalLista"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:fontFamily="@font/padrao"
+                android:text="R$ 1000,00"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/padrao"
+                android:text="|"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/text_data1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/padrao"
+                android:text="05/10/23"
+                android:textSize="15sp"
+                android:textColor="@color/gray2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/padrao"
+                android:text="-"
+                android:textSize="15sp"
+                android:textColor="@color/gray2" />
+
+            <TextView
+                android:id="@+id/text_data2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/padrao"
+                android:text="06/10/23"
+                android:textSize="15sp"
+                android:textColor="@color/gray2" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <ImageButton
+            android:id="@+id/remover_viagem"
+            android:layout_width="32.25dp"
+            android:layout_height="32.25dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/remover"
+            android:layout_gravity="center_vertical"/>
+
+        <ImageButton
+            android:id="@+id/btnRelatorio"
+            android:layout_width="32.25dp"
+            android:layout_height="32.25dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/icone_lista"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/padrao_background"
+    android:orientation="vertical"
+    tools:context=".AdicionarViagem">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/fotousuario"
+            android:src="@drawable/pessoa_perfil_padrao" />
+
+        <TextView
+            android:id="@+id/nomeUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/nome_do_individuo"
+            android:textColor="@color/gray1"
+            android:textSize="20sp"
+            android:fontFamily="@font/padrao"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/borda_branco_branco"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/adicionar_viagem"
+                    android:textColor="@color/black"
+                    android:textSize="27sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="bottom"
+                    android:contentDescription="@string/dinheiro"
+                    android:src="@drawable/icone_dinheiro" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/preencha_os_campos_e_adicione_as_despesas"
+                android:textSize="17sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:layout_marginHorizontal="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/padrao"
+                    android:text="@string/destino"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/destino"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:autofillHints=""
+                    android:hint="@string/criciuma_sc"
+                    android:inputType="text"
+                    android:backgroundTint="@color/gray"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:layout_marginHorizontal="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/padrao"
+                    android:text="@string/data_de_in_cio"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/dateEditText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:autofillHints="Data"
+                    android:hint="@string/dd_mm_aaaa"
+                    android:inputType="date"
+                    android:backgroundTint="@color/gray"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:layout_marginHorizontal="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/padrao"
+                    android:text="@string/data_do_fim"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/dateEditText2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:autofillHints="Data"
+                    android:hint="@string/dd_mm_aaaa"
+                    android:inputType="date"
+                    android:backgroundTint="@color/gray"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/padrao"
+                    android:text="@string/quantidade_de_nviajantes"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/quantViajantes"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:autofillHints=""
+                    android:inputType="numberDecimal"
+                    android:maxLength="2"
+                    android:backgroundTint="@color/gray"
+                    android:hint="2"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="33dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btnGasolina"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/gasolina"
+                        android:textSize="20sp"
+                        app:drawableEndCompat="@drawable/icone_add_coisas"
+                        android:layout_marginEnd="40dp"/>
+
+                    <TextView
+                        android:id="@+id/btnTarifa"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/tarifa_a_rea"
+                        android:textSize="20sp"
+                        app:drawableEndCompat="@drawable/icone_add_coisas" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btnRefeicao"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/refei_es"
+                        android:textSize="20sp"
+                        app:drawableEndCompat="@drawable/icone_add_coisas"
+                        android:layout_marginEnd="40dp"/>
+
+                    <TextView
+                        android:id="@+id/btnHospedagem"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/hospedagem"
+                        android:textSize="20sp"
+                        app:drawableEndCompat="@drawable/icone_add_coisas" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btnEntretenimento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/entreterimento_diversos"
+                        android:textSize="20sp"
+                        app:drawableEndCompat="@drawable/icone_add_coisas"
+                        android:layout_marginBottom="20dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="-32dp"
+            android:background="@drawable/borda_branco_branco"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/btnCancelarViagem"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:src="@drawable/icone_x" />
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:text="Adicionar viagem?"
+                android:textSize="17sp"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/btnSalvarViagem"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:src="@drawable/icone_ok" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

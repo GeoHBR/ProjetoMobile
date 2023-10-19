@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/padrao_background"
+    tools:context=".TarifaAreaActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/pessoa_perfil_padrao" />
+
+        <TextView
+            android:id="@+id/usuarioTarifa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/padrao"
+            android:text="@string/nome_do_individuo"
+            android:textColor="@color/gray1"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_marginRight="4dp"
+
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40dp"
+            android:textColor="@color/gray1"
+            android:text="R$" />
+
+        <TextView
+            android:id="@+id/totalTarifa"
+            android:layout_marginLeft="4dp"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="63sp"
+            android:textColor="@color/white"
+            android:text="0,00" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Valor total"
+        android:textColor="@color/gray1"
+        android:textSize="19sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/borda_branco_branco"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="20dp"
+                    android:text="Tarifa Aérea"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="27sp"/>
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/nuvem"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="10dp" />
+
+                <ImageView
+                    android:id="@+id/voltarTarifa"
+                    android:layout_width="fill_parent"
+                    android:layout_height="35dp"
+                    android:src="@drawable/seta_voltar"
+                    android:layout_weight="1"
+                    android:layout_gravity="bottom" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="9dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/icone_mala" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="Viagem 1"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="77dp"
+                android:layout_marginHorizontal="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:text="Custo estimado por pessoa:"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/custoPessoaTarifa"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:backgroundTint="@color/gray"
+                    android:hint="Valor"
+                    android:inputType="numberDecimal" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_gravity="center"
+                android:layout_width="390dp"
+                android:layout_height="2dp"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="77dp"
+                android:layout_marginHorizontal="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginBottom="34dp">
+
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:textSize="20sp"
+                    android:text="Aluguel do veiculo:" />
+
+                <EditText
+                    android:id="@+id/aluguelTarifa"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:hint="Valor"
+                    android:inputType="numberDecimal"
+                    android:backgroundTint="@color/gray" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/borda_branco_branco"
+            android:layout_marginTop="-34dp"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/cancelarTarifa"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:src="@drawable/icone_x" />
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textSize="17sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Adicionar à viagem?"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/salvarTarifa"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:src="@drawable/icone_ok" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

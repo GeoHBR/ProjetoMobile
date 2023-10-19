@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/padrao"
+            android:text="Bem-vindo\nde Volta"
+            android:textColor="@color/white"
+            android:textSize="42sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:layout_marginHorizontal="40dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginBottom="40dp">
+
+            <EditText
+                android:id="@+id/edit_usuario"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableLeft="@drawable/icone_mail"
+                android:drawablePadding="5dp"
+                android:hint="E-mail ou Usuário"
+                android:inputType="text"
+                android:backgroundTint="@color/gray2"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edit_senha_login"
+                    android:layout_width="270dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="40dp"
+                    android:drawableStart="@drawable/icone_senha"
+                    android:drawablePadding="5dp"
+                    android:hint="Senha"
+                    android:inputType="textPassword"
+                    android:backgroundTint="@color/gray2" />
+
+                <Switch
+                    android:id="@+id/switchMostrarSenha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    android:id="@+id/btn_entrar_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#2B557F"
+                    android:padding="10dp"
+                    android:text="Entrar"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginVertical="10dp">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ouTexto"
+                    android:background="@color/gray" />
+
+                <TextView
+                    android:id="@+id/ouTexto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:fontFamily="@font/padrao"
+                    android:text="OU"
+                    android:textColor="@color/gray"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/ouTexto"
+                    android:background="@color/gray" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/btn_cadastro_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/outline_button_preto"
+                android:padding="10dp"
+                android:text="Cadastre-se"
+                android:textAlignment="center"
+                android:textColor="#868686"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

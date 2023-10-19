@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/padrao_background"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="@string/fotousuario"
+                android:src="@drawable/pessoa_perfil_padrao" />
+
+            <TextView
+                android:id="@+id/nomeUser"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/padrao"
+                android:text="@string/nome_do_individuo"
+                android:textColor="@color/gray1"
+                android:textSize="20sp"
+                android:layout_weight="1"
+                />
+
+            <ImageButton
+                android:id="@+id/btn_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/fotousuario"
+                android:src="@drawable/icone_logout"
+                android:layout_gravity="bottom" />
+        </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/padrao"
+        android:text="@string/lista_de_viagens"
+        android:textColor="@color/white"
+        android:textSize="27sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="24dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/borda_branco_branco"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/lista_viagens"
+            android:layout_width="match_parent"
+            android:layout_height="478dp"
+            android:layout_marginBottom="37dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/circulo_shape_branco"
+        android:layout_gravity="center"
+        android:layout_marginTop="-36dp">
+
+        <ImageButton
+            android:id="@+id/btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/adicionar"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icone_add_viagem" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
