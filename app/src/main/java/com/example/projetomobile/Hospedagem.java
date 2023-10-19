@@ -23,7 +23,6 @@ public class Hospedagem extends AppCompatActivity {
     private EditText custoNoite;
     private EditText quantNoite;
     private EditText quantQuarto;
-    private ImageView voltar;
     private ImageView cancelar;
     private ImageView salvar;
     SharedPreferences preferences;
@@ -42,7 +41,6 @@ public class Hospedagem extends AppCompatActivity {
         quantNoite = findViewById(R.id.totalNoitesHospedagem);
         quantQuarto = findViewById(R.id.totalQuartoHospedagem);
         total = findViewById(R.id.totalHospedagem);
-        voltar = findViewById(R.id.voltarHospedagem);
         cancelar = findViewById(R.id.cancelarHospedagem);
         salvar = findViewById(R.id.salvarHospedagem);
 
@@ -61,12 +59,6 @@ public class Hospedagem extends AppCompatActivity {
 
         usuario.setText(preferences.getString("KEY_NOME", null));
 
-        voltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

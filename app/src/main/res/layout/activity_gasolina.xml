@@ -100,14 +100,6 @@
                     android:src="@drawable/icone_carro"
                     android:layout_gravity="bottom"
                     android:layout_marginStart="10dp"/>
-
-                <ImageView
-                    android:id="@+id/voltarGasolina"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/seta_voltar"
-                    android:layout_weight="1"
-                    android:layout_gravity="bottom" />
             </LinearLayout>
 
             <LinearLayout

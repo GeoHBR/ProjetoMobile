@@ -14,7 +14,9 @@
         android:layout_weight="1"
         android:backgroundTint="@color/gray"
         android:hint="Nome"
-        android:inputType="text" />
+        android:inputType="text"
+        android:gravity="center_vertical"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/custo_entreterimentoLista"
@@ -24,7 +26,9 @@
         android:layout_weight="1"
         android:backgroundTint="@color/gray"
         android:hint="Custo total"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:gravity="center_vertical"
+        android:textSize="20sp"/>
 
     <ImageButton
         android:id="@+id/remover_entreterimento"
