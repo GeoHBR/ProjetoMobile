@@ -88,17 +88,14 @@ public class Relatorio extends AppCompatActivity {
         voltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Relatorio.this, viagensActivity.class);
-                intent.putExtra("ID_VIAGEM", idViagem);
-                startActivity(intent);
-//                finish();
+                finish();
             }
         });
 
         excluir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Relatorio.this != null) {
+
                     ViagemDAO dao = new ViagemDAO(Relatorio.this);
                     ArrayList<Integer> ids = dao.Delete(idViagem);
                     GasolinaDAO daoG = new GasolinaDAO(Relatorio.this);
@@ -112,12 +109,7 @@ public class Relatorio extends AppCompatActivity {
                     EntretenimentoDAO daoE = new EntretenimentoDAO(Relatorio.this);
                     daoE.Delete(idViagem);
 
-
-
                     finish();
-                } else {
-                    Log.d(null, "onClick: CARALHO N FUNCIONA");
-                }
             }
         });
 
