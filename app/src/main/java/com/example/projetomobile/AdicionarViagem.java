@@ -192,6 +192,7 @@ public class AdicionarViagem extends AppCompatActivity {
                     dao = new ViagemDAO(AdicionarViagem.this);
                     ViagemModel model = new ViagemModel();
 
+                    model.set_id(idViagem);
                     model.setDestino(destino.getText().toString());
                     model.setDataInicio(dateInicio.getText().toString());
                     model.setDataFim(dateFim.getText().toString());
@@ -204,7 +205,7 @@ public class AdicionarViagem extends AppCompatActivity {
 
                     removerPreferences();
 
-                    dao.Insert(model);
+                    dao.Update(model);
                     finish();
                 }
             }

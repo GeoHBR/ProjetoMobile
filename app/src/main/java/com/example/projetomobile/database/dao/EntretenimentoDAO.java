@@ -40,8 +40,8 @@ public class EntretenimentoDAO extends AbstrataDAO{
 
         Open();
 
-        Cursor c = db.rawQuery("SELECT * FROM "+ EntretenimentoModel.TABLE_NAME+" WHERE "
-                + EntretenimentoModel.COLUNA_ID_VIAGEM + " = "+id, null);
+        Cursor c = db.rawQuery("SELECT * FROM "+ EntretenimentoModel.TABLE_NAME+ " WHERE "
+                +EntretenimentoModel.COLUNA_ID_VIAGEM + " = "+id, null);
 
         if(c.getCount() > 0){
             c.moveToFirst();
@@ -86,9 +86,16 @@ public class EntretenimentoDAO extends AbstrataDAO{
     public void Delete(int id){
         Open();
 
-        db.delete(EntretenimentoModel.TABLE_NAME, EntretenimentoModel.COLUNA_ID_VIAGEM + " = "+id, null);
+        db.delete(EntretenimentoModel.TABLE_NAME, EntretenimentoModel.COLUNA_ID + " = "+id, null);
 
         Close();
     }
 
+    public void DeleteAll(int id){
+        Open();
+
+        db.delete(EntretenimentoModel.TABLE_NAME, EntretenimentoModel.COLUNA_ID_VIAGEM + " = "+id, null);
+
+        Close();
+    }
 }
