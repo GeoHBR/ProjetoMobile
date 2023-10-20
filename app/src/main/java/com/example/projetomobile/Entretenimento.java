@@ -3,6 +3,7 @@ package com.example.projetomobile;
 import android.content.DialogInterface;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -101,6 +102,8 @@ public class Entretenimento extends AppCompatActivity {
 
                 model.setNome(listEn.get(0).getNome());
                 model.setPreco(listEn.get(0).getPreço());
+
+                edit.putInt("KEY_IDIDID", intent.getIntExtra("KEY_ID", 0)).apply();
 
                 int idI = dao.Insert(model);
                 edit.putInt("KEY_ID_ENTRETENIMENTO_INICIO", idI);

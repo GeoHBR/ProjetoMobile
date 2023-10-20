@@ -86,6 +86,7 @@ public class AdicionarViagem extends AppCompatActivity {
 
             idViagem = dao.Insert(model);
             update = false;
+
         }else{
             ViagemModel viagem = new ViagemModel();
             dao = new ViagemDAO(AdicionarViagem.this);
@@ -179,7 +180,7 @@ public class AdicionarViagem extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent1 = new Intent(AdicionarViagem.this, Entretenimento.class);
                 intent1.putExtra("KEY_ID", idViagem);
-                startActivity(new Intent(AdicionarViagem.this, Entretenimento.class));
+                startActivity(intent1);
             }
         });
 
