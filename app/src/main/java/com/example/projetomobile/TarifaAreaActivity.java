@@ -27,6 +27,7 @@ public class TarifaAreaActivity extends AppCompatActivity {
     SharedPreferences preferences;
     private float precoTotal;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +63,7 @@ public class TarifaAreaActivity extends AppCompatActivity {
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setResult(9);
                 finish();
             }
         });
@@ -101,6 +103,7 @@ public class TarifaAreaActivity extends AppCompatActivity {
                         int id = dao.Insert(model);
                         edit.putInt("KEY_ID_TARIFA", id).apply();
                     }
+                    setResult(1);
                     finish();
                 }
             }

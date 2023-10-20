@@ -62,6 +62,7 @@ public class Refeicoes extends AppCompatActivity {
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setResult(9);
                 finish();
             }
         });
@@ -100,6 +101,7 @@ public class Refeicoes extends AppCompatActivity {
                         int id = dao.Insert(model);
                         edit.putInt("KEY_ID_REFEICAO", id).apply();
                     }
+                    setResult(1);
                     finish();
                 }
             }

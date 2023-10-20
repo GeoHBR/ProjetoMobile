@@ -2,6 +2,8 @@ package com.example.projetomobile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -66,6 +68,7 @@ public class Gasolina extends AppCompatActivity {
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setResult(9);
                 finish();
             }
         });
@@ -83,6 +86,7 @@ public class Gasolina extends AppCompatActivity {
                 calcularTotal();
             }
         });
+
         salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,7 +126,11 @@ public class Gasolina extends AppCompatActivity {
 
                         edit.putInt("KEY_ID_GASOLINA", idGasolina).apply();
                     }
+//                    Intent it = new Intent();
+//                    it.putExtra("KEY_ID_GASOLINA", 23);
+                    setResult(1);
                     finish();
+
                 }
             }
         });
