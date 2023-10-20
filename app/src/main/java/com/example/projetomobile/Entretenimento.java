@@ -105,7 +105,6 @@ public class Entretenimento extends AppCompatActivity {
 
                     dao.Insert(model);
                 }
-                setResult(1);
                 finish();
             }
         });
@@ -113,7 +112,6 @@ public class Entretenimento extends AppCompatActivity {
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setResult(9);
                 finish();
             }
         });

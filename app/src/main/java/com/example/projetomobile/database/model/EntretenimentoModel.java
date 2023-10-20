@@ -18,8 +18,9 @@ public class EntretenimentoModel {
             + " ( "
             + COLUNA_ID + " integer primary key autoincrement, "
             + COLUNA_NOME + " text not null, "
-            + COLUNA_PRECO + " numeric(10,2) not null, "
-            + COLUNA_ID_VIAGEM + " integer not null"
+            + COLUNA_PRECO + " real not null, "
+            + COLUNA_ID_VIAGEM + " int not null, "
+            + "FOREIGN KEY("+COLUNA_ID_VIAGEM+") REFERENCES tb_viagem(_id)"
             + " );";
 
     public static final String
@@ -32,7 +33,6 @@ public class EntretenimentoModel {
     private String nome;
     private float preco;
     private int idViagem;
-
 
 
 //
@@ -67,4 +67,5 @@ public class EntretenimentoModel {
     public void setIdViagem(int idViagem) {
         this.idViagem = idViagem;
     }
+
 }

@@ -48,6 +48,8 @@ public class AdicionarViagem extends AppCompatActivity {
     SharedPreferences preferences;
     private SharedPreferences.Editor edit;
     private ViagemDAO dao;
+    private boolean update;
+    private int idViagem;
 
     private static final int TELA_GASOLINA = 1;
     private static final int TELA_TARIFA = 2;
@@ -63,6 +65,8 @@ public class AdicionarViagem extends AppCompatActivity {
         preferences = PreferenceManager.getDefaultSharedPreferences(AdicionarViagem.this);
         edit = preferences.edit();
 
+        Intent intent = getIntent();
+
         userNome = findViewById(R.id.nomeUser);
         destino = findViewById(R.id.destino);
         dateInicio = findViewById(R.id.dateEditText);
@@ -77,6 +81,31 @@ public class AdicionarViagem extends AppCompatActivity {
         cancelar = findViewById(R.id.btnCancelarViagem);
 
         userNome.setText(preferences.getString("KEY_NOME", null));
+
+        idViagem = intent.getIntExtra("ID_VIAGEM", 0);
+        if(idViagem == 0){
+            dao = new ViagemDAO(AdicionarViagem.this);
+            ViagemModel model = new ViagemModel();
+
+            model.setDestino("");
+            model.setDataInicio("");
+            model.setDataFim("");
+            model.setQuantPessoas(0);
+
+            idViagem = dao.Insert(model);
+            update = false;
+        }else{
+            ViagemModel viagem = new ViagemModel();
+            dao = new ViagemDAO(AdicionarViagem.this);
+            viagem = dao.SelectViagem(idViagem);
+
+            destino.setText(viagem.getDestino());
+            dateInicio.setText(viagem.getDataInicio());
+            dateFim.setText(viagem.getDataInicio());
+            quantViajantes.setText(Integer.toString(viagem.getQuantPessoas()));
+
+            update = true;
+        }
 
         // TextWatcher para o primeiro EditText
         dateInicio.addTextChangedListener(new TextWatcher() {
@@ -156,6 +185,8 @@ public class AdicionarViagem extends AppCompatActivity {
         entretenimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent1 = new Intent(AdicionarViagem.this, Entretenimento.class);
+                intent1.putExtra("KEY_ID", idViagem);
                 startActivity(new Intent(AdicionarViagem.this, Entretenimento.class));
             }
         });
@@ -176,6 +207,7 @@ public class AdicionarViagem extends AppCompatActivity {
                     dao = new ViagemDAO(AdicionarViagem.this);
                     ViagemModel model = new ViagemModel();
 
+                    model.set_id(idViagem);
                     model.setDestino(destino.getText().toString());
                     model.setDataInicio(dateInicio.getText().toString());
                     model.setDataFim(dateFim.getText().toString());
@@ -188,7 +220,7 @@ public class AdicionarViagem extends AppCompatActivity {
 
                     removerPreferences();
 
-                    dao.Insert(model);
+                    dao.Update(model);
                     finish();
                 }
             }
@@ -197,25 +229,29 @@ public class AdicionarViagem extends AppCompatActivity {
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(preferences.getInt("KEY_ID_GASOLINA", 0) > 0){
-                    GasolinaDAO dao = new GasolinaDAO(AdicionarViagem.this);
-                    dao.Delete(preferences.getInt("KEY_ID_GASOLINA", 0));
+                if(update){
+
+                }else{
+                    if(preferences.getInt("KEY_ID_GASOLINA", 0) > 0){
+                        GasolinaDAO dao = new GasolinaDAO(AdicionarViagem.this);
+                        dao.Delete(preferences.getInt("KEY_ID_GASOLINA", 0));
+                    }
+                    if(preferences.getInt("KEY_ID_HOSPEDAGEM", 0) > 0){
+                        HospedagemDAO dao = new HospedagemDAO(AdicionarViagem.this);
+                        dao.Delete(preferences.getInt("KEY_ID_HOSPEDAGEM", 0));
+                    }
+                    if(preferences.getInt("KEY_ID_TARIFA", 0) > 0){
+                        TarifaDAO dao = new TarifaDAO(AdicionarViagem.this);
+                        dao.Delete(preferences.getInt("KEY_ID_TARIFA", 0));
+                    }
+                    if(preferences.getInt("KEY_ID_REFEICAO", 0) > 0){
+                        RefeicaoDAO dao = new RefeicaoDAO(AdicionarViagem.this);
+                        dao.Delete(preferences.getInt("KEY_ID_REFEICAO", 0));
+                    }
+                    EntretenimentoDAO daoE = new EntretenimentoDAO(AdicionarViagem.this);
+                    dao = new ViagemDAO(AdicionarViagem.this);
+                    daoE.Delete(dao.SelectTotal(preferences.getInt("KEY_ID", 0)) + 1);
                 }
-                if(preferences.getInt("KEY_ID_HOSPEDAGEM", 0) > 0){
-                    HospedagemDAO dao = new HospedagemDAO(AdicionarViagem.this);
-                    dao.Delete(preferences.getInt("KEY_ID_HOSPEDAGEM", 0));
-                }
-                if(preferences.getInt("KEY_ID_TARIFA", 0) > 0){
-                    TarifaDAO dao = new TarifaDAO(AdicionarViagem.this);
-                    dao.Delete(preferences.getInt("KEY_ID_TARIFA", 0));
-                }
-                if(preferences.getInt("KEY_ID_REFEICAO", 0) > 0){
-                    RefeicaoDAO dao = new RefeicaoDAO(AdicionarViagem.this);
-                    dao.Delete(preferences.getInt("KEY_ID_REFEICAO", 0));
-                }
-                EntretenimentoDAO daoE = new EntretenimentoDAO(AdicionarViagem.this);
-                dao = new ViagemDAO(AdicionarViagem.this);
-                daoE.Delete(dao.SelectTotal(preferences.getInt("KEY_ID", 0)) + 1);
 
                 removerPreferences();
                 finish();
