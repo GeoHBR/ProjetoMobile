@@ -7,7 +7,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.projetomobile.Entretenimento;
 import com.example.projetomobile.R;
+import com.example.projetomobile.database.dao.EntretenimentoDAO;
+import com.example.projetomobile.database.dao.ViagemDAO;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
@@ -50,11 +55,19 @@ public class Entretenimento_Adapter extends BaseAdapter {
 
         nome.setText(entretenimento.getNome());
         preço.setText(String.valueOf(entretenimento.getPreço()));
-
         remover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                TextView txtTotal = activity.findViewById(R.id.txt_custo_total_entreterimento);
+
+                Float total = Float.valueOf(txtTotal.getText().toString());
+                total -= entretenimento.getPreço();
+
+                txtTotal.setText(String.valueOf(total));
+
                 listaEntretenimento.remove(i);
+
                 notifyDataSetChanged();
             }
         });

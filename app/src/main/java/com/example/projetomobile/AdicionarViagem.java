@@ -260,21 +260,6 @@ public class AdicionarViagem extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onResume() {
-        /*int i= preferences.getInt("KEY_ID_GASOLINA",0);
-
-        if(i>0){
-            gasolina.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
-        }
-        int x= preferences.getInt("KEY_ID_TARIFA",0);
-
-        if(x>0){
-            tarifaAerea.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
-        }*/
-
-        super.onResume();
-    }
 
     private void removerPreferences(){
         edit.remove("KEY_ID_GASOLINA").apply();

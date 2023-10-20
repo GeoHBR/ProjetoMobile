@@ -2,9 +2,10 @@ package com.example.projetomobile.adapter;
 
 public class Entretenimento_Modelo {
 
-    int id;
-    String nome;
-    float preço;
+    private int id;
+    private String nome;
+    private float preço;
+    private boolean update;
 
     public int getId() {
         return id;
@@ -28,5 +29,13 @@ public class Entretenimento_Modelo {
 
     public void setPreço(float preço) {
         this.preço = preço;
+    }
+
+    public boolean isUpdate() {
+        return update;
+    }
+
+    public void setUpdate(boolean update) {
+        this.update = update;
     }
 }
