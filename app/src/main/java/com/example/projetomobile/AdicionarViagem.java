@@ -87,7 +87,14 @@ public class AdicionarViagem extends AppCompatActivity {
             idViagem = dao.Insert(model);
             update = false;
         }else{
+            ViagemModel viagem = new ViagemModel();
+            dao = new ViagemDAO(AdicionarViagem.this);
+            viagem = dao.SelectViagem(idViagem);
 
+            destino.setText(viagem.getDestino());
+            dateInicio.setText(viagem.getDataInicio());
+            dateFim.setText(viagem.getDataInicio());
+            quantViajantes.setText(Integer.toString(viagem.getQuantPessoas()));
 
             update = true;
         }
@@ -237,7 +244,6 @@ public class AdicionarViagem extends AppCompatActivity {
                     dao = new ViagemDAO(AdicionarViagem.this);
                     daoE.Delete(dao.SelectTotal(preferences.getInt("KEY_ID", 0)) + 1);
                 }
-
 
                 removerPreferences();
                 finish();
