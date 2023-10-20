@@ -8,7 +8,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/text_nome_viagem"
@@ -74,18 +75,18 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:orientation="horizontal"
         android:gravity="end">
 
-        <ImageButton
-            android:id="@+id/remover_viagem"
-            android:layout_width="32.25dp"
-            android:layout_height="32.25dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/remover"
-            android:layout_gravity="center_vertical"/>
+<!--        <ImageButton-->
+<!--            android:id="@+id/remover_viagem"-->
+<!--            android:layout_width="32.25dp"-->
+<!--            android:layout_height="32.25dp"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:src="@drawable/remover"-->
+<!--            android:layout_gravity="center_vertical"/>-->
 
         <ImageButton
             android:id="@+id/btnRelatorio"

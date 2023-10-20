@@ -144,7 +144,9 @@
                     android:layout_height="50dp"
                     android:hint="2"
                     android:inputType="numberDecimal"
-                    android:backgroundTint="@color/gray"/>
+                    android:backgroundTint="@color/gray"
+                    android:gravity="center_vertical"
+                    android:textSize="20sp"/>
             </LinearLayout>
 
             <View
@@ -174,7 +176,9 @@
                     android:layout_height="50dp"
                     android:hint="15 dias"
                     android:inputType="numberDecimal"
-                    android:backgroundTint="@color/gray"/>
+                    android:backgroundTint="@color/gray"
+                    android:gravity="center_vertical"
+                    android:textSize="20sp"/>
 
             </LinearLayout>
 
@@ -205,7 +209,9 @@
                     android:layout_height="50dp"
                     android:hint="R$ 1000,00"
                     android:inputType="numberDecimal"
-                    android:backgroundTint="@color/gray"/>
+                    android:backgroundTint="@color/gray"
+                    android:gravity="center_vertical"
+                    android:textSize="20sp"/>
 
             </LinearLayout>
 
@@ -237,31 +243,82 @@
                     android:layout_height="50dp"
                     android:hint="R$ 500,00"
                     android:inputType="number"
-                    android:backgroundTint="@color/gray"/>
+                    android:backgroundTint="@color/gray"
+                    android:gravity="center_vertical"
+                    android:textSize="20sp"/>
             </LinearLayout>
         </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="74dp"
-            android:layout_height="74dp"
-            android:background="@drawable/circulo_shape_branco"
-            android:layout_gravity="center"
-            android:layout_marginTop="-37dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-35dp"
+            android:orientation="horizontal"
             android:gravity="center">
 
-            <ImageView
-                android:id="@+id/voltarRelatorio"
-                android:layout_width="62dp"
-                android:layout_height="62dp"
-                android:src="@drawable/circulo_shape" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/circulo_shape_branco">
 
-            <ImageView
-                android:layout_width="43dp"
-                android:layout_height="43dp"
-                android:layout_margin="9.5dp"
-                android:src="@drawable/icone_voltar_svg" />
+                <ImageButton
+                    android:id="@+id/btn_excluir_relatorio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/adicionar"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/icone_remover_viajem" />
+            </LinearLayout>
 
-        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="74dp"
+                android:layout_height="74dp"
+                android:background="@drawable/circulo_shape_branco"
+                android:gravity="center"
+                android:layout_marginHorizontal="20dp">
+
+                <ImageView
+                    android:id="@+id/voltarRelatorio"
+                    android:layout_width="62dp"
+                    android:layout_height="62dp"
+                    android:src="@drawable/circulo_shape_preto" />
+
+                <ImageView
+                    android:layout_width="43dp"
+                    android:layout_height="43dp"
+                    android:layout_marginStart="9.5dp"
+                    android:layout_marginTop="9.5dp"
+                    android:layout_marginEnd="9.5dp"
+                    android:layout_marginBottom="9.5dp"
+                    android:src="@drawable/icone_voltar_svg" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="74dp"
+                android:layout_height="74dp"
+                android:background="@drawable/circulo_shape_branco"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/editar_relatorio"
+                    android:layout_width="62dp"
+                    android:layout_height="62dp"
+                    android:src="@drawable/circulo_shape_laranja" />
+
+                <ImageView
+                    android:layout_width="43dp"
+                    android:layout_height="43dp"
+                    android:layout_marginStart="9.5dp"
+                    android:layout_marginTop="9.5dp"
+                    android:layout_marginEnd="9.5dp"
+                    android:layout_marginBottom="9.5dp"
+                    android:src="@drawable/icone_editar_relatorio" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>

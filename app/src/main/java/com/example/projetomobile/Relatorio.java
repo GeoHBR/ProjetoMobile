@@ -1,17 +1,23 @@
 package com.example.projetomobile;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.projetomobile.adapter.Viagem_Modelo;
+import com.example.projetomobile.database.dao.EntretenimentoDAO;
 import com.example.projetomobile.database.dao.GasolinaDAO;
 import com.example.projetomobile.database.dao.HospedagemDAO;
 import com.example.projetomobile.database.dao.RefeicaoDAO;
@@ -23,6 +29,7 @@ import com.example.projetomobile.database.model.ViagemModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -35,7 +42,10 @@ public class Relatorio extends AppCompatActivity {
     private TextView custoTotal2;
     private TextView custoViajante;
     private ImageView voltar;
+    private ImageButton excluir;
+    private ImageView editar;
     private int idViagem;
+    public ArrayList<Viagem_Modelo> listaViagens;
     SharedPreferences preferences;
 
     @Override
@@ -56,6 +66,8 @@ public class Relatorio extends AppCompatActivity {
         custoViajante = findViewById(R.id.custoViajanteRelatorio);
         voltar = findViewById(R.id.voltarRelatorio);
         destino = findViewById(R.id.destinoRelatorio);
+        excluir = findViewById(R.id.btn_excluir_relatorio);
+        editar = findViewById(R.id.editar_relatorio);
 
         idViagem = intent.getIntExtra("ID", 0);
 
@@ -71,13 +83,50 @@ public class Relatorio extends AppCompatActivity {
         custoTotal.setText(String.valueOf(totalV));
         custoViajante.setText(String.valueOf(totalV/viagem.getQuantPessoas()));
 
+        Intent intent1 = getIntent();
+
         voltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Relatorio.this, viagensActivity.class);
+                intent.putExtra("ID_VIAGEM", idViagem);
+                startActivity(intent);
+//                finish();
+            }
+        });
+
+        excluir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Relatorio.this != null) {
+                    ViagemDAO dao = new ViagemDAO(Relatorio.this);
+                    ArrayList<Integer> ids = dao.Delete(idViagem);
+                    GasolinaDAO daoG = new GasolinaDAO(Relatorio.this);
+                    daoG.Delete(ids.get(0));
+                    HospedagemDAO daoH = new HospedagemDAO(Relatorio.this);
+                    daoH.Delete(ids.get(1));
+                    RefeicaoDAO daoR = new RefeicaoDAO(Relatorio.this);
+                    daoR.Delete(ids.get(2));
+                    TarifaDAO daoT = new TarifaDAO(Relatorio.this);
+                    daoT.Delete(ids.get(3));
+                    EntretenimentoDAO daoE = new EntretenimentoDAO(Relatorio.this);
+                    daoE.Delete(idViagem);
+
+
+
+                    finish();
+                } else {
+                    Log.d(null, "onClick: CARALHO N FUNCIONA");
+                }
+            }
+        });
+
+        editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Relatorio.this, AdicionarViagem.class);
                 intent.putExtra("ID_VIAGEM", idViagem);
                 startActivity(intent);
-//                finish();
             }
         });
     }
