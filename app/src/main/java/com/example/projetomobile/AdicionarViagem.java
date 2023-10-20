@@ -55,7 +55,7 @@ public class AdicionarViagem extends AppCompatActivity {
     private static final int TELA_TARIFA = 2;
     private static final int TELA_REFEICOES = 3;
     private static final int TELA_HOSPEDAGEM = 4;
-    private static final int TELA_ENTRETERIMENTO = 5;
+    private static final int TELA_ENTRETENIMENTO = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,7 +150,8 @@ public class AdicionarViagem extends AppCompatActivity {
         hospedagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdicionarViagem.this, Hospedagem.class));
+                startActivityForResult(new Intent(AdicionarViagem.this, Hospedagem.class), TELA_HOSPEDAGEM);
+
             }
         });
         tarifaAerea.setOnClickListener(new View.OnClickListener() {
@@ -186,9 +187,9 @@ public class AdicionarViagem extends AppCompatActivity {
         entretenimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(AdicionarViagem.this, Entretenimento.class);
+                startActivityForResult(new Intent(AdicionarViagem.this, Entretenimento.class), TELA_ENTRETENIMENTO);
+                Intent intent1 = new Intent();
                 intent1.putExtra("KEY_ID", idViagem);
-                startActivity(intent1);
             }
         });
 
@@ -349,9 +350,11 @@ public class AdicionarViagem extends AppCompatActivity {
                 hospedagem.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
             }
         }
-        if (requestCode == TELA_ENTRETERIMENTO) {
+        if (requestCode == TELA_ENTRETENIMENTO) {
             if (resultCode == 1) {
                 entretenimento.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
+            }else if (resultCode == 9){
+                entretenimento.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_add_coisas,0);
             }
         }
     }

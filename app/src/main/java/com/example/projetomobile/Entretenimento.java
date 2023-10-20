@@ -145,6 +145,7 @@ public class Entretenimento extends AppCompatActivity {
                 for(int i = 0; i < listEnBanco.size(); i++){
                     dao.Delete(listEnBanco.get(i).getId());
                 }
+                setResult(1);
                 finish();
             }
         });
@@ -152,6 +153,7 @@ public class Entretenimento extends AppCompatActivity {
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setResult(9);
                 finish();
             }
         });

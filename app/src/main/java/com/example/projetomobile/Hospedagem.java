@@ -62,6 +62,7 @@ public class Hospedagem extends AppCompatActivity {
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setResult(9);
                 finish();
             }
         });
@@ -97,6 +98,7 @@ public class Hospedagem extends AppCompatActivity {
 
                         edit.putInt("KEY_ID_HOSPEDAGEM", id).apply();
                     }
+                    setResult(1);
                     finish();
                 }
             }
