@@ -59,7 +59,7 @@ public class ViagemDAO extends AbstrataDAO{
         contentValues.put(ViagemModel.COLUNA_ID_TARIFA, viagemModel.get_idTarifa());
 
         db.update(
-                TarifaModel.TABLE_NAME,
+                ViagemModel.TABLE_NAME,
                 contentValues,
                 TarifaModel.COLUNA_ID +" = ?",
                 new String[]{String.valueOf(viagemModel.get_id())});
