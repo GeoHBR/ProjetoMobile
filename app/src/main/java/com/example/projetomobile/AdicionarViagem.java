@@ -1,7 +1,9 @@
 package com.example.projetomobile;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -48,6 +50,12 @@ public class AdicionarViagem extends AppCompatActivity {
     private ViagemDAO dao;
     private boolean update;
     private int idViagem;
+
+    private static final int TELA_GASOLINA = 1;
+    private static final int TELA_TARIFA = 2;
+    private static final int TELA_REFEICOES = 3;
+    private static final int TELA_HOSPEDAGEM = 4;
+    private static final int TELA_ENTRETERIMENTO = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +143,8 @@ public class AdicionarViagem extends AppCompatActivity {
         gasolina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdicionarViagem.this, Gasolina.class));
+                //startActivity(new Intent(AdicionarViagem.this, Gasolina.class));
+                startActivityForResult(new Intent(AdicionarViagem.this, Gasolina.class), TELA_GASOLINA);
             }
         });
         hospedagem.setOnClickListener(new View.OnClickListener() {
@@ -150,10 +159,9 @@ public class AdicionarViagem extends AppCompatActivity {
                 if(quantViajantes.getText().toString().isEmpty()) {
                     quantViajantes.setError("Preencha este campo primeiro");
                 }else{
-                    Intent intent = new Intent(AdicionarViagem.this, TarifaAreaActivity.class);
+                    startActivityForResult(new Intent(AdicionarViagem.this, TarifaAreaActivity.class), TELA_TARIFA);
+                    Intent intent = new Intent();
                     intent.putExtra("QUANT_VIAJANTES", Integer.parseInt(quantViajantes.getText().toString()));
-
-                    startActivity(intent);
                 }
             }
         });
@@ -167,10 +175,10 @@ public class AdicionarViagem extends AppCompatActivity {
                 }else if(dateFim.getText().toString().isEmpty()){
                     dateFim.setError("Preencha este campo primeiro");
                 }else{
-                    Intent intent = new Intent(AdicionarViagem.this, Refeicoes.class);
+                    startActivityForResult(new Intent(AdicionarViagem.this, Refeicoes.class), TELA_REFEICOES);
+                    Intent intent = new Intent();
                     intent.putExtra("QUANT_VIAJANTES", Integer.parseInt(quantViajantes.getText().toString()));
                     intent.putExtra("DURACAO", diferencaData());
-                    startActivity(intent);
                 }
             }
         });
@@ -252,6 +260,22 @@ public class AdicionarViagem extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        /*int i= preferences.getInt("KEY_ID_GASOLINA",0);
+
+        if(i>0){
+            gasolina.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
+        }
+        int x= preferences.getInt("KEY_ID_TARIFA",0);
+
+        if(x>0){
+            tarifaAerea.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
+        }*/
+
+        super.onResume();
+    }
+
     private void removerPreferences(){
         edit.remove("KEY_ID_GASOLINA").apply();
         edit.remove("KEY_ID_HOSPEDAGEM").apply();
@@ -314,6 +338,36 @@ public class AdicionarViagem extends AppCompatActivity {
             s.insert(5, "/");
         } else if (input.length() > 10) {
             s.delete(10, s.length());
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == TELA_GASOLINA) {
+            if (resultCode == 1) {
+                gasolina.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
+            }
+        }
+        if (requestCode == TELA_TARIFA) {
+            if (resultCode == 1) {
+                tarifaAerea.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
+            }
+        }
+        if (requestCode == TELA_REFEICOES) {
+            if (resultCode == 1) {
+                refeicao.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
+            }
+        }
+        if (requestCode == TELA_HOSPEDAGEM) {
+            if (resultCode == 1) {
+                hospedagem.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
+            }
+        }
+        if (requestCode == TELA_ENTRETERIMENTO) {
+            if (resultCode == 1) {
+                entretenimento.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
+            }
         }
     }
 }

@@ -2,8 +2,6 @@ package com.example.projetomobile;
 
 import android.content.DialogInterface;
 import android.app.AlertDialog;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -43,8 +41,6 @@ public class Entretenimento extends AppCompatActivity {
 
         preferences = PreferenceManager.getDefaultSharedPreferences(Entretenimento.this);
         SharedPreferences.Editor edit = preferences.edit();
-
-        Intent intent = getIntent();
 
         usuario = findViewById(R.id.usuario_entreterimento);
         custoTotal = findViewById(R.id.txt_custo_total_entreterimento);
@@ -97,27 +93,18 @@ public class Entretenimento extends AppCompatActivity {
         salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ViagemDAO daoV = new ViagemDAO(Entretenimento.this);
                 EntretenimentoDAO dao = new EntretenimentoDAO(Entretenimento.this);
-                EntretenimentoModel model = new EntretenimentoModel();
-
-                model.setNome(listEn.get(0).getNome());
-                model.setPreco(listEn.get(0).getPreço());
-
-                edit.putInt("KEY_IDIDID", intent.getIntExtra("KEY_ID", 0)).apply();
-
-                int idI = dao.Insert(model);
-                edit.putInt("KEY_ID_ENTRETENIMENTO_INICIO", idI);
+                int idV = daoV.SelectTotal(preferences.getInt("KEY_ID", 0)) + 1;
                 for(int i = 0; i < listEn.size(); i++){
-                    if(i>0){
-                        model.setNome(listEn.get(i).getNome());
-                        model.setPreco(listEn.get(i).getPreço());
-                        model.setIdViagem(intent.getIntExtra("KEY_ID", 0));
+                    EntretenimentoModel model = new EntretenimentoModel();
 
-                        int idF = dao.Insert(model);
-                        edit.putInt("KEY_ID_ENTRETENIMENTO_FINAL", idF);
-                    }
+                    model.setNome(listEn.get(i).getNome());
+                    model.setPreco(listEn.get(i).getPreço());
+                    model.setIdViagem(idV);
+
+                    dao.Insert(model);
                 }
-                edit.apply();
                 finish();
             }
         });
