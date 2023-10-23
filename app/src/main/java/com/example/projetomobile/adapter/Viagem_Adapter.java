@@ -68,7 +68,7 @@ public class Viagem_Adapter extends BaseAdapter {
         data2.setText(viagem.getData2());
 
         TextView total = view.findViewById(R.id.totalLista);
-        total.setText("R$ "+String.valueOf(viagem.getTotal()));
+        total.setText("R$ " + String.valueOf(viagem.getTotal()));
 
         ImageButton btnRelatorio = view.findViewById(R.id.btnRelatorio);
         btnRelatorio.setOnClickListener(new View.OnClickListener() {
@@ -81,29 +81,6 @@ public class Viagem_Adapter extends BaseAdapter {
             }
         });
 
-//        ImageButton remover = view.findViewById(R.id.remover_viagem);
-//        remover.setOnClickListener(new View.OnClickListener() {
-//            @Overridea
-//            public void onClick(View v) {
-//
-//                ViagemDAO dao = new ViagemDAO(activity);
-//                ArrayList<Integer> ids = dao.Delete(viagem.getId());
-//                GasolinaDAO daoG = new GasolinaDAO(activity);
-//                daoG.Delete(ids.get(0));
-//                HospedagemDAO daoH = new HospedagemDAO(activity);
-//                daoH.Delete(ids.get(1));
-//                RefeicaoDAO daoR = new RefeicaoDAO(activity);
-//                daoR.Delete(ids.get(2));
-//                TarifaDAO daoT = new TarifaDAO(activity);
-//                daoT.Delete(ids.get(3));
-//                EntretenimentoDAO daoE = new EntretenimentoDAO(activity);
-//                daoE.Delete(viagem.getId());
-//
-//                listaViagens.remove(i);
-//
-//                notifyDataSetChanged();
-//            }
-//        });
         return view;
     }
 }

@@ -96,7 +96,7 @@ public class AdicionarViagem extends AppCompatActivity {
             update = false;
 
         }else{
-            ViagemModel viagem = new ViagemModel();
+            ViagemModel viagem;
             dao = new ViagemDAO(AdicionarViagem.this);
             viagem = dao.SelectViagem(idViagem);
 
@@ -104,6 +104,11 @@ public class AdicionarViagem extends AppCompatActivity {
             dateInicio.setText(viagem.getDataInicio());
             dateFim.setText(viagem.getDataInicio());
             quantViajantes.setText(Integer.toString(viagem.getQuantPessoas()));
+            edit.putInt("KEY_ID_GASOLINA", viagem.get_idGasolina());
+            edit.putInt("KEY_ID_HOSPEDAGEM", viagem.get_idHospedagem());
+            edit.putInt("KEY_ID_TARIFA", viagem.get_idTarifa());
+            edit.putInt("KEY_ID_REFEICAO", viagem.get_idRefeicao());
+            edit.apply();
 
             update = true;
         }
@@ -176,10 +181,11 @@ public class AdicionarViagem extends AppCompatActivity {
                 }else if(dateFim.getText().toString().isEmpty()){
                     dateFim.setError("Preencha este campo primeiro");
                 }else{
-                    startActivityForResult(new Intent(AdicionarViagem.this, Refeicoes.class), TELA_REFEICOES);
-                    Intent intent = new Intent();
+                    Intent intent = new Intent(AdicionarViagem.this, Refeicoes.class);
                     intent.putExtra("QUANT_VIAJANTES", Integer.parseInt(quantViajantes.getText().toString()));
                     intent.putExtra("DURACAO", diferencaData());
+                    startActivityForResult(intent, TELA_REFEICOES);
+
                 }
             }
         });
@@ -187,9 +193,9 @@ public class AdicionarViagem extends AppCompatActivity {
         entretenimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(AdicionarViagem.this, Entretenimento.class), TELA_ENTRETENIMENTO);
-                Intent intent1 = new Intent();
+                Intent intent1 = new Intent(AdicionarViagem.this, Entretenimento.class);
                 intent1.putExtra("KEY_ID", idViagem);
+                startActivityForResult(intent1, TELA_ENTRETENIMENTO);
             }
         });
 

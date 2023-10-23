@@ -69,7 +69,6 @@ public class viagensActivity extends AppCompatActivity {
             listaViagens.setAdapter(adapter);
         }
 
-
         userNome = findViewById(R.id.nomeUser);
         btnAdd = findViewById(R.id.btn_add);
         btnLogout = findViewById(R.id.btn_logout);
@@ -111,11 +110,12 @@ public class viagensActivity extends AppCompatActivity {
             for(int i = 0; i<viagens.size(); i++){
                 Viagem_Modelo viagem = new Viagem_Modelo();
                 ViagemModel viagemC = viagens.get(i);
-                viagem.setId(viagemC.get_id());
 
+                viagem.setId(viagemC.get_id());
                 viagem.setNomeViagem(viagemC.getDestino());
                 viagem.setData1(viagemC.getDataInicio());
                 viagem.setData2(viagemC.getDataFim());
+                viagem.setTotal(calcularTotal(viagemC.get_id()));
 
                 viagemModel.add(viagem);
             }
@@ -134,6 +134,7 @@ public class viagensActivity extends AppCompatActivity {
     }
 
     private float calcularTotal(int idViagem){
+
         GasolinaDAO daoG = new GasolinaDAO(this);
         HospedagemDAO daoH = new HospedagemDAO(this);
         RefeicaoDAO daoR = new RefeicaoDAO(this);

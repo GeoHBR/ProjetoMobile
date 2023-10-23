@@ -83,7 +83,6 @@ public class Relatorio extends AppCompatActivity {
         custoTotal.setText(String.valueOf(totalV));
         custoViajante.setText(String.valueOf(totalV/viagem.getQuantPessoas()));
 
-        Intent intent1 = getIntent();
 
         voltar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,20 +95,20 @@ public class Relatorio extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    ViagemDAO dao = new ViagemDAO(Relatorio.this);
-                    ArrayList<Integer> ids = dao.Delete(idViagem);
-                    GasolinaDAO daoG = new GasolinaDAO(Relatorio.this);
-                    daoG.Delete(ids.get(0));
-                    HospedagemDAO daoH = new HospedagemDAO(Relatorio.this);
-                    daoH.Delete(ids.get(1));
-                    RefeicaoDAO daoR = new RefeicaoDAO(Relatorio.this);
-                    daoR.Delete(ids.get(2));
-                    TarifaDAO daoT = new TarifaDAO(Relatorio.this);
-                    daoT.Delete(ids.get(3));
-                    EntretenimentoDAO daoE = new EntretenimentoDAO(Relatorio.this);
-                    daoE.Delete(idViagem);
+                ViagemDAO dao = new ViagemDAO(Relatorio.this);
+                ArrayList<Integer> ids = dao.Delete(idViagem);
+                GasolinaDAO daoG = new GasolinaDAO(Relatorio.this);
+                daoG.Delete(ids.get(0));
+                HospedagemDAO daoH = new HospedagemDAO(Relatorio.this);
+                daoH.Delete(ids.get(1));
+                RefeicaoDAO daoR = new RefeicaoDAO(Relatorio.this);
+                daoR.Delete(ids.get(2));
+                TarifaDAO daoT = new TarifaDAO(Relatorio.this);
+                daoT.Delete(ids.get(3));
+                EntretenimentoDAO daoE = new EntretenimentoDAO(Relatorio.this);
+                daoE.Delete(idViagem);
 
-                    finish();
+                finish();
             }
         });
 

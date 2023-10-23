@@ -27,6 +27,7 @@ public class Refeicoes extends AppCompatActivity {
     private ImageView salvar;
     SharedPreferences preferences;
     private float precoTotal;
+    private int viajantes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class Refeicoes extends AppCompatActivity {
         SharedPreferences.Editor edit = preferences.edit();
 
         Intent intent = getIntent();
+        viajantes = intent.getIntExtra("QUANT_VIAJANTES", 0);
 
         usuario = findViewById(R.id.usuarioRefeicao);
         custoTotal = findViewById(R.id.totalRefeicao);
@@ -77,7 +79,12 @@ public class Refeicoes extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                calcularTotal(intent);
+                float custoRefeicaoC = Float.parseFloat(custoRefeicao.getText().toString());
+                int quantRefeicaoC = Integer.parseInt(quantRefeicao.getText().toString());
+
+                float custoPessoa = (quantRefeicaoC * viajantes) * custoRefeicaoC;
+
+                custoTotal.setText(String.valueOf(custoPessoa));
             }
         });
         salvar.setOnClickListener(new View.OnClickListener() {
@@ -113,11 +120,9 @@ public class Refeicoes extends AppCompatActivity {
         }else{
             float custoRefeicaoC = Float.parseFloat(custoRefeicao.getText().toString());
             int quantRefeicaoC = Integer.parseInt(quantRefeicao.getText().toString());
-            int viajantes = intent.getIntExtra("QUANT_VIAJANTES", 0);
             int duracao = intent.getIntExtra("DURACAO", 0);
-            precoTotal = ((quantRefeicaoC * viajantes) * custoRefeicaoC) * duracao;
 
-            custoTotal.setText(Float.toString(precoTotal));
+            precoTotal = ((quantRefeicaoC * viajantes) * custoRefeicaoC) * duracao;
         }
     }
 }

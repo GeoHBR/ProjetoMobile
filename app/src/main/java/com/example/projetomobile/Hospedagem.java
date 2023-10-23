@@ -79,23 +79,16 @@ public class Hospedagem extends AppCompatActivity {
                 }else{
                     calcularTotal();
                     HospedagemModel model = new HospedagemModel();
+
+                    model.setCustoMedio(Float.parseFloat(custoNoite.getText().toString()));
+                    model.setTotalQuartos(Integer.parseInt(quantQuarto.getText().toString()));
+                    model.setTotalNoites(Integer.parseInt(quantNoite.getText().toString()));
+                    model.setTotal(totalC);
+
                     if(hospedagem > 0){
-
-                        model.setCustoMedio(Float.parseFloat(custoNoite.getText().toString()));
-                        model.setTotalQuartos(Integer.parseInt(quantQuarto.getText().toString()));
-                        model.setTotalNoites(Integer.parseInt(quantNoite.getText().toString()));
-                        model.setTotal(totalC);
-
                         dao.Update(hospedagem, model);
                     }else{
-
-                        model.setCustoMedio(Float.parseFloat(custoNoite.getText().toString()));
-                        model.setTotalQuartos(Integer.parseInt(quantQuarto.getText().toString()));
-                        model.setTotalNoites(Integer.parseInt(quantNoite.getText().toString()));
-                        model.setTotal(totalC);
-
                         int id = dao.Insert(model);
-
                         edit.putInt("KEY_ID_HOSPEDAGEM", id).apply();
                     }
                     setResult(1);

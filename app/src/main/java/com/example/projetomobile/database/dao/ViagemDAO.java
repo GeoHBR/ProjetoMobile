@@ -121,8 +121,7 @@ public class ViagemDAO extends AbstrataDAO{
             viagem.set_idTarifa(c.getInt(6));
             viagem.set_idGasolina(c.getInt(7));
             viagem.set_idRefeicao(c.getInt(8));
-            viagem.set_idRefeicao(c.getInt(9));
-
+            viagem.set_idHospedagem(c.getInt(9));
         }
 
         Close();

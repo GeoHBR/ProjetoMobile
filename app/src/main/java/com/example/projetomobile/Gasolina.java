@@ -99,38 +99,24 @@ public class Gasolina extends AppCompatActivity {
                 }else if (quantVeiculos.getText().toString().isEmpty()) {
                     quantVeiculos.setError("Campo Obrigatorio");
                 }else{
-
                     calcularTotal();
 
+                    GasolinaModel model = new GasolinaModel();
+
+                    model.setTotalKM(Float.parseFloat(totalKM.getText().toString()));
+                    model.setMedialKM(Float.parseFloat(mediaKMLitro.getText().toString()));
+                    model.setCustoMedio(Float.parseFloat(precoGasolina.getText().toString()));
+                    model.setTotalVeiculo(Integer.parseInt(quantVeiculos.getText().toString()));
+                    model.setTotal(precoTotal);
+
                     if(gasolina > 0){
-                        GasolinaModel model = new GasolinaModel();
-
-                        model.setTotalKM(Float.parseFloat(totalKM.getText().toString()));
-                        model.setMedialKM(Float.parseFloat(mediaKMLitro.getText().toString()));
-                        model.setCustoMedio(Float.parseFloat(precoGasolina.getText().toString()));
-                        model.setTotalVeiculo(Integer.parseInt(quantVeiculos.getText().toString()));
-                        model.setTotal(precoTotal);
-
                         dao.Update(gasolina, model);
-
                     }else{
-                        GasolinaModel model = new GasolinaModel();
-
-                        model.setTotalKM(Float.parseFloat(totalKM.getText().toString()));
-                        model.setMedialKM(Float.parseFloat(mediaKMLitro.getText().toString()));
-                        model.setCustoMedio(Float.parseFloat(precoGasolina.getText().toString()));
-                        model.setTotalVeiculo(Integer.parseInt(quantVeiculos.getText().toString()));
-                        model.setTotal(precoTotal);
-
                         int idGasolina = dao.Insert(model);
-
                         edit.putInt("KEY_ID_GASOLINA", idGasolina).apply();
                     }
-//                    Intent it = new Intent();
-//                    it.putExtra("KEY_ID_GASOLINA", 23);
                     setResult(1);
                     finish();
-
                 }
             }
         });

@@ -73,13 +73,13 @@ public class EntretenimentoDAO extends AbstrataDAO{
         if(c.getCount() > 0){
             c.moveToFirst();
             do{
-
                 total = total + c.getFloat(0);
 
             }while(c.moveToNext());
         }
 
         Close();
+
         return total;
     }
 
