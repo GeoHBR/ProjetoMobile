@@ -295,7 +295,6 @@ public class AdicionarViagem extends AppCompatActivity {
                                 listaCancelarDEL.remove(i);
                                 j=0;
                                 i=0;
-                                Log.e(Integer.toString(modelo.get_id()),"BEEEEEEEEEESSSSSSSSSSSSSSSSSs");
                             }
                         }
                     }
