@@ -119,7 +119,8 @@ public class TarifaAreaActivity extends AppCompatActivity {
             int viajantes = intent.getIntExtra("QUANT_VIAJANTES", 0);
             precoTotal = (custoPessoaC * viajantes) + veiculo;
 
-            custoTotal.setText(Float.toString(precoTotal));
+            custoTotal.setText(String.format("%.2f", precoTotal));
+
         }
     }
 }

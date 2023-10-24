@@ -101,7 +101,8 @@ public class Entretenimento extends AppCompatActivity {
                         total = Float.parseFloat(custoTotal.getText().toString());
                         total += Float.parseFloat(custoT.getText().toString());
 
-                        custoTotal.setText(String.valueOf(total));
+                        custoTotal.setText(String.valueOf(String.format("%.2f", total)));
+
 
                         listEn.add(model);
                         adapter.notifyDataSetChanged();
