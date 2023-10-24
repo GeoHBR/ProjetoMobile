@@ -3,10 +3,12 @@ package com.example.projetomobile;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.example.projetomobile.adapter.Entretenimento_Modelo;
 import com.example.projetomobile.database.dao.EntretenimentoDAO;
 import com.example.projetomobile.database.dao.GasolinaDAO;
 import com.example.projetomobile.database.dao.HospedagemDAO;
@@ -26,6 +28,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -49,7 +52,6 @@ public class AdicionarViagem extends AppCompatActivity {
     private ImageView criar;
     private TextView userNome;
     private ImageView cancelar;
-    private TextView TxtTotalViagem;
     SharedPreferences preferences;
     private SharedPreferences.Editor edit;
     private ViagemDAO dao;
@@ -60,14 +62,14 @@ public class AdicionarViagem extends AppCompatActivity {
     private static final int TELA_TARIFA = 2;
     private static final int TELA_REFEICOES = 3;
     private static final int TELA_HOSPEDAGEM = 4;
-    private static final int TELA_ENTRETENIMENTO = 5;
-    private ViagemModel viagem = new ViagemModel();
-    private GasolinaModel gasoModel;
-    private HospedagemModel hopModel;
-    private RefeicaoModel refModel;
-    private TarifaModel tarModel;
-    private ArrayList<EntretenimentoModel> listaE;
-    private float totalViagem;
+    private static final int TELA_ENTRETERIMENTO = 5;
+
+    ViagemModel viagem = new ViagemModel();
+    GasolinaModel gasoModel;
+    HospedagemModel hopModel;
+    RefeicaoModel refModel;
+    TarifaModel tarModel;
+    ArrayList<EntretenimentoModel> listaE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +105,6 @@ public class AdicionarViagem extends AppCompatActivity {
         entretenimento = findViewById(R.id.btnEntretenimento);
         criar = findViewById(R.id.btnSalvarViagem);
         cancelar = findViewById(R.id.btnCancelarViagem);
-        TxtTotalViagem = findViewById(R.id.txtCustoTotalViagens);
 
         userNome.setText(preferences.getString("KEY_NOME", null));
 
@@ -127,13 +128,13 @@ public class AdicionarViagem extends AppCompatActivity {
 
             destino.setText(viagem.getDestino());
             dateInicio.setText(viagem.getDataInicio());
-            dateFim.setText(viagem.getDataFim());
+            dateFim.setText(viagem.getDataInicio());
             quantViajantes.setText(Integer.toString(viagem.getQuantPessoas()));
 
             edit.putInt("KEY_ID_GASOLINA", viagem.get_idGasolina());
             edit.putInt("KEY_ID_HOSPEDAGEM", viagem.get_idHospedagem());
             edit.putInt("KEY_ID_REFEICAO", viagem.get_idRefeicao());
-            edit.putInt("KEY_ID_TARIFA", viagem.get_idTarifa());
+            edit.putInt("KEY_ID_TARIFAKEY_ID_TARIFA", viagem.get_idTarifa());
             edit.apply();
 
             gasoModel = gasoDAO.Select(viagem.get_idGasolina());
@@ -182,13 +183,14 @@ public class AdicionarViagem extends AppCompatActivity {
         gasolina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //startActivity(new Intent(AdicionarViagem.this, Gasolina.class));
                 startActivityForResult(new Intent(AdicionarViagem.this, Gasolina.class), TELA_GASOLINA);
             }
         });
         hospedagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(AdicionarViagem.this, Hospedagem.class), TELA_HOSPEDAGEM);
+                startActivity(new Intent(AdicionarViagem.this, Hospedagem.class));
             }
         });
         tarifaAerea.setOnClickListener(new View.OnClickListener() {
@@ -197,10 +199,9 @@ public class AdicionarViagem extends AppCompatActivity {
                 if(quantViajantes.getText().toString().isEmpty()) {
                     quantViajantes.setError("Preencha este campo primeiro");
                 }else{
-                    Intent intent = new Intent(AdicionarViagem.this, TarifaAreaActivity.class);
+                    startActivityForResult(new Intent(AdicionarViagem.this, TarifaAreaActivity.class), TELA_TARIFA);
+                    Intent intent = new Intent();
                     intent.putExtra("QUANT_VIAJANTES", Integer.parseInt(quantViajantes.getText().toString()));
-                    startActivityForResult( intent, TELA_TARIFA);
-
                 }
             }
         });
@@ -214,11 +215,10 @@ public class AdicionarViagem extends AppCompatActivity {
                 }else if(dateFim.getText().toString().isEmpty()){
                     dateFim.setError("Preencha este campo primeiro");
                 }else{
-                    Intent intent = new Intent(AdicionarViagem.this, Refeicoes.class);
+                    startActivityForResult(new Intent(AdicionarViagem.this, Refeicoes.class), TELA_REFEICOES);
+                    Intent intent = new Intent();
                     intent.putExtra("QUANT_VIAJANTES", Integer.parseInt(quantViajantes.getText().toString()));
                     intent.putExtra("DURACAO", diferencaData());
-                    startActivityForResult( intent, TELA_REFEICOES);
-
                 }
             }
         });
@@ -228,7 +228,7 @@ public class AdicionarViagem extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent1 = new Intent(AdicionarViagem.this, Entretenimento.class);
                 intent1.putExtra("KEY_ID", idViagem);
-                startActivityForResult( intent1, TELA_ENTRETENIMENTO);
+                startActivity(intent1);
             }
         });
 
@@ -295,6 +295,7 @@ public class AdicionarViagem extends AppCompatActivity {
                                 listaCancelarDEL.remove(i);
                                 j=0;
                                 i=0;
+                                Log.e(Integer.toString(modelo.get_id()),"BEEEEEEEEEESSSSSSSSSSSSSSSSSs");
                             }
                         }
                     }
@@ -418,50 +419,27 @@ public class AdicionarViagem extends AppCompatActivity {
         if (requestCode == TELA_GASOLINA) {
             if (resultCode == 1) {
                 gasolina.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
-                calcularTotal(idViagem);
             }
         }
         if (requestCode == TELA_TARIFA) {
             if (resultCode == 1) {
                 tarifaAerea.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
-                calcularTotal(idViagem);
             }
         }
         if (requestCode == TELA_REFEICOES) {
             if (resultCode == 1) {
                 refeicao.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
-                calcularTotal(idViagem);
             }
         }
         if (requestCode == TELA_HOSPEDAGEM) {
             if (resultCode == 1) {
                 hospedagem.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
-                calcularTotal(idViagem);
             }
         }
-        if (requestCode == TELA_ENTRETENIMENTO) {
+        if (requestCode == TELA_ENTRETERIMENTO) {
             if (resultCode == 1) {
                 entretenimento.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
-                calcularTotal(idViagem);
             }
         }
-    }
-    private void calcularTotal(int idViagem){
-
-        GasolinaDAO daoG = new GasolinaDAO(this);
-        HospedagemDAO daoH = new HospedagemDAO(this);
-        RefeicaoDAO daoR = new RefeicaoDAO(this);
-        TarifaDAO daoT = new TarifaDAO(this);
-        EntretenimentoDAO daoE = new EntretenimentoDAO(this);
-
-        float totalG = daoG.SelectTotal(idViagem);
-        float totalH = daoH.SelectTotal(idViagem);
-        float totalR = daoR.SelectTotal(idViagem);
-        float totalT = daoT.SelectTotal(idViagem);
-        float totalE = daoE.SelectTotal(idViagem);
-
-        totalViagem = totalG + totalH + totalR + totalT + totalE;
-
-        TxtTotalViagem.setText(String.format("%.2f", totalViagem));
     }
 }

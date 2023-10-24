@@ -47,15 +47,13 @@ public class Relatorio extends AppCompatActivity {
     private int idViagem;
     public ArrayList<Viagem_Modelo> listaViagens;
     SharedPreferences preferences;
-    private ViagemModel viagem;
-    private Intent intent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relatorio);
 
-        intent = getIntent();
+        Intent intent = getIntent();
 
         preferences = PreferenceManager.getDefaultSharedPreferences(Relatorio.this);
         idViagem = intent.getIntExtra("ID", 0);
@@ -74,16 +72,16 @@ public class Relatorio extends AppCompatActivity {
         idViagem = intent.getIntExtra("ID", 0);
 
         ViagemDAO daoV = new ViagemDAO(this);
-        viagem = daoV.SelectViagem(idViagem);
+        ViagemModel viagem = daoV.SelectViagem(idViagem);
 
         float totalV = intent.getFloatExtra("TOTAL", 0);
 
         destino.setText(viagem.getDestino());
         qtdViajantes.setText(String.valueOf(viagem.getQuantPessoas()));
         duracaoViajem.setText(String.valueOf(diferencaData(viagem.getDataInicio(), viagem.getDataFim()))+" dias");
-        custoTotal2.setText("R$ " +String.format("%.2f",totalV));
-        custoTotal.setText(String.format("%.2f",totalV));
-        custoViajante.setText("R$ " + String.format("%.2f",totalV/viagem.getQuantPessoas()));
+        custoTotal2.setText(String.valueOf(totalV));
+        custoTotal.setText(String.valueOf(totalV));
+        custoViajante.setText(String.valueOf(totalV/viagem.getQuantPessoas()));
 
 
         voltar.setOnClickListener(new View.OnClickListener() {
@@ -122,22 +120,6 @@ public class Relatorio extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    protected void onResume() {
-
-        ViagemDAO daoV = new ViagemDAO(this);
-        viagem = daoV.SelectViagem(idViagem);
-        float totalV = intent.getFloatExtra("TOTAL", 0);
-
-        destino.setText(viagem.getDestino());
-        qtdViajantes.setText(String.valueOf(viagem.getQuantPessoas()));
-        duracaoViajem.setText(String.valueOf(diferencaData(viagem.getDataInicio(), viagem.getDataFim()))+" dias");
-        custoTotal2.setText("R$ " +String.format("%.2f",totalV));
-        custoTotal.setText(String.format("%.2f",totalV));
-        custoViajante.setText("R$ " + String.format("%.2f",totalV/viagem.getQuantPessoas()));
-
-        super.onResume();
     }
 
     private int diferencaData(String inicio, String fim) {

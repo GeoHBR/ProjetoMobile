@@ -2,7 +2,6 @@ package com.example.projetomobile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -127,7 +126,7 @@ public class Hospedagem extends AppCompatActivity {
             int numNoite = Integer.parseInt(quantNoite.getText().toString());
             totalC = (custoNoiteC * numNoite) * quantQuartoC;
 
-            total.setText(String.format("%.2f", totalC));
+            total.setText(Float.toString(totalC));
         }
     }
 }

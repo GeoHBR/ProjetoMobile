@@ -54,7 +54,7 @@ public class Entretenimento_Adapter extends BaseAdapter {
         ImageButton remover = view.findViewById(R.id.remover_entreterimento);
 
         nome.setText(entretenimento.getNome());
-        preço.setText(String.format("%.2f", entretenimento.getPreço()));
+        preço.setText(String.valueOf(entretenimento.getPreço()));
         remover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

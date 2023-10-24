@@ -132,7 +132,8 @@ public class Gasolina extends AppCompatActivity {
             float gasolina = Float.parseFloat(precoGasolina.getText().toString());
             int totalVeiculos = Integer.parseInt(quantVeiculos.getText().toString());
             precoTotal = ((totalKm / media) * gasolina) / totalVeiculos;
-            custoTotal.setText(String.format("%.2f", precoTotal));
+
+            custoTotal.setText(Float.toString(precoTotal));
         }
     }
 }

@@ -23,7 +23,6 @@ public class Refeicoes extends AppCompatActivity {
     private TextView custoTotal;
     private EditText custoRefeicao;
     private EditText quantRefeicao;
-    private TextView txt_viajante;
     private ImageView cancelar;
     private ImageView salvar;
     SharedPreferences preferences;
@@ -47,7 +46,6 @@ public class Refeicoes extends AppCompatActivity {
         custoRefeicao = findViewById(R.id.custoRefeicao);
         cancelar = findViewById(R.id.cancelarRefeicao);
         salvar = findViewById(R.id.salvarRefeicao);
-        txt_viajante = findViewById(R.id.txt_refeicoes_viajantes);
 
         RefeicaoDAO dao = new RefeicaoDAO(Refeicoes.this);
 
@@ -56,13 +54,13 @@ public class Refeicoes extends AppCompatActivity {
             RefeicaoModel aux;
             aux = dao.Select(refeicao);
 
-            custoTotal.setText(String.format("%.2f",aux.getTotal()));
+            custoTotal.setText(Float.toString(aux.getTotal()));
             quantRefeicao.setText(Integer.toString(aux.getQuantRefeicao()));
             custoRefeicao.setText(Float.toString(aux.getCustoRefeicao()));
         }
 
         usuario.setText(preferences.getString("KEY_NOME", null));
-        txt_viajante.setText("Valor de "+viajantes+" viajantes por dia");
+
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +84,7 @@ public class Refeicoes extends AppCompatActivity {
 
                 float custoPessoa = (quantRefeicaoC * viajantes) * custoRefeicaoC;
 
-                custoTotal.setText(String.format("%.2f",custoPessoa));
+                custoTotal.setText(String.valueOf(custoPessoa));
             }
         });
         salvar.setOnClickListener(new View.OnClickListener() {

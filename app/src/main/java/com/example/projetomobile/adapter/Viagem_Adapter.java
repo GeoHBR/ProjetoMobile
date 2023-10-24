@@ -68,7 +68,7 @@ public class Viagem_Adapter extends BaseAdapter {
         data2.setText(viagem.getData2());
 
         TextView total = view.findViewById(R.id.totalLista);
-        total.setText("R$ " + String.format("%.2f", viagem.getTotal()));
+        total.setText("R$ " + String.valueOf(viagem.getTotal()));
 
         ImageButton btnRelatorio = view.findViewById(R.id.btnRelatorio);
         btnRelatorio.setOnClickListener(new View.OnClickListener() {
