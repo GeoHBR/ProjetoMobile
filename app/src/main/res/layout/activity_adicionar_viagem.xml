@@ -164,7 +164,9 @@
                     android:autofillHints="Data"
                     android:hint="@string/dd_mm_aaaa"
                     android:inputType="date"
-                    android:backgroundTint="@color/gray"/>
+                    android:backgroundTint="@color/gray"
+                    android:focusable="false"
+                    android:clickable="true"/>
             </LinearLayout>
 
             <LinearLayout
@@ -189,7 +191,9 @@
                     android:autofillHints="Data"
                     android:hint="@string/dd_mm_aaaa"
                     android:inputType="date"
-                    android:backgroundTint="@color/gray"/>
+                    android:backgroundTint="@color/gray"
+                    android:focusable="false"
+                    android:clickable="true"/>
             </LinearLayout>
 
             <LinearLayout

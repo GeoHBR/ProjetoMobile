@@ -3,6 +3,7 @@ package com.example.projetomobile;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,9 +23,8 @@ import com.example.projetomobile.database.model.ViagemModel;
 
 import android.preference.PreferenceManager;
 import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class AdicionarViagem extends AppCompatActivity {
 
@@ -68,6 +69,7 @@ public class AdicionarViagem extends AppCompatActivity {
     private TarifaModel tarModel;
     private ArrayList<EntretenimentoModel> listaE;
     private float totalViagem;
+    private Calendar calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,7 @@ public class AdicionarViagem extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+        calendar = Calendar.getInstance();
         userNome = findViewById(R.id.nomeUser);
         destino = findViewById(R.id.destino);
         dateInicio = findViewById(R.id.dateEditText);
@@ -147,35 +150,91 @@ public class AdicionarViagem extends AppCompatActivity {
             update = true;
         }
 
-        // TextWatcher para o primeiro EditText
-        dateInicio.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+//        // TextWatcher para o primeiro EditText
+//        dateInicio.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                formatInput(s);
+//            }
+//        });
+//
+//        // TextWatcher para o segundo EditText
+//        dateFim.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                formatInput(s);
+//            }
+//        });
 
+        //Calendario pra dateInicio
+        dateInicio.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onClick(View v) {
+                showDatePicker();
             }
+            private void showDatePicker() {
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                formatInput(s);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(AdicionarViagem.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, monthOfYear);
+                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                        String selectedDate = dateFormat.format(calendar.getTime());
+                        dateInicio.setText(selectedDate);
+                    }
+                }, year, month, day);
+
+                datePickerDialog.show();
             }
         });
 
-        // TextWatcher para o segundo EditText
-        dateFim.addTextChangedListener(new TextWatcher() {
+        //Calendario pro dateFim
+        dateFim.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onClick(View v) {
+                showDatePicker();
             }
+            private void showDatePicker() {
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
+                DatePickerDialog datePickerDialog = new DatePickerDialog(AdicionarViagem.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, monthOfYear);
+                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                formatInput(s);
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                        String selectedDate = dateFormat.format(calendar.getTime());
+                        dateFim.setText(selectedDate);
+                    }
+                }, year, month, day);
+
+                datePickerDialog.show();
             }
         });
 
