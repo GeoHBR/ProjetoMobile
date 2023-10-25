@@ -13,26 +13,14 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:layout_weight="1" >
+        android:layout_weight="1">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="53.95dp"
             android:layout_gravity="center"
-            android:fontFamily="@font/logo"
-            android:text="@string/NomeApp"
-            android:textColor="@color/white"
-            android:textSize="70sp" />
+            android:background="@drawable/logomarca"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/logo"
-            android:text="@string/Slogan"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="italic" />
     </LinearLayout>
 
     <LinearLayout
