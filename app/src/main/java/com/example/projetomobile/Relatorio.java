@@ -49,16 +49,12 @@ public class Relatorio extends AppCompatActivity {
     SharedPreferences preferences;
     private ViagemModel viagem;
     private Intent intent;
+    private static final int EDICAO = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relatorio);
-
-        intent = getIntent();
-
-        preferences = PreferenceManager.getDefaultSharedPreferences(Relatorio.this);
-        idViagem = intent.getIntExtra("ID", 0);
 
         usuario = findViewById(R.id.usuarioRelatorio);
         custoTotal = findViewById(R.id.txtCustoTotalRelatorio);
@@ -71,21 +67,13 @@ public class Relatorio extends AppCompatActivity {
         excluir = findViewById(R.id.btn_excluir_relatorio);
         editar = findViewById(R.id.editar_relatorio);
 
+        preferences = PreferenceManager.getDefaultSharedPreferences(Relatorio.this);
         usuario.setText(preferences.getString("KEY_NOME", null));
+
+        intent = getIntent();
         idViagem = intent.getIntExtra("ID", 0);
 
-        ViagemDAO daoV = new ViagemDAO(this);
-        viagem = daoV.SelectViagem(idViagem);
-
-        float totalV = intent.getFloatExtra("TOTAL", 0);
-
-        destino.setText(viagem.getDestino());
-        qtdViajantes.setText(String.valueOf(viagem.getQuantPessoas()));
-        duracaoViajem.setText(String.valueOf(diferencaData(viagem.getDataInicio(), viagem.getDataFim()))+" dias");
-        custoTotal2.setText("R$ " +String.format("%.2f",totalV));
-        custoTotal.setText(String.format("%.2f",totalV));
-        custoViajante.setText("R$ " + String.format("%.2f",totalV/viagem.getQuantPessoas()));
-
+        buscarViagem();
 
         voltar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +97,7 @@ public class Relatorio extends AppCompatActivity {
                 TarifaDAO daoT = new TarifaDAO(Relatorio.this);
                 daoT.Delete(ids.get(3));
                 EntretenimentoDAO daoE = new EntretenimentoDAO(Relatorio.this);
-                daoE.Delete(idViagem);
+                daoE.DeleteAll(idViagem);
 
                 finish();
             }
@@ -120,16 +108,26 @@ public class Relatorio extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Relatorio.this, AdicionarViagem.class);
                 intent.putExtra("ID_VIAGEM", idViagem);
-                startActivity(intent);
+                startActivityForResult(intent, EDICAO);
             }
         });
     }
 
-    protected void onResume() {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == EDICAO){
+            if(resultCode == 1){
+                buscarViagem();
+            }
+        }
+    }
+
+    private void buscarViagem() {
 
         ViagemDAO daoV = new ViagemDAO(this);
         viagem = daoV.SelectViagem(idViagem);
-        float totalV = intent.getFloatExtra("TOTAL", 0);
+        float totalV = calcularTotal();
 
         destino.setText(viagem.getDestino());
         qtdViajantes.setText(String.valueOf(viagem.getQuantPessoas()));
@@ -137,8 +135,6 @@ public class Relatorio extends AppCompatActivity {
         custoTotal2.setText("R$ " +String.format("%.2f",totalV));
         custoTotal.setText(String.format("%.2f",totalV));
         custoViajante.setText("R$ " + String.format("%.2f",totalV/viagem.getQuantPessoas()));
-
-        super.onResume();
     }
 
     private int diferencaData(String inicio, String fim) {
@@ -186,5 +182,23 @@ public class Relatorio extends AppCompatActivity {
             e.printStackTrace();
         }
         return date;
+    }
+
+    private float calcularTotal(){
+
+        GasolinaDAO daoG = new GasolinaDAO(Relatorio.this);
+        HospedagemDAO daoH = new HospedagemDAO(Relatorio.this);
+        RefeicaoDAO daoR = new RefeicaoDAO(Relatorio.this);
+        TarifaDAO daoT = new TarifaDAO(Relatorio.this);
+        EntretenimentoDAO daoE = new EntretenimentoDAO(Relatorio.this);
+
+        float totalG = daoG.SelectTotal(idViagem);
+        float totalH = daoH.SelectTotal(idViagem);
+        float totalR = daoR.SelectTotal(idViagem);
+        float totalT = daoT.SelectTotal(idViagem);
+        float totalE = daoE.SelectTotal(idViagem);
+
+        return totalG + totalH + totalR + totalT + totalE;
+
     }
 }

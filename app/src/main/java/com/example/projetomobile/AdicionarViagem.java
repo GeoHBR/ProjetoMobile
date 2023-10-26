@@ -289,6 +289,7 @@ public class AdicionarViagem extends AppCompatActivity {
                     if(gasoAdd){
                         if(update){
                             gasoDAO.Update(viagem.get_idGasolina(), gasoModel);
+                            model.set_idGasolina(viagem.get_idGasolina());
                         }else{
                             int idGasolina = gasoDAO.Insert(gasoModel);
                             model.set_idGasolina(idGasolina);
@@ -297,6 +298,7 @@ public class AdicionarViagem extends AppCompatActivity {
                     if(hosAdd){
                         if(update){
                             hopDAO.Update(viagem.get_idHospedagem(), hosModel);
+                            model.set_idHospedagem(viagem.get_idHospedagem());
                         }else{
                             int idHospedagem = hopDAO.Insert(hosModel);
                             model.set_idHospedagem(idHospedagem);
@@ -305,6 +307,7 @@ public class AdicionarViagem extends AppCompatActivity {
                     if(tarAdd){
                         if(update){
                             tarDAO.Update(viagem.get_idTarifa(), tarModel);
+                            model.set_idTarifa(viagem.get_idTarifa());
                         }else{
                             int idTarifa = tarDAO.Insert(tarModel);
                             model.set_idTarifa(idTarifa);
@@ -313,6 +316,7 @@ public class AdicionarViagem extends AppCompatActivity {
                     if(refAdd){
                         if(update){
                             refDAO.Update(viagem.get_idRefeicao(), refModel);
+                            model.set_idRefeicao(viagem.get_idRefeicao());
                         }else{
                             int idRefeicao = refDAO.Insert(refModel);
                             model.set_idRefeicao(idRefeicao);
@@ -324,10 +328,10 @@ public class AdicionarViagem extends AppCompatActivity {
                     }else{
                         idViagem = dao.Insert(model);
                     }
+                    if(update){
+                        entDAO.DeleteAll(idViagem);
+                    }
                     for(int i = 0; i < listaE.size(); i++){
-                        if(update){
-                            entDAO.DeleteAll(idViagem);
-                        }
                         EntretenimentoModel modelE = new EntretenimentoModel();
 
                         modelE.setNome(listaE.get(i).getNome());

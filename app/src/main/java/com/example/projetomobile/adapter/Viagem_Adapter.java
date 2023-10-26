@@ -76,7 +76,6 @@ public class Viagem_Adapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(activity, Relatorio.class);
                 intent.putExtra("ID", viagem.getId());
-                intent.putExtra("TOTAL", viagem.getTotal());
                 activity.startActivity(intent);
             }
         });

@@ -60,7 +60,7 @@ public class Gasolina extends AppCompatActivity {
             mediaKMLitro.setText(Float.toString(aux.getMedialKM()));
             precoGasolina.setText(Float.toString(aux.getCustoMedio()));
             quantVeiculos.setText(Integer.toString(aux.getTotalVeiculo()));
-            custoTotal.setText(Float.toString(aux.getTotal()));
+            custoTotal.setText(String.format("%.2f", aux.getTotal()));
 
         }
 
