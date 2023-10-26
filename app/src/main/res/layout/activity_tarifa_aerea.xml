@@ -121,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="Viagem 1"
+                    android:text="Sua viagem"
                     android:textSize="17sp" />
 
             </LinearLayout>
