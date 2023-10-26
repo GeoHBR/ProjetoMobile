@@ -23,6 +23,7 @@ import com.example.projetomobile.database.model.ViagemModel;
 
 import android.preference.PreferenceManager;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -156,6 +157,7 @@ public class AdicionarViagem extends AppCompatActivity {
                         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                         String selectedDate = dateFormat.format(calendar.getTime());
                         dateInicio.setText(selectedDate);
+                        recalcularTotal();
                     }
                 }, year, month, day);
 
@@ -184,10 +186,28 @@ public class AdicionarViagem extends AppCompatActivity {
                         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                         String selectedDate = dateFormat.format(calendar.getTime());
                         dateFim.setText(selectedDate);
+                        recalcularTotal();
                     }
                 }, year, month, day);
 
                 datePickerDialog.show();
+            }
+        });
+
+        quantViajantes.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                recalcularTotal();
             }
         });
 
@@ -246,7 +266,7 @@ public class AdicionarViagem extends AppCompatActivity {
                         intent.putExtra("EDICAO", true);
                     }
                     intent.putExtra("QUANT_VIAJANTES", Integer.parseInt(quantViajantes.getText().toString()));
-                    intent.putExtra("DURACAO", diferencaData());
+                    intent.putExtra("DURACAO", diferencaData(dateInicio.getText().toString(), dateFim.getText().toString()));
                     startActivityForResult( intent, TELA_REFEICOES);
 
                 }
@@ -279,6 +299,8 @@ public class AdicionarViagem extends AppCompatActivity {
                 }else{
                     dao = new ViagemDAO(AdicionarViagem.this);
                     ViagemModel model = new ViagemModel();
+
+                    recalcularTotal();
 
                     model.setDestino(destino.getText().toString());
                     model.setDataInicio(dateInicio.getText().toString());
@@ -354,9 +376,9 @@ public class AdicionarViagem extends AppCompatActivity {
         });
     }
 
-    public int diferencaData() {
-        int dataInicio = conrveteData(dateInicio.getText().toString());
-        int dataFim = conrveteData(dateFim.getText().toString());
+    public int diferencaData(String dataI, String dataF) {
+        int dataInicio = conrveteData(dataI);
+        int dataFim = conrveteData(dataF);
         return dataFim - dataInicio;
     }
 
@@ -469,5 +491,41 @@ public class AdicionarViagem extends AppCompatActivity {
         totalViagem = gas + hos + ref + tar + ent;
 
         TxtTotalViagem.setText(String.format("%.2f", totalViagem));
+    }
+    private void recalcularTotal(){
+        int dataBanco = 0;
+        int viajantesBanco = 0;
+        int dataNova = 0;
+
+        if(!dateInicio.getText().toString().isEmpty() && !dateFim.getText().toString().isEmpty()){
+            dataNova = diferencaData(dateInicio.getText().toString(), dateFim.getText().toString());
+        }
+        if(update){
+            dataBanco = diferencaData(viagem.getDataInicio(), viagem.getDataFim());
+            viajantesBanco = viagem.getQuantPessoas();
+        }
+        if(!quantViajantes.getText().toString().isEmpty()){
+            int viajantes = Integer.parseInt(quantViajantes.getText().toString());
+            if (dataBanco != dataNova || viajantesBanco != viajantes) {
+                //refaz total da tarifa area
+                if(tarAdd){
+                    float custoPessoaC = tarModel.getCustoPessoa();
+                    float veiculo = tarModel.getCustoAluguel();
+                    float precoTotalT = (custoPessoaC * viajantes) + veiculo;
+
+                    tarModel.setTotal(precoTotalT);
+                }
+                //refaz total da refeicao
+                if(refAdd){
+                    float custoRefeicaoC = refModel.getCustoRefeicao();
+                    int quantRefeicaoC = refModel.getQuantRefeicao();
+                    int duracao = dataNova;
+                    float precoTotalR = ((quantRefeicaoC * viajantes) * custoRefeicaoC) * duracao;
+
+                    refModel.setTotal(precoTotalR);
+                }
+                calcularTotal();
+            }
+        }
     }
 }
