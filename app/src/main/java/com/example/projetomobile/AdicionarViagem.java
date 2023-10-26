@@ -53,43 +53,41 @@ public class AdicionarViagem extends AppCompatActivity {
     private TextView TxtTotalViagem;
     SharedPreferences preferences;
     private SharedPreferences.Editor edit;
-    private ViagemDAO dao;
+    private ViagemDAO dao = new ViagemDAO(AdicionarViagem.this);
     private boolean update;
     private int idViagem;
-
     private static final int TELA_GASOLINA = 1;
     private static final int TELA_TARIFA = 2;
     private static final int TELA_REFEICOES = 3;
     private static final int TELA_HOSPEDAGEM = 4;
     private static final int TELA_ENTRETENIMENTO = 5;
     private ViagemModel viagem = new ViagemModel();
-    private GasolinaModel gasoModel;
-    private HospedagemModel hopModel;
-    private RefeicaoModel refModel;
-    private TarifaModel tarModel;
-    private ArrayList<EntretenimentoModel> listaE;
+    private GasolinaModel gasoModel = new GasolinaModel();
+    private boolean gasoAdd = false;
+    private HospedagemModel hosModel = new HospedagemModel();
+    private boolean hosAdd = false;
+    private RefeicaoModel refModel = new RefeicaoModel();
+    private boolean refAdd = false;
+    private TarifaModel tarModel = new TarifaModel();
+    private boolean tarAdd = false;
+    private ArrayList<EntretenimentoModel> listaE = new ArrayList<>();
+    private boolean entAdd = false;
     private float totalViagem;
     private Calendar calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        GasolinaDAO gasoDAO = new GasolinaDAO(AdicionarViagem.this);
-        gasoModel= new GasolinaModel();
 
-        HospedagemDAO hopDAO = new HospedagemDAO(AdicionarViagem.this);
-        hopModel = new HospedagemModel();
-
-        RefeicaoDAO refDAO = new RefeicaoDAO(AdicionarViagem.this);
-        refModel = new RefeicaoModel();
-
-        TarifaDAO tarDAO = new TarifaDAO(AdicionarViagem.this);
-        tarModel = new TarifaModel();
+        GasolinaDAO gasoDAO = new GasolinaDAO(this);
+        HospedagemDAO hopDAO = new HospedagemDAO(this);
+        RefeicaoDAO refDAO = new RefeicaoDAO(this);
+        TarifaDAO tarDAO = new TarifaDAO(this);
+        EntretenimentoDAO entDAO = new EntretenimentoDAO(this);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_viagem);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(AdicionarViagem.this);
-        edit = preferences.edit();
 
         Intent intent = getIntent();
 
@@ -111,21 +109,9 @@ public class AdicionarViagem extends AppCompatActivity {
         userNome.setText(preferences.getString("KEY_NOME", null));
 
         idViagem = intent.getIntExtra("ID_VIAGEM", 0);
-        if(idViagem == 0){
-            dao = new ViagemDAO(AdicionarViagem.this);
-            ViagemModel model = new ViagemModel();
 
-            model.setDestino("");
-            model.setDataInicio("");
-            model.setDataFim("");
-            model.setQuantPessoas(0);
+        if(idViagem > 0){
 
-            idViagem = dao.Insert(model);
-            update = false;
-
-        }else{
-
-            dao = new ViagemDAO(AdicionarViagem.this);
             viagem = dao.SelectViagem(idViagem);
 
             destino.setText(viagem.getDestino());
@@ -133,54 +119,21 @@ public class AdicionarViagem extends AppCompatActivity {
             dateFim.setText(viagem.getDataFim());
             quantViajantes.setText(Integer.toString(viagem.getQuantPessoas()));
 
-            edit.putInt("KEY_ID_GASOLINA", viagem.get_idGasolina());
-            edit.putInt("KEY_ID_HOSPEDAGEM", viagem.get_idHospedagem());
-            edit.putInt("KEY_ID_REFEICAO", viagem.get_idRefeicao());
-            edit.putInt("KEY_ID_TARIFA", viagem.get_idTarifa());
-            edit.apply();
+            gasoAdd = true;
+            hosAdd = true;
+            refAdd = true;
+            tarAdd = true;
+            entAdd = true;
 
             gasoModel = gasoDAO.Select(viagem.get_idGasolina());
-            hopModel = hopDAO.Select(viagem.get_idHospedagem());
+            hosModel = hopDAO.Select(viagem.get_idHospedagem());
             refModel = refDAO.Select(viagem.get_idRefeicao());
             tarModel = tarDAO.Select(viagem.get_idTarifa());
+            listaE = entDAO.Select(idViagem);
 
-            EntretenimentoDAO dao = new EntretenimentoDAO(AdicionarViagem.this);
-            listaE = dao.Select(viagem.get_id());
-
+            calcularTotal();
             update = true;
         }
-
-//        // TextWatcher para o primeiro EditText
-//        dateInicio.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                formatInput(s);
-//            }
-//        });
-//
-//        // TextWatcher para o segundo EditText
-//        dateFim.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                formatInput(s);
-//            }
-//        });
 
         //Calendario pra dateInicio
         dateInicio.setOnClickListener(new View.OnClickListener() {
@@ -241,13 +194,23 @@ public class AdicionarViagem extends AppCompatActivity {
         gasolina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(AdicionarViagem.this, Gasolina.class), TELA_GASOLINA);
+                Intent it = new Intent(AdicionarViagem.this, Gasolina.class);
+                if(gasoAdd){
+                    it.putExtra("GASOLINA", gasoModel);
+                    it.putExtra("EDICAO", true);
+                }
+                startActivityForResult(it, TELA_GASOLINA);
             }
         });
         hospedagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(AdicionarViagem.this, Hospedagem.class), TELA_HOSPEDAGEM);
+                Intent it = new Intent(AdicionarViagem.this, Hospedagem.class);
+                if(hosAdd){
+                    it.putExtra("HOSPEDAGEM", hosModel);
+                    it.putExtra("EDICAO", true);
+                }
+                startActivityForResult(it, TELA_HOSPEDAGEM);
             }
         });
         tarifaAerea.setOnClickListener(new View.OnClickListener() {
@@ -256,9 +219,13 @@ public class AdicionarViagem extends AppCompatActivity {
                 if(quantViajantes.getText().toString().isEmpty()) {
                     quantViajantes.setError("Preencha este campo primeiro");
                 }else{
-                    Intent intent = new Intent(AdicionarViagem.this, TarifaAreaActivity.class);
-                    intent.putExtra("QUANT_VIAJANTES", Integer.parseInt(quantViajantes.getText().toString()));
-                    startActivityForResult( intent, TELA_TARIFA);
+                    Intent it = new Intent(AdicionarViagem.this, TarifaAreaActivity.class);
+                    if(tarAdd){
+                        it.putExtra("TARIFA", tarModel);
+                        it.putExtra("EDICAO", true);
+                    }
+                    it.putExtra("QUANT_VIAJANTES", Integer.parseInt(quantViajantes.getText().toString()));
+                    startActivityForResult( it, TELA_TARIFA);
 
                 }
             }
@@ -274,6 +241,10 @@ public class AdicionarViagem extends AppCompatActivity {
                     dateFim.setError("Preencha este campo primeiro");
                 }else{
                     Intent intent = new Intent(AdicionarViagem.this, Refeicoes.class);
+                    if(refAdd){
+                        intent.putExtra("REFEICAO", refModel);
+                        intent.putExtra("EDICAO", true);
+                    }
                     intent.putExtra("QUANT_VIAJANTES", Integer.parseInt(quantViajantes.getText().toString()));
                     intent.putExtra("DURACAO", diferencaData());
                     startActivityForResult( intent, TELA_REFEICOES);
@@ -285,9 +256,12 @@ public class AdicionarViagem extends AppCompatActivity {
         entretenimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(AdicionarViagem.this, Entretenimento.class);
-                intent1.putExtra("KEY_ID", idViagem);
-                startActivityForResult( intent1, TELA_ENTRETENIMENTO);
+                Intent in = new Intent(AdicionarViagem.this, Entretenimento.class);
+                if(entAdd){
+                    in.putExtra("ENTRETENIMENTO", listaE);
+                    in.putExtra("EDICAO", true);
+                }
+                startActivityForResult(in, TELA_ENTRETENIMENTO);
             }
         });
 
@@ -303,24 +277,66 @@ public class AdicionarViagem extends AppCompatActivity {
                 }else if(quantViajantes.getText().toString().isEmpty()) {
                     quantViajantes.setError("Campo Obrigatorio");
                 }else{
-
                     dao = new ViagemDAO(AdicionarViagem.this);
                     ViagemModel model = new ViagemModel();
 
-                    model.set_id(idViagem);
                     model.setDestino(destino.getText().toString());
                     model.setDataInicio(dateInicio.getText().toString());
                     model.setDataFim(dateFim.getText().toString());
                     model.set_idUsuario(preferences.getInt("KEY_ID", 0));
                     model.setQuantPessoas(Integer.parseInt(quantViajantes.getText().toString()));
-                    model.set_idGasolina(preferences.getInt("KEY_ID_GASOLINA", 0));
-                    model.set_idHospedagem(preferences.getInt("KEY_ID_HOSPEDAGEM", 0));
-                    model.set_idTarifa(preferences.getInt("KEY_ID_TARIFA", 0));
-                    model.set_idRefeicao(preferences.getInt("KEY_ID_REFEICAO", 0));
 
-                    removerPreferences();
+                    if(gasoAdd){
+                        if(update){
+                            gasoDAO.Update(viagem.get_idGasolina(), gasoModel);
+                        }else{
+                            int idGasolina = gasoDAO.Insert(gasoModel);
+                            model.set_idGasolina(idGasolina);
+                        }
+                    }
+                    if(hosAdd){
+                        if(update){
+                            hopDAO.Update(viagem.get_idHospedagem(), hosModel);
+                        }else{
+                            int idHospedagem = hopDAO.Insert(hosModel);
+                            model.set_idHospedagem(idHospedagem);
+                        }
+                    }
+                    if(tarAdd){
+                        if(update){
+                            tarDAO.Update(viagem.get_idTarifa(), tarModel);
+                        }else{
+                            int idTarifa = tarDAO.Insert(tarModel);
+                            model.set_idTarifa(idTarifa);
+                        }
+                    }
+                    if(refAdd){
+                        if(update){
+                            refDAO.Update(viagem.get_idRefeicao(), refModel);
+                        }else{
+                            int idRefeicao = refDAO.Insert(refModel);
+                            model.set_idRefeicao(idRefeicao);
+                        }
+                    }
+                    if(update){
+                        model.set_id(idViagem);
+                        dao.Update(model);
+                    }else{
+                        idViagem = dao.Insert(model);
+                    }
+                    for(int i = 0; i < listaE.size(); i++){
+                        if(update){
+                            entDAO.DeleteAll(idViagem);
+                        }
+                        EntretenimentoModel modelE = new EntretenimentoModel();
 
-                    dao.Update(model);
+                        modelE.setNome(listaE.get(i).getNome());
+                        modelE.setPreco(listaE.get(i).getPreco());
+                        modelE.setIdViagem(idViagem);
+
+                        entDAO.Insert(modelE);
+                    }
+                    setResult(1);
                     finish();
                 }
             }
@@ -329,88 +345,9 @@ public class AdicionarViagem extends AppCompatActivity {
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(update){
-                    gasoDAO.Update(viagem.get_idGasolina(), gasoModel);
-                    hopDAO.Update(viagem.get_idHospedagem(), hopModel);
-                    refDAO.Update(viagem.get_idRefeicao(), refModel);
-                    tarDAO.Update(viagem.get_idHospedagem(), tarModel);
-
-                    EntretenimentoDAO entDAO = new EntretenimentoDAO(AdicionarViagem.this);
-                    ArrayList<EntretenimentoModel> listaENew;
-                    ArrayList<EntretenimentoModel> listaCancelarDEL;
-                    ArrayList<EntretenimentoModel> listaCancelarINS;
-
-                    listaCancelarDEL = entDAO.Select(viagem.get_id());
-                    listaCancelarINS = listaE;
-
-
-                    for(int i = 0; i < listaCancelarDEL.size(); i++){
-                        for(int j=0; j < listaCancelarINS.size(); j++) {
-                            EntretenimentoModel modelo;
-                            modelo = listaCancelarINS.get(j);
-
-                            if(listaCancelarDEL.get(i).get_id() == modelo.get_id()) {
-                                listaCancelarINS.remove(j);
-                                listaCancelarDEL.remove(i);
-                                j=0;
-                                i=0;
-                            }
-                        }
-                    }
-
-                    for(int i = 0; i < listaCancelarINS.size(); i++){
-                        EntretenimentoModel model = new EntretenimentoModel();
-
-                        model.setNome(listaCancelarINS.get(i).getNome());
-                        model.setPreco(listaCancelarINS.get(i).getPreco());
-                        model.setIdViagem(viagem.get_id());
-
-                        entDAO.Insert(model);
-                    }
-
-                    for(int i = 0; i < listaCancelarDEL.size(); i++){
-                        EntretenimentoModel model = new EntretenimentoModel();
-
-                        int id = listaCancelarDEL.get(i).get_id();
-
-                        entDAO.Delete(id);
-                    }
-
-
-                }else{
-                    if(preferences.getInt("KEY_ID_GASOLINA", 0) > 0){
-                        GasolinaDAO dao = new GasolinaDAO(AdicionarViagem.this);
-                        dao.Delete(preferences.getInt("KEY_ID_GASOLINA", 0));
-                    }
-                    if(preferences.getInt("KEY_ID_HOSPEDAGEM", 0) > 0){
-                        HospedagemDAO dao = new HospedagemDAO(AdicionarViagem.this);
-                        dao.Delete(preferences.getInt("KEY_ID_HOSPEDAGEM", 0));
-                    }
-                    if(preferences.getInt("KEY_ID_TARIFA", 0) > 0){
-                        TarifaDAO dao = new TarifaDAO(AdicionarViagem.this);
-                        dao.Delete(preferences.getInt("KEY_ID_TARIFA", 0));
-                    }
-                    if(preferences.getInt("KEY_ID_REFEICAO", 0) > 0){
-                        RefeicaoDAO dao = new RefeicaoDAO(AdicionarViagem.this);
-                        dao.Delete(preferences.getInt("KEY_ID_REFEICAO", 0));
-                    }
-                    EntretenimentoDAO daoE = new EntretenimentoDAO(AdicionarViagem.this);
-                    dao = new ViagemDAO(AdicionarViagem.this);
-                    daoE.Delete(dao.SelectTotal(preferences.getInt("KEY_ID", 0)) + 1);
-                }
-
-                removerPreferences();
                 finish();
             }
         });
-    }
-
-
-    private void removerPreferences(){
-        edit.remove("KEY_ID_GASOLINA").apply();
-        edit.remove("KEY_ID_HOSPEDAGEM").apply();
-        edit.remove("KEY_ID_TARIFA").apply();
-        edit.remove("KEY_ID_REFEICAO").apply();
     }
 
     public int diferencaData() {
@@ -472,54 +409,60 @@ public class AdicionarViagem extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == TELA_GASOLINA) {
             if (resultCode == 1) {
                 gasolina.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
-                calcularTotal(idViagem);
+                gasoModel = (GasolinaModel) data.getSerializableExtra("GASOLINA");
+                gasoAdd = true;
             }
         }
         if (requestCode == TELA_TARIFA) {
             if (resultCode == 1) {
                 tarifaAerea.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
-                calcularTotal(idViagem);
+                tarModel = (TarifaModel) data.getSerializableExtra("TARIFA");
+                tarAdd = true;
             }
         }
         if (requestCode == TELA_REFEICOES) {
             if (resultCode == 1) {
                 refeicao.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
-                calcularTotal(idViagem);
+                refModel = (RefeicaoModel) data.getSerializableExtra("REFEICAO");
+                refAdd = true;
             }
         }
         if (requestCode == TELA_HOSPEDAGEM) {
             if (resultCode == 1) {
                 hospedagem.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
-                calcularTotal(idViagem);
+                hosModel = (HospedagemModel) data.getSerializableExtra("HOSPEDAGEM");
+                hosAdd = true;
             }
         }
         if (requestCode == TELA_ENTRETENIMENTO) {
             if (resultCode == 1) {
                 entretenimento.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.icone_adicionado,0);
-                calcularTotal(idViagem);
+                listaE = (ArrayList<EntretenimentoModel>) data.getSerializableExtra("ENTRETENIMENTO");
+                entAdd = true;
             }
         }
+        calcularTotal();
+
     }
-    private void calcularTotal(int idViagem){
+    private void calcularTotal(){
 
-        GasolinaDAO daoG = new GasolinaDAO(this);
-        HospedagemDAO daoH = new HospedagemDAO(this);
-        RefeicaoDAO daoR = new RefeicaoDAO(this);
-        TarifaDAO daoT = new TarifaDAO(this);
-        EntretenimentoDAO daoE = new EntretenimentoDAO(this);
+        float gas = gasoModel.getTotal();
+        float hos = hosModel.getTotal();
+        float ref = refModel.getTotal();
+        float tar = tarModel.getTotal();
+        float ent = 0;
+        if(entAdd){
+            for(int i = 0; i <listaE.size(); i++){
+                ent += listaE.get(i).getPreco();
+            }
+        }
 
-        float totalG = daoG.SelectTotal(idViagem);
-        float totalH = daoH.SelectTotal(idViagem);
-        float totalR = daoR.SelectTotal(idViagem);
-        float totalT = daoT.SelectTotal(idViagem);
-        float totalE = daoE.SelectTotal(idViagem);
-
-        totalViagem = totalG + totalH + totalR + totalT + totalE;
+        totalViagem = gas + hos + ref + tar + ent;
 
         TxtTotalViagem.setText(String.format("%.2f", totalViagem));
     }

@@ -32,9 +32,9 @@ public class Entretenimento extends AppCompatActivity {
     private ImageView salvar;
     private ListView listaEntretenimento;
     SharedPreferences preferences;
-    private int idV;
     private ArrayList<Entretenimento_Modelo> listEn = new ArrayList<>();
-    ArrayList<Entretenimento_Modelo> listEnBanco = new ArrayList<>();
+    private ArrayList<EntretenimentoModel> listaE = new ArrayList<>();
+    private ArrayList<Entretenimento_Modelo> listEnBanco = new ArrayList<>();
     private float total;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,9 +43,6 @@ public class Entretenimento extends AppCompatActivity {
 
         preferences = PreferenceManager.getDefaultSharedPreferences(Entretenimento.this);
         SharedPreferences.Editor edit = preferences.edit();
-
-        Intent intent = getIntent();
-        idV  = intent.getIntExtra("KEY_ID", 0);
 
         usuario = findViewById(R.id.usuario_entreterimento);
         custoTotal = findViewById(R.id.txt_custo_total_entreterimento);
@@ -58,26 +55,25 @@ public class Entretenimento extends AppCompatActivity {
 
         Entretenimento_Adapter adapter = new Entretenimento_Adapter(listEn, this);
 
-        EntretenimentoDAO dao = new EntretenimentoDAO(Entretenimento.this);
-        ArrayList<EntretenimentoModel> listaE;
-        listaE = dao.Select(idV);
-        total = dao.SelectTotal(idV);
-
-        custoTotal.setText(String.valueOf(total));
-
+        Intent intent = getIntent();
+        boolean edicao = intent.getBooleanExtra("EDICAO", false);
+        if(edicao) {
+            listaE = (ArrayList<EntretenimentoModel>) intent.getSerializableExtra("ENTRETENIMENTO");
+        }
         if(listaE.size() > 0){
             for(int i = 0; i < listaE.size(); i++){
                 Entretenimento_Modelo modelLista = new Entretenimento_Modelo();
 
-                modelLista.setId(listaE.get(i).get_id());
                 modelLista.setNome(listaE.get(i).getNome());
                 modelLista.setPreço(listaE.get(i).getPreco());
-                modelLista.setUpdate(true);
 
-                listEnBanco.add(modelLista);
+                total += listaE.get(i).getPreco();
+
                 listEn.add(modelLista);
             }
         }
+        custoTotal.setText(String.format("%.2f", total));
+
         listaEntretenimento.setAdapter(adapter);
         adicionar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,25 +90,25 @@ public class Entretenimento extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Entretenimento_Modelo model = new Entretenimento_Modelo();
 
-                        model.setNome(nomeT.getText().toString());
-                        model.setPreço(Float.parseFloat(custoT.getText().toString()));
-                        model.setUpdate(false);
+                        if(nomeT.getText().toString().isEmpty()){
+                        } else if(custoT.toString().isEmpty()) {
+                        }else{
+                            model.setNome(nomeT.getText().toString());
+                            model.setPreço(Float.parseFloat(custoT.getText().toString()));
 
-                        total = Float.parseFloat(custoTotal.getText().toString());
-                        total += Float.parseFloat(custoT.getText().toString());
+                            total = Float.parseFloat(custoTotal.getText().toString().replace(",", "."));
+                            total += Float.parseFloat(custoT.getText().toString());
 
-                        custoTotal.setText(String.valueOf(String.format("%.2f", total)));
+                            custoTotal.setText(String.format("%.2f", total));
 
-
-                        listEn.add(model);
-                        adapter.notifyDataSetChanged();
-
+                            listEn.add(model);
+                            adapter.notifyDataSetChanged();
+                        }
                     }
                 });
                 builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                         dialog.dismiss();
                     }
                 });
@@ -124,29 +120,22 @@ public class Entretenimento extends AppCompatActivity {
         salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EntretenimentoDAO dao = new EntretenimentoDAO(Entretenimento.this);
-
+                ArrayList<EntretenimentoModel> listaEn = new ArrayList<>();
                 if(listEn.size() > 0){
                     for(int i = 0; i < listEn.size(); i++){
-                        if(listEn.get(i).isUpdate()){
-                            listEnBanco.remove(listEn.get(i));
-                        }else{
-                            EntretenimentoModel model = new EntretenimentoModel();
+                        EntretenimentoModel model = new EntretenimentoModel();
 
-                            model.setNome(listEn.get(i).getNome());
-                            model.setPreco(listEn.get(i).getPreço());
-                            model.setIdViagem(idV);
+                        model.setNome(listEn.get(i).getNome());
+                        model.setPreco(listEn.get(i).getPreço());
 
-                            dao.Insert(model);
+                        listaEn.add(model);
                         }
                     }
-                }else{
-                    dao.DeleteAll(idV);
-                }
-                for(int i = 0; i < listEnBanco.size(); i++){
-                    dao.Delete(listEnBanco.get(i).getId());
-                }
-                setResult(1);
+                Intent it = new Intent();
+
+                it.putExtra("ENTRETENIMENTO", listaEn);
+
+                setResult(1, it);
                 finish();
             }
         });

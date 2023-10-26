@@ -1,5 +1,6 @@
 package com.example.projetomobile;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -34,6 +35,7 @@ public class viagensActivity extends AppCompatActivity {
     private ImageButton btnAdd;
     SharedPreferences preferences;
     private SharedPreferences.Editor edit;
+    private static final int ADICIONAR = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +45,57 @@ public class viagensActivity extends AppCompatActivity {
         preferences = PreferenceManager.getDefaultSharedPreferences(viagensActivity.this);
         edit = preferences.edit();
 
-        removerPreferences();
+        listaViagens = findViewById(R.id.lista_viagens);
+        userNome = findViewById(R.id.nomeUser);
+        btnAdd = findViewById(R.id.btn_add);
+        btnLogout = findViewById(R.id.btn_logout);
 
+        listarViagens();
+
+        userNome.setText(preferences.getString("KEY_NOME", null));
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(viagensActivity.this, AdicionarViagem.class), ADICIONAR);
+            }
+        });
+
+//      Função Logout
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                ButtonsSalve.showAlertDialog(viagensActivity.this, "Logout", "Deseja sair de sua conta?", new ButtonsSalve.OnDismissListener() {
+                    @Override
+                    public void onDismiss(boolean validacao) {
+                        if (validacao) {
+                            edit.putString("KEY_LOGIN_AUTOMATICO", "false").apply();
+                            finish();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == ADICIONAR){
+            if(resultCode == 1){
+                listarViagens();
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listarViagens();
+    }
+
+    private void listarViagens(){
         listaViagens = findViewById(R.id.lista_viagens);
 
         ViagemDAO dao = new ViagemDAO(viagensActivity.this);
@@ -68,69 +119,6 @@ public class viagensActivity extends AppCompatActivity {
             Viagem_Adapter adapter = new Viagem_Adapter(viagemModel, this);
             listaViagens.setAdapter(adapter);
         }
-
-        userNome = findViewById(R.id.nomeUser);
-        btnAdd = findViewById(R.id.btn_add);
-        btnLogout = findViewById(R.id.btn_logout);
-
-        userNome.setText(preferences.getString("KEY_NOME", null));
-
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(viagensActivity.this, AdicionarViagem.class));
-            }
-        });
-
-//      Função Logout
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                ButtonsSalve.showAlertDialog(viagensActivity.this, "Logout", "Deseja sair de sua conta?", new ButtonsSalve.OnDismissListener() {
-                    @Override
-                    public void onDismiss(boolean validacao) {
-                        if (validacao) {
-                            edit.putString("KEY_LOGIN_AUTOMATICO", "false").apply();
-                            finish();
-                        }
-                    }
-                });
-            }
-        });
-    }
-
-    @Override
-    protected void onResume() {
-        ViagemDAO dao = new ViagemDAO(viagensActivity.this);
-        ArrayList<ViagemModel> viagens = dao.SelectAll(preferences.getInt("KEY_ID", 0));
-        if(viagens.size() > 0){
-            ArrayList<Viagem_Modelo> viagemModel = new ArrayList<>();
-
-            for(int i = 0; i<viagens.size(); i++){
-                Viagem_Modelo viagem = new Viagem_Modelo();
-                ViagemModel viagemC = viagens.get(i);
-
-                viagem.setId(viagemC.get_id());
-                viagem.setNomeViagem(viagemC.getDestino());
-                viagem.setData1(viagemC.getDataInicio());
-                viagem.setData2(viagemC.getDataFim());
-                viagem.setTotal(calcularTotal(viagemC.get_id()));
-
-                viagemModel.add(viagem);
-            }
-
-            Viagem_Adapter adapter = new Viagem_Adapter(viagemModel, this);
-            listaViagens.setAdapter(adapter);
-        }
-        super.onResume();
-    }
-
-    private void removerPreferences(){
-        edit.remove("KEY_ID_GASOLINA").apply();
-        edit.remove("KEY_ID_HOSPEDAGEM").apply();
-        edit.remove("KEY_ID_TARIFA").apply();
-        edit.remove("KEY_ID_REFEICAO").apply();
     }
 
     private float calcularTotal(int idViagem){

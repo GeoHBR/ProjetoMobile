@@ -36,10 +36,6 @@ public class Refeicoes extends AppCompatActivity {
         setContentView(R.layout.activity_refeicoes);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(Refeicoes.this);
-        SharedPreferences.Editor edit = preferences.edit();
-
-        Intent intent = getIntent();
-        viajantes = intent.getIntExtra("QUANT_VIAJANTES", 0);
 
         usuario = findViewById(R.id.usuarioRefeicao);
         custoTotal = findViewById(R.id.totalRefeicao);
@@ -49,14 +45,14 @@ public class Refeicoes extends AppCompatActivity {
         salvar = findViewById(R.id.salvarRefeicao);
         txt_viajante = findViewById(R.id.txt_refeicoes_viajantes);
 
-        RefeicaoDAO dao = new RefeicaoDAO(Refeicoes.this);
+        Intent intent = getIntent();
+        viajantes = intent.getIntExtra("QUANT_VIAJANTES", 0);
+        boolean edicao = intent.getBooleanExtra("EDICAO", false);
+        if(edicao){
+            RefeicaoModel aux = (RefeicaoModel) intent.getSerializableExtra("REFEICAO");
+            float custoPessoa = (aux.getQuantRefeicao() * viajantes) * aux.getCustoRefeicao();
 
-        int refeicao = preferences.getInt("KEY_ID_REFEICAO", 0);
-        if(refeicao > 0){
-            RefeicaoModel aux;
-            aux = dao.Select(refeicao);
-
-            custoTotal.setText(String.format("%.2f",aux.getTotal()));
+            custoTotal.setText(String.format("%.2f",custoPessoa));
             quantRefeicao.setText(Integer.toString(aux.getQuantRefeicao()));
             custoRefeicao.setText(Float.toString(aux.getCustoRefeicao()));
         }
@@ -81,12 +77,17 @@ public class Refeicoes extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                float custoRefeicaoC = Float.parseFloat(custoRefeicao.getText().toString());
-                int quantRefeicaoC = Integer.parseInt(quantRefeicao.getText().toString());
+                if(custoRefeicao.getText().toString().isEmpty()){
+                } else if(quantRefeicao.getText().toString().isEmpty()) {
+                }else{
+                    float custoRefeicaoC = Float.parseFloat(custoRefeicao.getText().toString());
+                    int quantRefeicaoC = Integer.parseInt(quantRefeicao.getText().toString());
 
-                float custoPessoa = (quantRefeicaoC * viajantes) * custoRefeicaoC;
+                    float custoPessoa = (quantRefeicaoC * viajantes) * custoRefeicaoC;
 
-                custoTotal.setText(String.format("%.2f",custoPessoa));
+                    custoTotal.setText(String.format("%.2f",custoPessoa));
+                }
+
             }
         });
         salvar.setOnClickListener(new View.OnClickListener() {
@@ -104,13 +105,11 @@ public class Refeicoes extends AppCompatActivity {
                     model.setQuantRefeicao(Integer.parseInt(quantRefeicao.getText().toString()));
                     model.setTotal(precoTotal);
 
-                    if(refeicao > 0){
-                        dao.Update(refeicao, model);
-                    }else{
-                        int id = dao.Insert(model);
-                        edit.putInt("KEY_ID_REFEICAO", id).apply();
-                    }
-                    setResult(1);
+                    Intent it = new Intent();
+
+                    it.putExtra("REFEICAO", model);
+
+                    setResult(1, it);
                     finish();
                 }
             }

@@ -1,6 +1,8 @@
 package com.example.projetomobile.database.model;
 
-public class RefeicaoModel {
+import java.io.Serializable;
+
+public class RefeicaoModel implements Serializable {
     // Nome da tabela
     public static final String TABLE_NAME = "tb_refeicao";
 

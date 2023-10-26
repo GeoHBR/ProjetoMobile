@@ -34,7 +34,6 @@ public class TarifaAreaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tarifa_aerea);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(TarifaAreaActivity.this);
-        SharedPreferences.Editor edit = preferences.edit();
 
         Intent intent = getIntent();
 
@@ -45,13 +44,10 @@ public class TarifaAreaActivity extends AppCompatActivity {
         cancelar = findViewById(R.id.cancelarTarifa);
         salvar = findViewById(R.id.salvarTarifa);
 
-        TarifaDAO dao = new TarifaDAO(TarifaAreaActivity.this);
+        boolean edicao = intent.getBooleanExtra("EDICAO", false);
 
-        int tarifa = preferences.getInt("KEY_ID_TARIFA", 0);
-
-        if(tarifa > 0){
-            TarifaModel aux;
-            aux = dao.Select(tarifa);
+        if(edicao){
+            TarifaModel aux = (TarifaModel) intent.getSerializableExtra("TARIFA");
 
             custoTotal.setText(Float.toString(aux.getTotal()));
             custoPessoa.setText(Float.toString(aux.getCustoPessoa()));
@@ -97,13 +93,12 @@ public class TarifaAreaActivity extends AppCompatActivity {
                     model.setCustoPessoa(Float.parseFloat(custoPessoa.getText().toString()));
                     model.setTotal(precoTotal);
 
-                    if(tarifa > 0){
-                        dao.Update(tarifa, model);
-                    }else{
-                        int id = dao.Insert(model);
-                        edit.putInt("KEY_ID_TARIFA", id).apply();
-                    }
-                    setResult(1);
+                    Intent it = new Intent();
+
+                    it.putExtra("TARIFA", model);
+
+                    setResult(1, it);
+
                     finish();
                 }
             }

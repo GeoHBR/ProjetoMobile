@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 
 import com.example.projetomobile.database.dao.GasolinaDAO;
 import com.example.projetomobile.database.model.GasolinaModel;
+
+import java.io.Serializable;
 
 public class Gasolina extends AppCompatActivity {
 
@@ -35,9 +38,6 @@ public class Gasolina extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gasolina);
 
-        preferences = PreferenceManager.getDefaultSharedPreferences(Gasolina.this);
-        SharedPreferences.Editor edit = preferences.edit();
-
         usuario = findViewById(R.id.usuarioGasolina);
         custoTotal = findViewById(R.id.txtCustoTotalGasolina);
         totalKM = findViewById(R.id.totalKMGasolina);
@@ -47,13 +47,14 @@ public class Gasolina extends AppCompatActivity {
         cancelar = findViewById(R.id.cancelarGasolina);
         salvar = findViewById(R.id.addGasolina);
 
-        GasolinaDAO dao = new GasolinaDAO(Gasolina.this);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        int gasolina = preferences.getInt("KEY_ID_GASOLINA", 0);
+        Intent intent = getIntent();
 
-        if(gasolina > 0){
-            GasolinaModel aux;
-            aux = dao.Select(gasolina);
+        boolean edicao = intent.getBooleanExtra("EDICAO", false);
+
+        if(edicao){
+            GasolinaModel aux = (GasolinaModel) intent.getSerializableExtra("GASOLINA");
 
             totalKM.setText(Float.toString(aux.getTotalKM()));
             mediaKMLitro.setText(Float.toString(aux.getMedialKM()));
@@ -109,13 +110,11 @@ public class Gasolina extends AppCompatActivity {
                     model.setTotalVeiculo(Integer.parseInt(quantVeiculos.getText().toString()));
                     model.setTotal(precoTotal);
 
-                    if(gasolina > 0){
-                        dao.Update(gasolina, model);
-                    }else{
-                        int idGasolina = dao.Insert(model);
-                        edit.putInt("KEY_ID_GASOLINA", idGasolina).apply();
-                    }
-                    setResult(1);
+                    Intent it = new Intent();
+
+                    it.putExtra("GASOLINA", model);
+
+                    setResult(1, it);
                     finish();
                 }
             }

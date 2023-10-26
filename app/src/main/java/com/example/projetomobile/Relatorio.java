@@ -71,6 +71,7 @@ public class Relatorio extends AppCompatActivity {
         excluir = findViewById(R.id.btn_excluir_relatorio);
         editar = findViewById(R.id.editar_relatorio);
 
+        usuario.setText(preferences.getString("KEY_NOME", null));
         idViagem = intent.getIntExtra("ID", 0);
 
         ViagemDAO daoV = new ViagemDAO(this);

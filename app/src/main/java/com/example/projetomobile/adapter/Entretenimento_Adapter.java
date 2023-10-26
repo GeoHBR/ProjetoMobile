@@ -61,7 +61,7 @@ public class Entretenimento_Adapter extends BaseAdapter {
 
                 TextView txtTotal = activity.findViewById(R.id.txt_custo_total_entreterimento);
 
-                Float total = Float.valueOf(txtTotal.getText().toString());
+                Float total = Float.valueOf(txtTotal.getText().toString().replace(",", "."));
                 total -= entretenimento.getPreço();
 
                 txtTotal.setText(String.valueOf(total));

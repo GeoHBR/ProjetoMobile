@@ -35,7 +35,6 @@ public class Hospedagem extends AppCompatActivity {
         setContentView(R.layout.activity_hospedagem);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(Hospedagem.this);
-        SharedPreferences.Editor edit = preferences.edit();
 
         usuario = findViewById(R.id.usuarioHospedagem);
         custoNoite = findViewById(R.id.custoNoiteHospedagem);
@@ -45,12 +44,11 @@ public class Hospedagem extends AppCompatActivity {
         cancelar = findViewById(R.id.cancelarHospedagem);
         salvar = findViewById(R.id.salvarHospedagem);
 
-        HospedagemDAO dao = new HospedagemDAO(Hospedagem.this);
-        int hospedagem = preferences.getInt("KEY_ID_HOSPEDAGEM", 0);
+        Intent intent = getIntent();
+        boolean edicao = intent.getBooleanExtra("EDICAO", false);
 
-        if(hospedagem > 0){
-            HospedagemModel aux;
-            aux = dao.Select(hospedagem);
+        if(edicao){
+            HospedagemModel aux = (HospedagemModel) intent.getSerializableExtra("HOSPEDAGEM");
 
             total.setText(Float.toString(aux.getTotal()));
             custoNoite.setText(Float.toString(aux.getCustoMedio()));
@@ -86,13 +84,11 @@ public class Hospedagem extends AppCompatActivity {
                     model.setTotalNoites(Integer.parseInt(quantNoite.getText().toString()));
                     model.setTotal(totalC);
 
-                    if(hospedagem > 0){
-                        dao.Update(hospedagem, model);
-                    }else{
-                        int id = dao.Insert(model);
-                        edit.putInt("KEY_ID_HOSPEDAGEM", id).apply();
-                    }
-                    setResult(1);
+                    Intent it = new Intent();
+
+                    it.putExtra("HOSPEDAGEM", model);
+
+                    setResult(1, it);
                     finish();
                 }
             }
