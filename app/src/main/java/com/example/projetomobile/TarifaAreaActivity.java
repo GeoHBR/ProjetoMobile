@@ -103,6 +103,35 @@ public class TarifaAreaActivity extends AppCompatActivity {
                 }
             }
         });
+
+        alugelVeiculo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b) {
+                    if (alugelVeiculo.getText().toString().equals("")) {
+                        alugelVeiculo.setText("0.0");
+                    }
+                } else if(alugelVeiculo.getText().toString().equals("")) {
+                    alugelVeiculo.setText("0.0");
+                } else if(Float.parseFloat(alugelVeiculo.getText().toString()) == 0) {
+                    alugelVeiculo.setText("");
+                }
+            }
+        });
+        custoPessoa.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b) {
+                    if (custoPessoa.getText().toString().equals("")) {
+                        custoPessoa.setText("0.0");
+                    }
+                } else if(custoPessoa.getText().toString().equals("")) {
+                    custoPessoa.setText("0.0");
+                } else if(Float.parseFloat(custoPessoa.getText().toString()) == 0) {
+                    custoPessoa.setText("");
+                }
+            }
+        });
     }
 
     private void calcularTotal(Intent intent){

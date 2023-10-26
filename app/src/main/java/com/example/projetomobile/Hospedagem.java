@@ -111,6 +111,51 @@ public class Hospedagem extends AppCompatActivity {
             }
         });
 
+        custoNoite.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b) {
+                    if (custoNoite.getText().toString().equals("")) {
+                        custoNoite.setText("0.0");
+                    }
+                } else if(custoNoite.getText().toString().equals("")) {
+                    custoNoite.setText("0.0");
+                } else if(Float.parseFloat(custoNoite.getText().toString()) == 0) {
+                    custoNoite.setText("");
+                }
+            }
+        });
+
+        quantNoite.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b) {
+                    if (quantNoite.getText().toString().equals("")) {
+                        quantNoite.setText("0");
+                    }
+                } else if(quantNoite.getText().toString().equals("")) {
+                    quantNoite.setText("0");
+                } else if(Integer.parseInt(quantNoite.getText().toString()) == 0) {
+                    quantNoite.setText("");
+                }
+            }
+        });
+
+        quantQuarto.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b) {
+                    if (quantQuarto.getText().toString().equals("")) {
+                        quantQuarto.setText("0");
+                    }
+                } else if(quantQuarto.getText().toString().equals("")) {
+                    quantQuarto.setText("0");
+                } else if(Integer.parseInt(quantQuarto.getText().toString()) == 0) {
+                    quantQuarto.setText("");
+                }
+            }
+        });
+
     }
 
     public void calcularTotal(){

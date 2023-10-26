@@ -114,6 +114,36 @@ public class Refeicoes extends AppCompatActivity {
                 }
             }
         });
+
+        quantRefeicao.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b) {
+                    if (quantRefeicao.getText().toString().equals("")) {
+                        quantRefeicao.setText("0");
+                    }
+                } else if(quantRefeicao.getText().toString().equals("")) {
+                    quantRefeicao.setText("0");
+                } else if(Integer.parseInt(quantRefeicao.getText().toString()) == 0) {
+                    quantRefeicao.setText("");
+                }
+            }
+        });
+
+        custoRefeicao.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b) {
+                    if (custoRefeicao.getText().toString().equals("")) {
+                        custoRefeicao.setText("0.0");
+                    }
+                } else if(custoRefeicao.getText().toString().equals("")) {
+                    custoRefeicao.setText("0.0");
+                } else if(Float.parseFloat(custoRefeicao.getText().toString()) == 0) {
+                    custoRefeicao.setText("");
+                }
+            }
+        });
     }
     private void calcularTotal(Intent intent){
         if(custoRefeicao.getText().toString().isEmpty()){

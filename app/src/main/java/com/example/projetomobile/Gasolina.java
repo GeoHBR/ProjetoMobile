@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.projetomobile.database.dao.GasolinaDAO;
@@ -119,6 +120,69 @@ public class Gasolina extends AppCompatActivity {
                 }
             }
         });
+
+
+//      Apagar zero na hora de editar a tabela
+        totalKM.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b) {
+                    if (totalKM.getText().toString().equals("")) {
+                        totalKM.setText("0.0");
+                    }
+                } else if(totalKM.getText().toString().equals("")) {
+                    totalKM.setText("0.0");
+                } else if(Float.parseFloat(totalKM.getText().toString()) == 0) {
+                    totalKM.setText("");
+                }
+            }
+        });
+
+        mediaKMLitro.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b) {
+                    if (mediaKMLitro.getText().toString().equals("")) {
+                        mediaKMLitro.setText("0.0");
+                    }
+                } else if(mediaKMLitro.getText().toString().equals("")) {
+                    mediaKMLitro.setText("0.0");
+                } else if(Float.parseFloat(mediaKMLitro.getText().toString()) == 0) {
+                    mediaKMLitro.setText("");
+                }
+            }
+        });
+
+        precoGasolina.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b) {
+                    if (precoGasolina.getText().toString().equals("")) {
+                        precoGasolina.setText("0.0");
+                    }
+                } else if(precoGasolina.getText().toString().equals("")) {
+                    precoGasolina.setText("0.0");
+                } else if(Float.parseFloat(precoGasolina.getText().toString()) == 0) {
+                    precoGasolina.setText("");
+                }
+            }
+        });
+
+        quantVeiculos.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b) {
+                    if (quantVeiculos.getText().toString().equals("")) {
+                        quantVeiculos.setText("0");
+                    }
+                } else if(quantVeiculos.getText().toString().equals("")) {
+                    quantVeiculos.setText("0");
+                } else if(Integer.parseInt(quantVeiculos.getText().toString()) == 0) {
+                    quantVeiculos.setText("");
+                }
+            }
+        });
+
     }
     private void calcularTotal(){
         if(totalKM.getText().toString().isEmpty() ){
