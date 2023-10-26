@@ -166,9 +166,9 @@ public class Relatorio extends AppCompatActivity {
         meses.set(ano, 2 -1,1);
 
         int anosBis = ((ano-2000) / 4)+1;
-        dias = anosBis * 366;
+        dias += anosBis * 366;
         dias += 365*(ano-2000-anosBis);
-        dias +=dia;
+        dias +=dia+1;
 
         return dias;
     }

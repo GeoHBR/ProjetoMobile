@@ -24,6 +24,7 @@ import com.example.projetomobile.database.model.ViagemModel;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -401,6 +402,10 @@ public class AdicionarViagem extends AppCompatActivity {
     public int diferencaData(String dataI, String dataF) {
         int dataInicio = conrveteData(dataI);
         int dataFim = conrveteData(dataF);
+//        Log.e("erroha", dataI);
+//        Log.e("erroha", dataF);
+//        Log.e("erroha", Integer.toString(dataInicio));
+//        Log.e("erroha", Integer.toString(dataFim));
         return dataFim - dataInicio;
     }
 
@@ -416,6 +421,7 @@ public class AdicionarViagem extends AppCompatActivity {
         int ano = calendario.get(Calendar.YEAR);
         int mes = calendario.get(Calendar.MONTH);
         int dia = calendario.get(Calendar.DAY_OF_MONTH);
+
         int mesDia=0;
 
         for(int i=mes+1; i>0; i--) {
@@ -423,13 +429,14 @@ public class AdicionarViagem extends AppCompatActivity {
             mesDia = meses.getActualMaximum(Calendar.DAY_OF_MONTH);
             dias += mesDia;
         }
+//        Log.e("erroha", Integer.toString(dias));
 
         meses.set(ano, 2 -1,1);
 
         int anosBis = ((ano-2000) / 4)+1;
-        dias = anosBis * 366;
+        dias += anosBis * 366;
         dias += 365*(ano-2000-anosBis);
-        dias +=dia;
+        dias +=dias+1;
 
         return dias;
     }
