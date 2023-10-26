@@ -309,37 +309,59 @@ public class AdicionarViagem extends AppCompatActivity {
                     model.setQuantPessoas(Integer.parseInt(quantViajantes.getText().toString()));
 
                     if(gasoAdd){
+                        boolean novo = true;
                         if(update){
-                            gasoDAO.Update(viagem.get_idGasolina(), gasoModel);
-                            model.set_idGasolina(viagem.get_idGasolina());
-                        }else{
+                            if(viagem.get_idGasolina() > 0){
+                                gasoDAO.Update(viagem.get_idGasolina(), gasoModel);
+                                model.set_idGasolina(viagem.get_idGasolina());
+                                novo = false;
+                            }
+                        }
+                        if(novo){
                             int idGasolina = gasoDAO.Insert(gasoModel);
                             model.set_idGasolina(idGasolina);
                         }
                     }
                     if(hosAdd){
+                        boolean novo = true;
                         if(update){
-                            hopDAO.Update(viagem.get_idHospedagem(), hosModel);
-                            model.set_idHospedagem(viagem.get_idHospedagem());
-                        }else{
+                            if(viagem.get_idHospedagem() > 0){
+                                hopDAO.Update(viagem.get_idHospedagem(), hosModel);
+                                model.set_idHospedagem(viagem.get_idHospedagem());
+                                novo = false;
+                            }
+                        }
+                        if(novo){
                             int idHospedagem = hopDAO.Insert(hosModel);
                             model.set_idHospedagem(idHospedagem);
                         }
                     }
                     if(tarAdd){
+                        boolean novo = true;
                         if(update){
-                            tarDAO.Update(viagem.get_idTarifa(), tarModel);
-                            model.set_idTarifa(viagem.get_idTarifa());
-                        }else{
+                            if(viagem.get_idTarifa() > 0){
+                                tarDAO.Update(viagem.get_idTarifa(), tarModel);
+                                model.set_idTarifa(viagem.get_idTarifa());
+                                novo = false;
+                            }
+
+                        }
+                        if(novo){
                             int idTarifa = tarDAO.Insert(tarModel);
                             model.set_idTarifa(idTarifa);
                         }
                     }
                     if(refAdd){
+                        boolean novo = true;
                         if(update){
-                            refDAO.Update(viagem.get_idRefeicao(), refModel);
-                            model.set_idRefeicao(viagem.get_idRefeicao());
-                        }else{
+                            if(viagem.get_idRefeicao() > 0){
+                                refDAO.Update(viagem.get_idRefeicao(), refModel);
+                                model.set_idRefeicao(viagem.get_idRefeicao());
+                                novo = false;
+                            }
+
+                        }
+                        if(novo){
                             int idRefeicao = refDAO.Insert(refModel);
                             model.set_idRefeicao(idRefeicao);
                         }
