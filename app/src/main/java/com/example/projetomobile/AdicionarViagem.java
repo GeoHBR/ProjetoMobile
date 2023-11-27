@@ -402,10 +402,6 @@ public class AdicionarViagem extends AppCompatActivity {
     public int diferencaData(String dataI, String dataF) {
         int dataInicio = conrveteData(dataI);
         int dataFim = conrveteData(dataF);
-//        Log.e("erroha", dataI);
-//        Log.e("erroha", dataF);
-//        Log.e("erroha", Integer.toString(dataInicio));
-//        Log.e("erroha", Integer.toString(dataFim));
         return dataFim - dataInicio;
     }
 

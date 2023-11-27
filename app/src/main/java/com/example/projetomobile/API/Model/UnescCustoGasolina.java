@@ -6,8 +6,8 @@ public class UnescCustoGasolina implements Serializable {
 
     private int totalEstimadoKM;
     private double mediaKMLitro;
-    private double custoPorPessoa;
     private double custoMedioLitro;
+    private double totalVeiculos;
 
     public int getTotalEstimadoKM() {
         return totalEstimadoKM;
@@ -25,19 +25,19 @@ public class UnescCustoGasolina implements Serializable {
         this.mediaKMLitro = mediaKMLitro;
     }
 
-    public double getCustoPorPessoa() {
-        return custoPorPessoa;
-    }
-
-    public void setCustoPorPessoa(double custoPorPessoa) {
-        this.custoPorPessoa = custoPorPessoa;
-    }
-
     public double getCustoMedioLitro() {
         return custoMedioLitro;
     }
 
     public void setCustoMedioLitro(double custoMedioLitro) {
         this.custoMedioLitro = custoMedioLitro;
+    }
+
+    public double getTotalVeiculos() {
+        return totalVeiculos;
+    }
+
+    public void setTotalVeiculos(double custoMedioLitro) {
+        this.totalVeiculos = custoMedioLitro;
     }
 }

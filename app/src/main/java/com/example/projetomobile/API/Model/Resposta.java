@@ -5,9 +5,7 @@ import java.io.Serializable;
 public class Resposta implements Serializable {
 
     private boolean Sucesso;
-
     private String Mensagem;
-
     private int ChavePrimaria;
 
     public Resposta(){

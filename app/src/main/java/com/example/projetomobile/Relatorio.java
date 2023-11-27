@@ -13,14 +13,21 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.TypedArrayUtils;
 
 import com.example.projetomobile.API.API;
 import com.example.projetomobile.API.Model.EnviarViagem;
 import com.example.projetomobile.API.Model.Resposta;
+import com.example.projetomobile.API.Model.UnescCustoEntretenimento;
+import com.example.projetomobile.API.Model.UnescCustoGasolina;
 import com.example.projetomobile.API.Model.UnescViagem;
+import com.example.projetomobile.API.Model.UnescViagemCustoAereo;
+import com.example.projetomobile.API.Model.UnescViagemCustoHospedagem;
+import com.example.projetomobile.API.Model.UnescViagemCustoRefeicao;
 import com.example.projetomobile.adapter.Viagem_Modelo;
 import com.example.projetomobile.database.dao.EntretenimentoDAO;
 import com.example.projetomobile.database.dao.GasolinaDAO;
@@ -28,8 +35,11 @@ import com.example.projetomobile.database.dao.HospedagemDAO;
 import com.example.projetomobile.database.dao.RefeicaoDAO;
 import com.example.projetomobile.database.dao.TarifaDAO;
 import com.example.projetomobile.database.dao.ViagemDAO;
+import com.example.projetomobile.database.model.EntretenimentoModel;
+import com.example.projetomobile.database.model.GasolinaModel;
 import com.example.projetomobile.database.model.HospedagemModel;
 import com.example.projetomobile.database.model.RefeicaoModel;
+import com.example.projetomobile.database.model.TarifaModel;
 import com.example.projetomobile.database.model.ViagemModel;
 
 import java.text.ParseException;
@@ -127,30 +137,87 @@ public class Relatorio extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EnviarViagem enviarViagem = new EnviarViagem();
-                UnescViagem viagem = new UnescViagem();
 
-                viagem.setIdConta(78936);
-                viagem.setDuracaoViagem(76);
-                viagem.setCustoTotalViagem(500.00);
-                viagem.setTotalViajantes(2);
+                UnescViagem viagemUnesc = new UnescViagem();
 
-                enviarViagem.setUnescViagem(viagem);
+                float total = calcularTotal();
+
+                viagemUnesc.setIdConta(123539);
+                viagemUnesc.setDuracaoViagem(diferencaData(viagem.getDataInicio(), viagem.getDataFim()));
+                viagemUnesc.setLocal(viagem.getDestino());
+                viagemUnesc.setCustoTotalViagem(total);
+                viagemUnesc.setCustoPorPessoa(total/viagem.getQuantPessoas());
+                viagemUnesc.setTotalViajantes(viagem.getQuantPessoas());
+
+                enviarViagem.setUnescViagem(viagemUnesc);
+
+                UnescCustoGasolina gasolinaUnesc = new UnescCustoGasolina();
+                GasolinaDAO gasoDAO = new GasolinaDAO(Relatorio.this);
+                GasolinaModel gaso = gasoDAO.Select(viagem.get_idGasolina());
+
+                gasolinaUnesc.setCustoMedioLitro(gaso.getCustoMedio());
+                gasolinaUnesc.setTotalEstimadoKM((int) gaso.getTotalKM());
+                gasolinaUnesc.setTotalVeiculos(gaso.getTotalVeiculo());
+                gasolinaUnesc.setMediaKMLitro(gaso.getMedialKM());
+
+                enviarViagem.setUnescCustoGasolina(gasolinaUnesc);
+
+                UnescViagemCustoAereo aereoUnesc = new UnescViagemCustoAereo();
+                TarifaDAO tarDAO = new TarifaDAO(Relatorio.this);
+                TarifaModel tar = tarDAO.Select(viagem.get_idTarifa());
+
+                aereoUnesc.setCustoPessoa(tar.getCustoPessoa());
+                aereoUnesc.setCustoAluguelVeiculo(tar.getCustoAluguel());
+
+                enviarViagem.setUnescViagemCustoAereo(aereoUnesc);
+
+                UnescViagemCustoHospedagem hospedagemUnesc = new UnescViagemCustoHospedagem();
+                HospedagemDAO hosDAO = new HospedagemDAO(Relatorio.this);
+                HospedagemModel hos = hosDAO.Select(viagem.get_idHospedagem());
+
+                hospedagemUnesc.setCustoMedioNoite(hos.getCustoMedio());
+                hospedagemUnesc.setTotalNoite(hos.getTotalNoites());
+                hospedagemUnesc.setTotalQuartos(hos.getTotalQuartos());
+
+                enviarViagem.setUnescViagemCustoHospedagem(hospedagemUnesc);
+
+                UnescViagemCustoRefeicao refeicaoUnesc = new UnescViagemCustoRefeicao();
+                RefeicaoDAO refDAO = new RefeicaoDAO(Relatorio.this);
+                RefeicaoModel ref = refDAO.Select(viagem.get_idRefeicao());
+
+                refeicaoUnesc.setCustoRefeicao(ref.getCustoRefeicao());
+                refeicaoUnesc.setRefeicoesDia(ref.getQuantRefeicao());
+
+                enviarViagem.setUnescViagemCustoRefeicao(refeicaoUnesc);
+
+                EntretenimentoDAO entDAO = new EntretenimentoDAO(Relatorio.this);
+                ArrayList<EntretenimentoModel> listE =entDAO.Select(viagem.get_id());
+                ArrayList<UnescCustoEntretenimento> listEUnesc = new ArrayList<>();
+
+                for(int i = 0; i < listE.size(); i++){
+                    UnescCustoEntretenimento aux = new UnescCustoEntretenimento();
+                    aux.setEntretenimento(listE.get(i).getNome());
+                    aux.setValor((int) listE.get(i).getPreco());
+
+                    listEUnesc.add(aux);
+                }
+
+                enviarViagem.setListaUnescCustoEntretenimentos(listEUnesc);
 
                 API.postViagem(enviarViagem, new Callback<Resposta>() {
                     @Override
                     public void onResponse(Call<Resposta> call, Response<Resposta> response) {
                         if(response != null && response.isSuccessful()) {
                             Resposta resposta = response.body();
-
-                            if(resposta.isSucesso()) {
-
+                            if(resposta != null) {
+                                Toast.makeText(Relatorio.this, "Viagem Sincronizada com Sucesso", Toast.LENGTH_LONG).show();
                             }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Resposta> call, Throwable t) {
-
+                        Toast.makeText(Relatorio.this, "Ocorrou um Erro Durante a Sincronização", Toast.LENGTH_LONG).show();
                     }
                 });
             }
