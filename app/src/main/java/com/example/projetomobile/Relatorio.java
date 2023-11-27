@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -16,6 +17,10 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.projetomobile.API.API;
+import com.example.projetomobile.API.Model.EnviarViagem;
+import com.example.projetomobile.API.Model.Resposta;
+import com.example.projetomobile.API.Model.UnescViagem;
 import com.example.projetomobile.adapter.Viagem_Modelo;
 import com.example.projetomobile.database.dao.EntretenimentoDAO;
 import com.example.projetomobile.database.dao.GasolinaDAO;
@@ -33,6 +38,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class Relatorio extends AppCompatActivity {
     private TextView usuario;
     private TextView destino;
@@ -44,6 +53,7 @@ public class Relatorio extends AppCompatActivity {
     private ImageView voltar;
     private ImageButton excluir;
     private ImageView editar;
+    private Button btnSync;
     private int idViagem;
     public ArrayList<Viagem_Modelo> listaViagens;
     SharedPreferences preferences;
@@ -66,6 +76,7 @@ public class Relatorio extends AppCompatActivity {
         destino = findViewById(R.id.destinoRelatorio);
         excluir = findViewById(R.id.btn_excluir_relatorio);
         editar = findViewById(R.id.editar_relatorio);
+        btnSync = findViewById(R.id.btnSincronizar);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(Relatorio.this);
         usuario.setText(preferences.getString("KEY_NOME", null));
@@ -109,6 +120,39 @@ public class Relatorio extends AppCompatActivity {
                 Intent intent = new Intent(Relatorio.this, AdicionarViagem.class);
                 intent.putExtra("ID_VIAGEM", idViagem);
                 startActivityForResult(intent, EDICAO);
+            }
+        });
+
+        btnSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EnviarViagem enviarViagem = new EnviarViagem();
+                UnescViagem viagem = new UnescViagem();
+
+                viagem.setIdConta(78936);
+                viagem.setDuracaoViagem(76);
+                viagem.setCustoTotalViagem(500.00);
+                viagem.setTotalViajantes(2);
+
+                enviarViagem.setUnescViagem(viagem);
+
+                API.postViagem(enviarViagem, new Callback<Resposta>() {
+                    @Override
+                    public void onResponse(Call<Resposta> call, Response<Resposta> response) {
+                        if(response != null && response.isSuccessful()) {
+                            Resposta resposta = response.body();
+
+                            if(resposta.isSucesso()) {
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Resposta> call, Throwable t) {
+
+                    }
+                });
             }
         });
     }
