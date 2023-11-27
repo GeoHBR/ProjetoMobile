@@ -1,7 +1,7 @@
 package com.example.projetomobile.API.endpoint;
 
-import com.example.projetomobile.API.Model.EnviarViagem;
 import com.example.projetomobile.API.Model.Resposta;
+import com.example.projetomobile.API.Model.UnescViagem;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -20,5 +20,5 @@ public interface ViagemEndpoint {
 
 
     @POST("api/cadastro/viagem")
-    Call<Resposta> postViagem(@Body EnviarViagem enviarViagem);
+    Call<Resposta> postViagem(@Body UnescViagem enviarViagem);
 }

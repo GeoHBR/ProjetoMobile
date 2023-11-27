@@ -1,7 +1,7 @@
 package com.example.projetomobile.API;
 
-import com.example.projetomobile.API.Model.EnviarViagem;
 import com.example.projetomobile.API.Model.Resposta;
+import com.example.projetomobile.API.Model.UnescViagem;
 import com.example.projetomobile.API.endpoint.ViagemEndpoint;
 
 import retrofit2.Call;
@@ -25,7 +25,7 @@ public class API {
     }
 
 
-    public static void postViagem(EnviarViagem viagem, final Callback<Resposta> callback){
+    public static void postViagem(UnescViagem viagem, final Callback<Resposta> callback){
         ViagemEndpoint endpoint = retrofit.create(ViagemEndpoint.class);
         Call<Resposta> call = endpoint.postViagem(viagem);
         call.enqueue(callback);

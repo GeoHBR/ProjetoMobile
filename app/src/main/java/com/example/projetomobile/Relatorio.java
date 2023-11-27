@@ -1,15 +1,11 @@
 package com.example.projetomobile;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,10 +13,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.TypedArrayUtils;
 
 import com.example.projetomobile.API.API;
-import com.example.projetomobile.API.Model.EnviarViagem;
 import com.example.projetomobile.API.Model.Resposta;
 import com.example.projetomobile.API.Model.UnescCustoEntretenimento;
 import com.example.projetomobile.API.Model.UnescCustoGasolina;
@@ -67,7 +61,7 @@ public class Relatorio extends AppCompatActivity {
     private int idViagem;
     public ArrayList<Viagem_Modelo> listaViagens;
     SharedPreferences preferences;
-    private ViagemModel viagem;
+    private ViagemModel viagemB;
     private Intent intent;
     private static final int EDICAO = 1;
 
@@ -136,62 +130,59 @@ public class Relatorio extends AppCompatActivity {
         btnSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EnviarViagem enviarViagem = new EnviarViagem();
 
-                UnescViagem viagemUnesc = new UnescViagem();
+                UnescViagem viagem = new UnescViagem();
 
                 float total = calcularTotal();
 
-                viagemUnesc.setIdConta(123539);
-                viagemUnesc.setDuracaoViagem(diferencaData(viagem.getDataInicio(), viagem.getDataFim()));
-                viagemUnesc.setLocal(viagem.getDestino());
-                viagemUnesc.setCustoTotalViagem(total);
-                viagemUnesc.setCustoPorPessoa(total/viagem.getQuantPessoas());
-                viagemUnesc.setTotalViajantes(viagem.getQuantPessoas());
-
-                enviarViagem.setUnescViagem(viagemUnesc);
+                viagem.setIdConta(123539);
+                viagem.setDuracaoViagem(diferencaData(viagemB.getDataInicio(), viagemB.getDataFim()));
+                viagem.setLocal(viagemB.getDestino());
+                viagem.setCustoTotalViagem(total);
+                viagem.setCustoPorPessoa(total/viagemB.getQuantPessoas());
+                viagem.setTotalViajantes(viagemB.getQuantPessoas());
 
                 UnescCustoGasolina gasolinaUnesc = new UnescCustoGasolina();
                 GasolinaDAO gasoDAO = new GasolinaDAO(Relatorio.this);
-                GasolinaModel gaso = gasoDAO.Select(viagem.get_idGasolina());
+                GasolinaModel gaso = gasoDAO.Select(viagemB.get_idGasolina());
 
                 gasolinaUnesc.setCustoMedioLitro(gaso.getCustoMedio());
                 gasolinaUnesc.setTotalEstimadoKM((int) gaso.getTotalKM());
                 gasolinaUnesc.setTotalVeiculos(gaso.getTotalVeiculo());
                 gasolinaUnesc.setMediaKMLitro(gaso.getMedialKM());
 
-                enviarViagem.setUnescCustoGasolina(gasolinaUnesc);
+                viagem.setGasolina(gasolinaUnesc);
 
                 UnescViagemCustoAereo aereoUnesc = new UnescViagemCustoAereo();
                 TarifaDAO tarDAO = new TarifaDAO(Relatorio.this);
-                TarifaModel tar = tarDAO.Select(viagem.get_idTarifa());
+                TarifaModel tar = tarDAO.Select(viagemB.get_idTarifa());
 
                 aereoUnesc.setCustoPessoa(tar.getCustoPessoa());
                 aereoUnesc.setCustoAluguelVeiculo(tar.getCustoAluguel());
 
-                enviarViagem.setUnescViagemCustoAereo(aereoUnesc);
+                viagem.setAereo(aereoUnesc);
 
                 UnescViagemCustoHospedagem hospedagemUnesc = new UnescViagemCustoHospedagem();
                 HospedagemDAO hosDAO = new HospedagemDAO(Relatorio.this);
-                HospedagemModel hos = hosDAO.Select(viagem.get_idHospedagem());
+                HospedagemModel hos = hosDAO.Select(viagemB.get_idHospedagem());
 
                 hospedagemUnesc.setCustoMedioNoite(hos.getCustoMedio());
                 hospedagemUnesc.setTotalNoite(hos.getTotalNoites());
                 hospedagemUnesc.setTotalQuartos(hos.getTotalQuartos());
 
-                enviarViagem.setUnescViagemCustoHospedagem(hospedagemUnesc);
+                viagem.setHospedagem(hospedagemUnesc);
 
                 UnescViagemCustoRefeicao refeicaoUnesc = new UnescViagemCustoRefeicao();
                 RefeicaoDAO refDAO = new RefeicaoDAO(Relatorio.this);
-                RefeicaoModel ref = refDAO.Select(viagem.get_idRefeicao());
+                RefeicaoModel ref = refDAO.Select(viagemB.get_idRefeicao());
 
                 refeicaoUnesc.setCustoRefeicao(ref.getCustoRefeicao());
                 refeicaoUnesc.setRefeicoesDia(ref.getQuantRefeicao());
 
-                enviarViagem.setUnescViagemCustoRefeicao(refeicaoUnesc);
+                viagem.setRefeicao(refeicaoUnesc);
 
                 EntretenimentoDAO entDAO = new EntretenimentoDAO(Relatorio.this);
-                ArrayList<EntretenimentoModel> listE =entDAO.Select(viagem.get_id());
+                ArrayList<EntretenimentoModel> listE =entDAO.Select(viagemB.get_id());
                 ArrayList<UnescCustoEntretenimento> listEUnesc = new ArrayList<>();
 
                 for(int i = 0; i < listE.size(); i++){
@@ -202,9 +193,9 @@ public class Relatorio extends AppCompatActivity {
                     listEUnesc.add(aux);
                 }
 
-                enviarViagem.setListaUnescCustoEntretenimentos(listEUnesc);
+                viagem.setListaEntretenimento(listEUnesc);
 
-                API.postViagem(enviarViagem, new Callback<Resposta>() {
+                API.postViagem(viagem, new Callback<Resposta>() {
                     @Override
                     public void onResponse(Call<Resposta> call, Response<Resposta> response) {
                         if(response != null && response.isSuccessful()) {
@@ -237,15 +228,15 @@ public class Relatorio extends AppCompatActivity {
     private void buscarViagem() {
 
         ViagemDAO daoV = new ViagemDAO(this);
-        viagem = daoV.SelectViagem(idViagem);
+        viagemB = daoV.SelectViagem(idViagem);
         float totalV = calcularTotal();
 
-        destino.setText(viagem.getDestino());
-        qtdViajantes.setText(String.valueOf(viagem.getQuantPessoas()));
-        duracaoViajem.setText(String.valueOf(diferencaData(viagem.getDataInicio(), viagem.getDataFim()))+" dias");
+        destino.setText(viagemB.getDestino());
+        qtdViajantes.setText(String.valueOf(viagemB.getQuantPessoas()));
+        duracaoViajem.setText(String.valueOf(diferencaData(viagemB.getDataInicio(), viagemB.getDataFim()))+" dias");
         custoTotal2.setText("R$ " +String.format("%.2f",totalV));
         custoTotal.setText(String.format("%.2f",totalV));
-        custoViajante.setText("R$ " + String.format("%.2f",totalV/viagem.getQuantPessoas()));
+        custoViajante.setText("R$ " + String.format("%.2f",totalV/viagemB.getQuantPessoas()));
     }
 
     private int diferencaData(String inicio, String fim) {
