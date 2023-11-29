@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class UnescViagem implements Serializable {
-    public static final String TABLE_NAME = "tb_entreterimento";
-
     private int totalViajantes;
     private int duracaoViagem;
     private double custoTotalViagem;

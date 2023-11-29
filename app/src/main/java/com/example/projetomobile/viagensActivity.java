@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ public class viagensActivity extends AppCompatActivity {
     private ListView listaViagens;
     private TextView userNome;
     private ImageButton btnAdd;
+    private Button btnSync;
     SharedPreferences preferences;
     private SharedPreferences.Editor edit;
     private static final int ADICIONAR = 1;
@@ -49,6 +51,7 @@ public class viagensActivity extends AppCompatActivity {
         userNome = findViewById(R.id.nomeUser);
         btnAdd = findViewById(R.id.btn_add);
         btnLogout = findViewById(R.id.btn_logout);
+        btnSync = findViewById(R.id.btnViagemSync);
 
         listarViagens();
 
@@ -75,6 +78,13 @@ public class viagensActivity extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+
+        btnSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(viagensActivity.this, viagensSincronizadasActivity.class));
             }
         });
     }

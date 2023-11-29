@@ -3,6 +3,8 @@ package com.example.projetomobile.API.endpoint;
 import com.example.projetomobile.API.Model.Resposta;
 import com.example.projetomobile.API.Model.UnescViagem;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -15,10 +17,11 @@ public interface ViagemEndpoint {
     @GET("api/listar/viagem{viagemId}")
     Call<Resposta> getViagem(@Query("viagemId")int viagemId);
 
+    @GET("api/listar/viagem/conta")
+    Call<ArrayList<UnescViagem>> getViagens(@Query("contaId")int idConta);
+
     @GET("api/listar/viagem")
     Call<Resposta> getViagemPath(@Path("viagemId") int viagemId);
-
-
     @POST("api/cadastro/viagem")
     Call<Resposta> postViagem(@Body UnescViagem enviarViagem);
 }

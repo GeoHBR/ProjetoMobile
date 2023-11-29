@@ -4,6 +4,8 @@ import com.example.projetomobile.API.Model.Resposta;
 import com.example.projetomobile.API.Model.UnescViagem;
 import com.example.projetomobile.API.endpoint.ViagemEndpoint;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -18,9 +20,9 @@ public class API {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    public static void getViagem(int viagemId, final Callback<Resposta> callback){
+    public static void getViagens(int idConta, final Callback<ArrayList<UnescViagem>> callback){
         ViagemEndpoint endpoint = retrofit.create(ViagemEndpoint.class);
-        Call<Resposta> call = endpoint.getViagemPath(viagemId);
+        Call<ArrayList<UnescViagem>> call = endpoint.getViagens(idConta);
         call.enqueue(callback);
     }
 

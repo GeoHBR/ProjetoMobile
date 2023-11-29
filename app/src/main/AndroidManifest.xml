@@ -39,6 +39,12 @@
             android:name=".AdicionarViagem"
             android:exported="false" />
         <activity
+            android:name=".viagensSincronizadasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RelatorioSync"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -198,14 +198,13 @@ public class Relatorio extends AppCompatActivity {
                 API.postViagem(viagem, new Callback<Resposta>() {
                     @Override
                     public void onResponse(Call<Resposta> call, Response<Resposta> response) {
-                        if(response != null && response.isSuccessful()) {
+                        if (response != null && response.isSuccessful()) {
                             Resposta resposta = response.body();
-                            if(resposta != null) {
+                            if (resposta != null) {
                                 Toast.makeText(Relatorio.this, "Viagem Sincronizada com Sucesso", Toast.LENGTH_LONG).show();
                             }
                         }
                     }
-
                     @Override
                     public void onFailure(Call<Resposta> call, Throwable t) {
                         Toast.makeText(Relatorio.this, "Ocorrou um Erro Durante a Sincronização", Toast.LENGTH_LONG).show();

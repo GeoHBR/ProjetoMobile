@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:fontFamily="@font/padrao"
-        android:text="@string/lista_de_viagens"
+        android:text="@string/lista_de_viagensSync"
         android:textColor="@color/white"
         android:textSize="27sp"
         android:layout_marginTop="20dp"
@@ -75,19 +75,11 @@
         android:layout_gravity="center"
         android:layout_marginTop="-36dp">
 
-        <ImageButton
-            android:id="@+id/btn_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/adicionar"
-            android:scaleType="fitCenter"
-            android:src="@drawable/icone_add_viagem" />
         <Button
-            android:id="@+id/btnViagemSync"
+            android:id="@+id/voltarSync"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Viagens Sincronizdas"/>
+            android:text="Voltar"/>
 
     </LinearLayout>
 
