@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +26,7 @@ public class viagensSincronizadasActivity extends AppCompatActivity {
 
     private ListView listaViagens;
     private TextView userNome;
-    private Button btnVoltar;
+    private ImageView btnVoltar;
     SharedPreferences preferences;
     private SharedPreferences.Editor edit;
 

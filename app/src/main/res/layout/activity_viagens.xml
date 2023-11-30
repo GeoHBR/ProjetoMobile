@@ -71,9 +71,10 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/circulo_shape_branco"
+        android:background="@drawable/borda_branco_branco"
+        android:layout_marginTop="-36dp"
         android:layout_gravity="center"
-        android:layout_marginTop="-36dp">
+        android:gravity="center">
 
         <ImageButton
             android:id="@+id/btn_add"
@@ -83,13 +84,15 @@
             android:contentDescription="@string/adicionar"
             android:scaleType="fitCenter"
             android:src="@drawable/icone_add_viagem" />
+
         <Button
             android:id="@+id/btnViagemSync"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="match_parent"
-            android:text="Viagens Sincronizdas"/>
+            android:text="Viagens Sincronizdas"
+            android:background="@drawable/borda_branco_branco"
+            android:textStyle="bold"
+            android:textSize="17sp"/>
 
     </LinearLayout>
-
-
 </LinearLayout>
